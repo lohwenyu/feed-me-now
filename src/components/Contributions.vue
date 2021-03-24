@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1> Your Contributions</h1>
         <ContributionCard/>
     </div>
 </template>
