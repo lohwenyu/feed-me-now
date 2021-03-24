@@ -9,7 +9,8 @@
 import NavigationBar from './components/NavigationBar.vue';
 
 export default {
- data(){
+  name: "App",
+  data(){
     return{
     }
   },
@@ -19,9 +20,10 @@ export default {
 }
 </script>
 
-<style scoped>
-div{
-  background-color: rgb(228, 235, 221);
-  
+<style>
+body {
+    /* background-color: #E4EBDD; */
+    background-color: rgb(228, 235, 221); 
+    font-family: "Roboto", sans-serif;
 }
 </style>
