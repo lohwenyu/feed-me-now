@@ -5,7 +5,7 @@
         </header>
         <div id="title">
             Feed an Animal Today 
-            <img id="logo" src='../assets/ourlogo.png'/>
+            <img id="logo" src='../assets/our_logo.png'/>
         </div>
         <div id="container">
             <ul>
