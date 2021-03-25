@@ -28,9 +28,6 @@
 import database from '../firebase.js'
 
 export default {
-import database from '../firebase.js'
-
-export default {
     data() {
         return {
             animals : []
