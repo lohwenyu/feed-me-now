@@ -55,7 +55,7 @@ export default {
     height: 490px;
     background-color: #FFFFFF;
     word-wrap: break-word;
-    margin: 20px
+    margin: 20px;
 }
 img {
     width: 100%;

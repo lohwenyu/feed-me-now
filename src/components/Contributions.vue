@@ -2,7 +2,9 @@
     <div>
         <h1> Your Contributions</h1>
         <div class="row">
-            <ContributionCard v-for="(animal, index) in animalList" :key="index" class="col" v-bind:animal="animal"/>
+            <div class="column" v-for="(animal, index) in animalList" :key="index">
+                <ContributionCard v-bind:animal="animal"/>
+            </div>
         </div>
     </div>
 </template>
@@ -37,11 +39,13 @@ export default {
 <style scoped>
 .row {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
-    justify-content:space-between;
     justify-content: space-evenly;
 }
+/* kiv alignment */
+/* .row>* {
+    flex: 0 0 33.3333%;
+} */
 .row:after {
     display: table;
     clear: both;

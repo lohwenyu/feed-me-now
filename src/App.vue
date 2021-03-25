@@ -27,5 +27,7 @@ export default {
 body {
   background-color: #e4ebdd;
   font-family: "Roboto", sans-serif;
+  margin: 0px;
+  padding: 0px
 }
 </style>
