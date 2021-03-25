@@ -7,6 +7,7 @@
                 <!-- add in word count -->
                 <p>We welcome any feedback (200 char).</p>
                 <textarea rows="10"/>
+                <button class="submitButton" type="button">Submit</button>
             </div>
             <div id="breakLine"></div>
             <div class="column" id="transactionEnquiry">
@@ -15,6 +16,7 @@
                 <textarea rows="1"/>
                 <p>Tell us what was wrong with your transaction.</p>
                 <textarea rows="10"/>
+                <button class="submitButton" type="button">Submit</button>
             </div>
         </div>
         <p class="alternative">Or</p>
@@ -52,7 +54,7 @@ export default {
 }
 #breakLine {
     width: 1px;
-    height: 400px;
+    height: 440px;
     background-color: #000000;
 }
 #transactionEnquiry {
@@ -71,5 +73,25 @@ textarea {
 .alternative {
     text-align: center;
     font-size: 20px;
+}
+.submitButton {
+    background-color: rgba(64, 168, 213, 0.24);
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+.submitButton:hover {
+    background-color: rgba(64, 168, 213, 0.5);
+    transition: ease-in-out 0.2s;
 }
 </style>

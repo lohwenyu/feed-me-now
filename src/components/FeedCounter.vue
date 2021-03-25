@@ -4,7 +4,6 @@
         <div id="mealCounter">
             <img class="icon" src="../assets/meal.jpg"/>
             <span class="quantity">X {{ mealQuantity }}</span>
-            
         </div>
         <div id="feastCounter">
             <img class="icon" src="../assets/feast.jpg"/>
@@ -32,9 +31,8 @@ export default {
     flex-wrap: wrap;
 }
 #mealCounter:after {
-  content: "";
-  display: table;
-  clear: both;
+    display: table;
+    clear: both;
 }
 #feastCounter {
     display: flex;
@@ -42,9 +40,8 @@ export default {
     flex-wrap: wrap;
 }
 #feastCounter:after {
-  content: "";
-  display: table;
-  clear: both;
+    display: table;
+    clear: both;
 }
 .icon {
     color: #96B08A;

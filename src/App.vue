@@ -2,11 +2,14 @@
   <div id="app">
     <navigation-bar></navigation-bar>
     <router-view></router-view>
+    <!-- <Login/> -->
+
   </div>
 </template>
 
 <script>
 import NavigationBar from './components/NavigationBar.vue';
+// import Login from "./components/Login.vue"
 
 export default {
   name: "App",
@@ -15,7 +18,8 @@ export default {
     }
   },
   components:{
-    'navigation-bar': NavigationBar
+    'navigation-bar': NavigationBar,
+    // Login
   }
 }
 </script>
@@ -23,10 +27,10 @@ export default {
 <style>
 * {
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 body {
   background-color: #e4ebdd;
-  font-family: "Roboto", sans-serif;
   margin: 0px;
   padding: 0px
 }

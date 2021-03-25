@@ -2,7 +2,7 @@
     <div class="homepage">
         <div id="title">
             Feed an Animal Today 
-            <img id="logo" src='../assets/our_logo.png'/>
+            <img id="logo" src='../assets/logo.png'/>
         </div>
         <div id="container">
             <ul>
@@ -25,6 +25,9 @@
 
 
 <script>
+import database from '../firebase.js'
+
+export default {
 import database from '../firebase.js'
 
 export default {
