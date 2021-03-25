@@ -2,11 +2,14 @@
   <div id="app">
     <navigation-bar></navigation-bar>
     <router-view></router-view>
+    <!-- <Login/> -->
+
   </div>
 </template>
 
 <script>
 import NavigationBar from './components/NavigationBar.vue';
+// import Login from "./components/Login.vue"
 
 export default {
   name: "App",
@@ -15,7 +18,8 @@ export default {
     }
   },
   components:{
-    'navigation-bar': NavigationBar
+    'navigation-bar': NavigationBar,
+    // Login
   }
 }
 </script>
