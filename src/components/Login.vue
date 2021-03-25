@@ -4,6 +4,7 @@
             <div class="column"></div>
             <div class="column">
                 <div id="formContainer">
+                    <img src="../assets/logo.png" alt=""/>
                     <form id="loginForm">
                         <div class="inputContainer">
                             <div class="iconContainer"><font-awesome-icon icon="user-circle" size="2x"/></div>
@@ -52,6 +53,11 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center; 
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .inputContainer {
     width: 300px;
