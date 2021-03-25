@@ -21,9 +21,11 @@ export default {
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
 body {
-    /* background-color: #E4EBDD; */
-    background-color: rgb(228, 235, 221); 
-    font-family: "Roboto", sans-serif;
+  background-color: #e4ebdd;
+  font-family: "Roboto", sans-serif;
 }
 </style>

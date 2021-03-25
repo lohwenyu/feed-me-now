@@ -31,7 +31,6 @@ header{
     text-align: top;
     font-family: Avenir, Helvetica, Arial, sans-serif;
 }
-
 a{
     color: #fff;
     text-decoration: none;

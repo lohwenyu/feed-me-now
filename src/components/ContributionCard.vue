@@ -5,7 +5,7 @@
             <div id="cardContent">
                 <span id="name">{{ animal.name }}</span>
                 <div id="speciesContainer">
-                    <span>{{ animal.species }}</span>
+                    <span>{{ information[0].commonName }}</span>
                 </div>
                 <span id="feedStatus">{{ animal.name + " " + animal.feedStatus + "!" }}</span>
             </div>
@@ -19,6 +19,7 @@
 <script>
 import FeedAgainButton from './FeedAgainButton.vue';
 import FeedCounter from "./FeedCounter.vue";
+import database from "../firebase.js";
 
 export default {
     name: "ContributionCard",
@@ -26,29 +27,39 @@ export default {
         FeedCounter,
         FeedAgainButton
     },
+    props: {
+        animal: {
+            type: Object
+        }
+    },
     data() {
         return {
-            animal: {
-                picture: "https://cdn.shopify.com/s/files/1/2123/8425/products/38178921-LRG_2da4e487-aa82-4a2f-ad1e-6e3bf7e069df_530x.jpg?v=1579024968" ,
-                name: "Rango",
-                feedStatus: "full and hopping around",
-                birthday: "",
-                species: "Eastern Grey Kangaroo"
-            }
+            information: []
         }
+    },
+    methods: {
+        fetchInformation: function () {
+            database.collection('animalInformation').doc(this.animal.animalInformation).get().then(doc => {
+                this.information.push(doc.data());
+            })
+        }
+    },
+    created() {
+        this.fetchInformation()
     }
 }
 </script>
-<style>
+<style scoped>
 #mainContainer {
-    width: 25%;
-    height: 450px;
+    width: 370px;
+    height: 490px;
     background-color: #FFFFFF;
     word-wrap: break-word;
+    margin: 20px
 }
 img {
     width: 100%;
-    height: 30%;
+    height: 40%;
     object-fit: cover;
 }
 #contentContainer {
@@ -68,8 +79,8 @@ img {
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 5px;
-    margin-top: 5px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 #speciesContainer span {
     margin-inline-start: 8px;
@@ -83,12 +94,11 @@ img {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    justify-content:space-between;
+    justify-content:space-evenly;
 }
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+    display: table;
+    clear: both;
 }
 .column {
     float:left

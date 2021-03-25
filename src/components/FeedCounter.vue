@@ -3,13 +3,11 @@
         <!-- can consider changing this alignment -->
         <div id="mealCounter">
             <img class="icon" src="../assets/meal.jpg"/>
-            <!-- <font-awesome-icon class="icon" icon="gift" size="3x"/> -->
             <span class="quantity">X {{ mealQuantity }}</span>
             
         </div>
         <div id="feastCounter">
             <img class="icon" src="../assets/feast.jpg"/>
-            <!-- <font-awesome-icon class="icon" icon="gifts" size="3x"/> -->
             <span class="quantity">X {{ feastQuantity }}</span>
         </div>
     </div>
