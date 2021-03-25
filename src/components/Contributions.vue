@@ -1,51 +1,59 @@
 <template>
-    <div>
-        <h1> Your Contributions</h1>
+    <div id="mainContainer">
+        <PageHeader v-bind:header="'Your Contributions'" v-bind:icon="'heart'"/>
         <div class="row">
-            <div class="column" v-for="(animal, index) in animalList" :key="index">
-                <ContributionCard v-bind:animal="animal"/>
+            <div class="column" v-for="([animalId, array], index) in Object.entries(contributionList)" :key="index">
+                <ContributionCard v-bind:animalId="animalId" v-bind:array="array"/>
             </div>
         </div>
     </div>
 </template>
 <script>
+import PageHeader from "./PageHeader.vue"
 import ContributionCard from './ContributionCard.vue';
 import database from "../firebase.js";
 
 export default {
     name: "Contributions",
     components: {
-        ContributionCard
+        ContributionCard,
+        PageHeader
     },
     data() {
         return {
-            animalList: []
+            // animalList: [],
+            currUser: "QNqhGFZ0EVtmArEaV3vt",
+            contributionList: null,
         }
     },
     methods: {
-        fetchItems: function () {
-            database.collection('animals').get().then(snapshot => {
-                snapshot.docs.forEach(doc => {
-                    this.animalList.push(doc.data());
-                });
-            });
+        fetchContributions: function() {
+            database.collection('users').doc(this.currUser).get().then(doc => {
+                this.contributionList = doc.data().contributions
+            }).then(() =>{
+                console.log(this.contributionList)
+            })
         }
     },
     created() {
-        this.fetchItems()
+        this.fetchContributions();
     }
 }
 </script>
 <style scoped>
+#mainContainer {
+    align-items: center;
+}
 .row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
 }
-/* kiv alignment */
-/* .row>* {
+.row>* {
     flex: 0 0 33.3333%;
-} */
+    min-width: 410px;
+    max-width: none;
+    max-height: 550px;
+}
 .row:after {
     display: table;
     clear: both;

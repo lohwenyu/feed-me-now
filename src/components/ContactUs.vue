@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Contact Us</h1>
+        <PageHeader v-bind:header="'Contact Us'" v-bind:icon="'address-book'"/>
         <div class="row">
             <div class="column" id="feedback">
                 <p class="header">Leave a Feedback</p>
@@ -24,8 +24,13 @@
     </div>
 </template>
 <script>
+import PageHeader from "./PageHeader.vue";
+
 export default {
     name: "ContactUs",
+    components: {
+        PageHeader
+    },
     data() {
         return {
 

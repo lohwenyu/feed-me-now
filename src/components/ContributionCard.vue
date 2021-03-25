@@ -10,7 +10,7 @@
                 <span id="feedStatus">{{ animal.name + " " + animal.feedStatus + "!" }}</span>
             </div>
             <div class="row">
-                <FeedCounter class="column"/>
+                <FeedCounter class="column" v-bind:mealQuantity="array[0]" v-bind:feastQuantity="array[1]"/>
                 <FeedAgainButton class="column"/>
             </div>
         </div>
@@ -28,34 +28,49 @@ export default {
         FeedAgainButton
     },
     props: {
-        animal: {
-            type: Object
+        animalId: {
+            type: String
+        },
+        array: {
+            type: Array
         }
     },
     data() {
         return {
+            animal: null,
             information: []
         }
     },
     methods: {
-        fetchInformation: function () {
+        fetchAnimal: function() {
+            database.collection('animals').doc(this.animalId).get().then(doc => {
+                this.animal = doc.data();
+            }).then(() => {
+                console.log(this.animal);
+                this.fetchInformation()
+            });
+        },
+        fetchInformation: function() {
             database.collection('animalInformation').doc(this.animal.animalInformation).get().then(doc => {
                 this.information.push(doc.data());
             })
         }
     },
     created() {
-        this.fetchInformation()
+        this.fetchAnimal()
     }
 }
 </script>
 <style scoped>
 #mainContainer {
     width: 370px;
-    height: 490px;
+    height: 510px;
     background-color: #FFFFFF;
     word-wrap: break-word;
-    margin: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 img {
     width: 100%;

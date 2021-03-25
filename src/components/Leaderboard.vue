@@ -1,13 +1,20 @@
 <template>
     <div>
-        <h1>leaderboard</h1>
+        <PageHeader v-bind:header="'Leaderboard'" v-bind:icon="'trophy'"/>
     </div>
 </template>
 <script>
+import PageHeader from "./PageHeader.vue";
+
 export default {
     name: "Leaderboard",
+    components: {
+        PageHeader
+    },
     data() {
-        
+        return {
+
+        }
     }
 }
 </script>

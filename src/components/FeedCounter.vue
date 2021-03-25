@@ -14,12 +14,18 @@
 <script>
 export default {
     name: "FeedCounter",
+    props: {
+        mealQuantity: {
+            type: Number
+        },
+        feastQuantity: {
+            type: Number
+        }
+    },
     components: {
     },
     data() {
         return {
-            mealQuantity: 6,
-            feastQuantity: 15
         }
     }
 }
@@ -47,8 +53,8 @@ export default {
     color: #96B08A;
     float: left;
     margin: 10px;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
 }
 .quantity {
     font-size: 15px;
