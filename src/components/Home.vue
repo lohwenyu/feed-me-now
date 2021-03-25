@@ -23,8 +23,6 @@
             </ul>
             
         </div>
-            
-    </div>
     
 </template>
 
@@ -56,7 +54,8 @@ export default {
     } , 
     created() {
         this.fetchDetails()
-    }
+        }
+   
     
 }
 </script>
