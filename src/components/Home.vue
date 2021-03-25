@@ -1,8 +1,5 @@
 <template>
     <div class="homepage">
-        <header>
-            <NavBar></NavBar>
-        </header>
         <div id="title">
             Feed an Animal Today 
             <img id="logo" src='../assets/our_logo.png'/>
@@ -23,18 +20,14 @@
             </ul>
             
         </div>
-    
+    </div>
 </template>
 
 
 <script>
-import NavBar from './NavBar.vue'
 import database from '../firebase.js'
 
 export default {
-    components : {
-        NavBar 
-    } , 
     data() {
         return {
             animals : []
