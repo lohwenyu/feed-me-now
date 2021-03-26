@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navigation-bar></navigation-bar>
+    <!-- <navigation-bar></navigation-bar> -->
     <router-view></router-view>
     <!-- <Login/> -->
 
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import NavigationBar from './components/NavigationBar.vue';
+// import NavigationBar from './components/NavigationBar.vue';
 // import Login from "./components/Login.vue"
 
 export default {
@@ -18,7 +18,7 @@ export default {
     }
   },
   components:{
-    'navigation-bar': NavigationBar,
+    // 'navigation-bar': NavigationBar,
     // Login
   }
 }

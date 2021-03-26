@@ -1,33 +1,41 @@
 <template>
-    <div class="homepage">
-        <div id="title">
-            Feed an Animal Today 
-            <img id="logo" src='../assets/logo.png'/>
-        </div>
-        <div id="container">
-            <ul>
-                <li id="animal" v-for="animal in animals" :key="animal.id">
-                        <img id="animalPic" v-bind:src="animal.picture">
-                        <br>
-                        {{ animal.name }}
-                        <br>
-                        {{ animal.description }}
-                        <br>
-                        <br>
-                        <br>
-                        <button id="FeedMeButton"> Feed Me </button>
-                </li>
-            </ul>
-            
+    <div>
+        <NavigationBar/>
+        <div class="homepage">
+            <div id="title">
+                Feed an Animal Today 
+                <img id="logo" src='../assets/logo.png'/>
+            </div>
+            <div id="container">
+                <ul>
+                    <li id="animal" v-for="animal in animals" :key="animal.id">
+                            <img id="animalPic" v-bind:src="animal.picture">
+                            <br>
+                            {{ animal.name }}
+                            <br>
+                            {{ animal.description }}
+                            <br>
+                            <br>
+                            <br>
+                            <button id="FeedMeButton"> Feed Me </button>
+                    </li>
+                </ul>
+                
+            </div>
         </div>
     </div>
 </template>
 
 
 <script>
-import database from '../firebase.js'
+import database from '../firebase.js';
+import NavigationBar from "./NavigationBar.vue";
 
 export default {
+    name: "Home",
+    components: {
+        NavigationBar
+    },
     data() {
         return {
             animals : []

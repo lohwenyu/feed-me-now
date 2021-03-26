@@ -1,36 +1,41 @@
 <template>
     <div>
-        <PageHeader v-bind:header="'Contact Us'" v-bind:icon="'address-book'"/>
-        <div class="row">
-            <div class="column" id="feedback">
-                <p class="header">Leave a Feedback</p>
-                <p>We welcome any feedback (200 char).</p>
-                <textarea rows="5" v-model.trim="feedback"/>
-                <span>{{ feedback.length }}/200</span>
-                <button class="submitButton" type="submit" v-on:click="submitFeedBack()">Submit</button>
+        <NavigationBar/>
+        <div>
+            <PageHeader v-bind:header="'Contact Us'" v-bind:icon="'address-book'"/>
+            <div class="row">
+                <div class="column" id="feedback">
+                    <p class="header">Leave a Feedback</p>
+                    <p>We welcome any feedback (200 char).</p>
+                    <textarea rows="5" v-model.trim="feedback"/>
+                    <span>{{ feedback.length }}/200</span>
+                    <button class="submitButton" type="submit" v-on:click="submitFeedBack()">Submit</button>
+                </div>
+                <div id="breakLine"></div>
+                <div class="column" id="transactionEnquiry">
+                    <p class="header">Transaction Enquiry</p>
+                    <p>Transaction Number:</p>
+                    <textarea rows="1" v-model="transactionId"/>
+                    <p>Tell us what was wrong with your transaction.</p>
+                    <textarea rows="10" v-model="transactionIssue"/>
+                    <button class="submitButton" type="button" v-on:click="submitEnquiry()">Submit</button>
+                </div>
             </div>
-            <div id="breakLine"></div>
-            <div class="column" id="transactionEnquiry">
-                <p class="header">Transaction Enquiry</p>
-                <p>Transaction Number:</p>
-                <textarea rows="1" v-model="transactionId"/>
-                <p>Tell us what was wrong with your transaction.</p>
-                <textarea rows="10" v-model="transactionIssue"/>
-                <button class="submitButton" type="button" v-on:click="submitEnquiry()">Submit</button>
-            </div>
+            <p class="alternative">Or</p>
+            <p class="alternative">Simple write in to <a href="customer_service@feedmenow.com">Feed Me Now</a>.</p>
         </div>
-        <p class="alternative">Or</p>
-        <p class="alternative">Simple write in to <a href="customer_service@feedmenow.com">Feed Me Now</a>.</p>
     </div>
 </template>
 <script>
 import PageHeader from "./PageHeader.vue";
 import database, { firestore } from "../firebase";
+import NavigationBar from './NavigationBar.vue';
 
 export default {
     name: "ContactUs",
     components: {
-        PageHeader
+        PageHeader,
+        NavigationBar
     },
     data() {
         return {

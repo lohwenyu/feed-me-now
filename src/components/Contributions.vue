@@ -1,9 +1,12 @@
 <template>
-    <div id="mainContainer">
-        <PageHeader v-bind:header="'Your Contributions'" v-bind:icon="'heart'"/>
-        <div class="row">
-            <div class="column" v-for="([animalId, array], index) in Object.entries(contributionList)" :key="index">
-                <ContributionCard v-bind:animalId="animalId" v-bind:array="array"/>
+    <div>
+        <NavigationBar/>
+        <div id="mainContainer">
+            <PageHeader v-bind:header="'Your Contributions'" v-bind:icon="'heart'"/>
+            <div class="row">
+                <div class="column" v-for="([animalId, array], index) in Object.entries(contributionList)" :key="index">
+                    <ContributionCard v-bind:animalId="animalId" v-bind:array="array"/>
+                </div>
             </div>
         </div>
     </div>
@@ -12,12 +15,14 @@
 import PageHeader from "./PageHeader.vue"
 import ContributionCard from './ContributionCard.vue';
 import database from "../firebase.js";
+import NavigationBar from './NavigationBar.vue';
 
 export default {
     name: "Contributions",
     components: {
         ContributionCard,
-        PageHeader
+        PageHeader,
+        NavigationBar
     },
     data() {
         return {

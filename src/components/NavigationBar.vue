@@ -1,9 +1,10 @@
 <template>
    <div>
-        <router-link to="/" exact>Home </router-link>
+        <router-link to="/home" exact>Home </router-link>
         <router-link to="/contributions" exact>Your Contributions</router-link>
         <router-link to="/leaderboard" exact>Leader Board</router-link>
-        <router-link to="/contactus" exact>Contact Us </router-link>
+        <router-link to="/contactus" exact>Contact Us</router-link>
+        <router-link to="/login" exact>Logout</router-link>
     </div>
   
 </template>

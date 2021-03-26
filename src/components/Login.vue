@@ -15,7 +15,8 @@
                             <input id="password" type="password" placeholder="Password">
                         </div>
                         <p><button type="button" id="forgetButton">Forgot Password?</button></p>
-                        <button type="button" id="loginButton">Sign In</button>
+                        <button type="button" id="loginButton" v-on:click="login()">Sign In</button>
+                        <p id="signUp">Don't have an account? <button type="button" id="signUpButton" v-on:click="signUp()">Sign up here.</button></p>
                     </form>
                 </div>
             </div>
@@ -28,6 +29,14 @@ export default {
     data() {
         return {
 
+        }
+    },
+    methods: {
+        login: function() {
+            this.$router.push({ path: '/home' })
+        },
+        signUp: function() {
+            this.$router.push({ path: '/signup' })
         }
     }
 }
@@ -92,13 +101,16 @@ input {
     background: none;
     border: none;
     outline: none;
+    font-size: 13px;
+    padding: 0px;
+    color: white;
 }
 #forgetButton:hover {
     transition: ease-in-out 0.2s;
-    color: white;
+    color: black;
 }
 #loginButton {
-    width: 100px;
+    width: 300px;
     height: 30px;
     outline: none;
     border-radius: 30px;
@@ -106,11 +118,24 @@ input {
     font-size: 15px;
     background-color: black;
     color: white;
-    float: right;
 }
 #loginButton:hover {
     transition: ease-in-out 0.2s;
     background-color: white;
+    color: black;
+}
+#signUp {
+    font-size: 13px;
+}
+#signUpButton {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0px;
+    color: white;
+}
+#signUpButton:hover {
+    transition: ease-in-out 0.2s;
     color: black;
 }
 </style>
