@@ -4,19 +4,19 @@
         <div class="row">
             <div class="column" id="feedback">
                 <p class="header">Leave a Feedback</p>
-                <!-- add in word count -->
                 <p>We welcome any feedback (200 char).</p>
-                <textarea rows="10"/>
-                <button class="submitButton" type="button">Submit</button>
+                <textarea rows="5" v-model.trim="feedback"/>
+                <span>{{ feedback.length }}/200</span>
+                <button class="submitButton" type="submit" v-on:click="submitFeedBack()">Submit</button>
             </div>
             <div id="breakLine"></div>
             <div class="column" id="transactionEnquiry">
                 <p class="header">Transaction Enquiry</p>
                 <p>Transaction Number:</p>
-                <textarea rows="1"/>
+                <textarea rows="1" v-model="transactionId"/>
                 <p>Tell us what was wrong with your transaction.</p>
-                <textarea rows="10"/>
-                <button class="submitButton" type="button">Submit</button>
+                <textarea rows="10" v-model="transactionIssue"/>
+                <button class="submitButton" type="button" v-on:click="submitEnquiry()">Submit</button>
             </div>
         </div>
         <p class="alternative">Or</p>
@@ -25,6 +25,7 @@
 </template>
 <script>
 import PageHeader from "./PageHeader.vue";
+import database, { firestore } from "../firebase";
 
 export default {
     name: "ContactUs",
@@ -33,7 +34,47 @@ export default {
     },
     data() {
         return {
-
+            currUser: "QNqhGFZ0EVtmArEaV3vt", //replace with firebase getter
+            feedback: "",
+            transactionId: "",
+            transactionIssue: ""
+        }
+    },
+    methods: {
+        submitFeedBack: function() {
+            if (this.feedback.length > 200) {
+                window.alert("Feedback has to be less than 200 characters long. Do consider contacting us through email for detailed feedback. Thank you!")
+            } else {
+                var feedbackRef = database.collection("feedback").doc();
+                feedbackRef.set({
+                    entry: this.feedback,
+                    userId: this.currUser
+                }).then(() => {
+                    window.alert("Feedback succesfully submitted. Thank you for your feedback!");
+                    location.reload();
+                })
+                database.collection("users").doc(this.currUser).update({
+                    feedback: firestore.FieldValue.arrayUnion(feedbackRef.id)
+                })
+            }
+        },
+        submitEnquiry: function() {
+            if (this.transactionId.length > 0 && this.transactionIssue.length > 0) {
+                var enquiryRef = database.collection("transactionEnquiry").doc();
+                enquiryRef.set({
+                    entry: this.transactionIssue,
+                    userId: this.currUser,
+                    transactionId: this.transactionId
+                }).then(() => {
+                    window.alert("Transaction enquiry succesfully submitted. Please give us up to 2 working days to contact you. Thank you for your patience!");
+                    location.reload();
+                })
+                database.collection("users").doc(this.currUser).update({
+                    transactionEnquiry: firestore.FieldValue.arrayUnion(enquiryRef.id)
+                })
+            } else {
+                window.alert("Do ensure that both the transaction number and transaction issue fields have been filled up. Thank you!")
+            }
         }
     }
 }
