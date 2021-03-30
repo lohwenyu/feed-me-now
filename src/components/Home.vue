@@ -9,13 +9,13 @@
                 <li id="animal" v-for="animal in animals" :key="animal.id">
                         <img id="animalPic" v-bind:src="animal.picture">
                         <br>
-                        {{ animal.name }}
+                        <span id="name">{{ animal.name }}</span>
                         <br>
                         {{ animal.description }}
                         <br>
                         <br>
                         <br>
-                        <button id="FeedMeButton"> Feed Me </button>
+                        <FeedAgainButton/>
                 </li>
             </ul>
             
@@ -26,8 +26,13 @@
 
 <script>
 import database from '../firebase.js'
+import FeedAgainButton from './FeedAgainButton.vue';
 
 export default {
+    name: "Home",
+    components: {
+        FeedAgainButton
+    },
     data() {
         return {
             animals : []
@@ -70,7 +75,6 @@ header{
     width : 1900px ;
     height: 800px;
     margin: 240px auto;
-    background-color: #CCD2A8;
     bottom : 200px ; 
     
 }
@@ -111,5 +115,7 @@ header{
     width : 100% ; 
 }
 
-
+#name {
+    font-size: 30px;
+}
 </style>
