@@ -1,21 +1,20 @@
 <template>
     <div class="homepage">
         <div id="title">
-            Feed an Animal Today 
+            <h1>Feed an Animal Today</h1>
             <img id="logo" src='../assets/logo.png'/>
         </div>
         <div id="container">
             <ul>
                 <li id="animal" v-for="animal in animals" :key="animal.id">
                         <img id="animalPic" v-bind:src="animal.picture">
-                        <br>
-                        <span id="name">{{ animal.name }}</span>
-                        <br>
-                        {{ animal.description }}
-                        <br>
-                        <br>
-                        <br>
-                        <FeedAgainButton/>
+                        <div id="info">
+                            <span id="name">{{ animal.name }}</span>
+                            <br><br>
+                            <span>{{ animal.description }}</span>
+                            <br><br><br>
+                            <button type="button">FEED ME</button>
+                        </div>
                 </li>
             </ul>
             
@@ -26,13 +25,9 @@
 
 <script>
 import database from '../firebase.js'
-import FeedAgainButton from './FeedAgainButton.vue';
 
 export default {
     name: "Home",
-    components: {
-        FeedAgainButton
-    },
     data() {
         return {
             animals : []
@@ -70,30 +65,30 @@ header{
   width : 100% ;
 }
 
+h1{
+    float:left;
+}
+
 #container {
     position: relative;
-    width : 1900px ;
-    height: 800px;
+    width : 100% ;
+    height: auto;
     margin: 240px auto;
     bottom : 200px ; 
-    
 }
 
 #animal {
         position : relative; 
-        width: calc(600px - 10px);
-        height: calc(800px - 100px);
+        width: 400px;
+        height: 600px;
         background-color: #FFF;
         float: left; 
         margin : 15px ; 
-        
 }
 
 #animalPic {
-    width: calc(600px - 10px);
-    height: calc(800px - 300px);
-    
-
+    width: 400px;
+    height: 300px;
 }
 
 #FeedMeButton {
@@ -106,8 +101,10 @@ header{
 #logo {
     float: right ;
     top : 0px ; 
-    
+}
 
+#info{
+    padding: 10px;
 }
 
 #title {
@@ -117,5 +114,21 @@ header{
 
 #name {
     font-size: 30px;
+}
+button {
+    background-color: rgba(64, 168, 213, 0.24);
+    width: 140px;
+    height: 70px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    border: none;
+    outline: none;
+}
+button:hover {
+    background-color: rgba(64, 168, 213, 0.5);
+    transition: ease-in-out 0.2s;
 }
 </style>
