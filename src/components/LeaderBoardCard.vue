@@ -11,7 +11,12 @@
                 <FeedAgainButton class="column"/>
             </div>
         </div>
-        <p>still working on contributors part</p>
+        <div id="ranking">
+            <span><strong>You are the </strong></span><br>
+            <span style="font-size:40px"><strong>#{{array[2]}} </strong></span><br>
+            <span><strong> contributor </strong></span>
+            <p>with {{array[0]+2*array[1]}} contributions</p>
+        </div>
     </div>
 </template>
 <script>
@@ -97,6 +102,16 @@ img {
     margin-inline-start: 8px;
     font-size: 15px;
     text-transform: uppercase;
+}
+#ranking{
+    width: 15%;
+    float: left;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+#ranking span{
+    font-size: 30px;
 }
 .row {
     align-items: center;
