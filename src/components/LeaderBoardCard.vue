@@ -16,19 +16,23 @@
              <span style="font-size:40px"><strong>#{{array[2]}} </strong></span><br>
              <span><strong> contributor </strong></span>
              <p>with {{array[0]+2*array[1]}} contributions</p>
-         </div>
+        </div>
+        <ContributorBoard v-bind:animalId="animalId"/>
     </div>
 </template>
+
 <script>
 import FeedAgainButton from './FeedAgainButton.vue';
 import FeedCounter from "./FeedCounter.vue";
 import database from "../firebase.js";
+import ContributorBoard from "./ContributorBoard";
 
 export default {
     name: "ContributionCard",
     components: {
         FeedCounter,
-        FeedAgainButton
+        FeedAgainButton,
+        ContributorBoard
     },
     props: {
         animalId: {
