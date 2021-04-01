@@ -8,15 +8,19 @@
                     <form id="loginForm">
                         <div class="inputContainer">
                             <div class="iconContainer"><font-awesome-icon icon="user-circle" size="lg"/></div>
-                            <input id="username" type="text" placeholder="Username"><br>
+                            <input id="username" v-model="username" type="text" placeholder="Username"><br>
+                        </div>
+                        <div class="inputContainer">
+                            <div class="iconContainer"><font-awesome-icon icon="envelope" size="lg"/></div>
+                            <input id="email" v-model="email" type="email" placeholder="Email"><br>
                         </div>
                         <div class="inputContainer">
                             <div class="iconContainer"><font-awesome-icon icon="lock" size="lg"/></div>
-                            <input id="password" type="password" placeholder="Password">
+                            <input id="password" v-model="password" type="password" placeholder="Password">
                         </div>
                         <div class="inputContainer">
                             <div class="iconContainer"><font-awesome-icon icon="check-double" size="lg"/></div>
-                            <input id="password" type="password" placeholder="Confirm Password">
+                            <input id="password" v-model="confirmPassword" type="password" placeholder="Confirm Password">
                         </div>
                         <button type="button" id="signUpButton" v-on:click="signUp()">Sign Up</button>
                         <p id="login">Already have an account? <button type="button" id="loginButton" v-on:click="login()">Login here.</button></p>
@@ -27,11 +31,47 @@
     </div>
 </template>
 <script>
+import { auth } from "../firebase.js";
+
 export default {
     name: "SignUp",
+    data() {
+        return {
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            created: false
+        }
+    },
     methods: {
         signUp: function() {
-            this.$router.push({ path: '/home' })
+            if (this.username === "") {
+                window.alert("Please fill in username field!")
+            } else if (this.email === "") {
+                window.alert("Please fill in email field!")
+            } else if (this.password === "") {
+                window.alert("Please set a password!")
+            } else if (this.password !== this.confirmPassword) {
+                window.alert("Passwords do not match!") 
+            } else {
+                return auth.createUserWithEmailAndPassword(this.email, this.password)
+                    .then((userCredential) => {
+                        var user = userCredential.user;
+                        console.log(user);
+
+                        auth.onAuthStateChanged((user) => {
+                            if (user) {
+                                this.$router.push({ path: '/home' })
+                            }
+                        })
+                    })
+                    .catch((error) => {
+                        var errorMessage = error.message;
+                        window.alert(errorMessage);
+                    }
+                );
+            }
         },
         login: function() {
             this.$router.push({ path: '/login' })

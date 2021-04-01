@@ -24,11 +24,12 @@
     </div>
 </template>
 <script>
+// import { auth } from "../firebase.js";
+
 export default {
     name: "Login",
     data() {
         return {
-
         }
     },
     methods: {
