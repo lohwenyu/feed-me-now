@@ -5,15 +5,20 @@
         <router-link to="/leaderboard" exact>Leader Board</router-link>
         <router-link to="/contactus" exact>Contact Us</router-link>
         <router-link v-on:click.native="logout()" to="/login" exact>Logout</router-link>
+        <UserCard/>
     </div>
   
 </template>
 
 <script>
 import { auth } from "../firebase.js";
+import UserCard from "./UserCard.vue";
 
 export default {
     name: "NavigationBar",
+    components: {
+        UserCard
+    },
     methods: {
         logout: async function() {
             return auth.signOut().then(() => {
