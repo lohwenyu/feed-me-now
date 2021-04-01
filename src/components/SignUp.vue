@@ -14,9 +14,12 @@
                             <div class="iconContainer"><font-awesome-icon icon="lock" size="lg"/></div>
                             <input id="password" type="password" placeholder="Password">
                         </div>
-                        <p><button type="button" id="forgetButton">Forgot Password?</button></p>
-                        <button type="button" id="loginButton" v-on:click="login()">Sign In</button>
-                        <p id="signUp">Don't have an account? <button type="button" id="signUpButton" v-on:click="signUp()">Sign up here.</button></p>
+                        <div class="inputContainer">
+                            <div class="iconContainer"><font-awesome-icon icon="check-double" size="lg"/></div>
+                            <input id="password" type="password" placeholder="Confirm Password">
+                        </div>
+                        <button type="button" id="signUpButton" v-on:click="signUp()">Sign Up</button>
+                        <p id="login">Already have an account? <button type="button" id="loginButton" v-on:click="login()">Login here.</button></p>
                     </form>
                 </div>
             </div>
@@ -25,25 +28,20 @@
 </template>
 <script>
 export default {
-    name: "Login",
-    data() {
-        return {
-
-        }
-    },
+    name: "SignUp",
     methods: {
-        login: function() {
+        signUp: function() {
             this.$router.push({ path: '/home' })
         },
-        signUp: function() {
-            this.$router.push({ path: '/signup' })
+        login: function() {
+            this.$router.push({ path: '/login' })
         }
     }
 }
 </script>
 <style scoped>
 #mainContainer {
-    background-image: url("https://wallpaperaccess.com/full/1267114.jpg");
+    background-image: url("https://pro2-bar-s3-cdn-cf1.myportfolio.com/383922e195047105bbe4a3f326ac989a/91edee3e-fa8d-47a8-9be1-c38a2a364cf5_rw_1920.jpg?h=d0da74dbb32ed941ede16cacd5b84544");
     background-size: cover;
 }
 .row {
@@ -109,7 +107,8 @@ input {
     transition: ease-in-out 0.2s;
     color: black;
 }
-#loginButton {
+#signUpButton {
+    margin-top: 10px;
     width: 300px;
     height: 30px;
     outline: none;
@@ -119,22 +118,22 @@ input {
     background-color: black;
     color: white;
 }
-#loginButton:hover {
+#signUpButton:hover {
     transition: ease-in-out 0.2s;
     background-color: white;
     color: black;
 }
-#signUp {
+#login {
     font-size: 13px;
 }
-#signUpButton {
+#loginButton {
     background: none;
     border: none;
     outline: none;
     padding: 0px;
     color: white;
 }
-#signUpButton:hover {
+#loginButton:hover {
     transition: ease-in-out 0.2s;
     color: black;
 }

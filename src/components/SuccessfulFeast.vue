@@ -1,65 +1,73 @@
 <template>
     <div>
-        <div id="center">
-            <div id="one">
-                <img id="meal" src="../assets/feast.jpg"/>
+        <NavigationBar/>
+        <div>
+            <div id="center">
+                <div id="one">
+                    <img id="meal" src="../assets/feast.jpg"/>
+                </div>
+                <div id="onetext">
+                    x 1
+                </div>
+                <div id="two">
+                    <img id="meal" src="../assets/feast.jpg"/>
+                </div>
+                <div id="twotext">
+                    x 1
+                </div>
+                <div id="three">
+                    <img id="meal" src="../assets/feast.jpg"/>
+                </div>
+                <div id="threetext">
+                    x 1
+                </div>            
+                <img id="animal" v-bind:src="selectedanimal[1].picture">
+                <div id="four">
+                    <img id="meal" src="../assets/feast.jpg"/>
+                </div>
+                <div id="fourtext">
+                    x 1
+                </div>                         
+                <div id="five">
+                    <img id="meal" src="../assets/feast.jpg"/>
+                </div>
+                <div id="fivetext">
+                    x 1
+                </div>
+                <div id="six">
+                    <img id="meal" src="../assets/feast.jpg"/>
+                </div>   
+                <div id="sixtext">
+                    x 1
+                </div>                 
+                </div>
+            <p>THANK YOU FOR YOUR DONATION</p>
+            <p id="order">Your order is #{{this.orderNumber}}</p>
+            <button @click="homepage()">Help more animals</button>
+            <div id="heartone">
+                <img id="heart" src="../assets/heart.png"/>
+            </div>          
+            <div id="hearttwo">
+                <img id="heart" src="../assets/heart.png"/>
             </div>
-            <div id="onetext">
-                x 1
+            <div id="heartthree">
+                <img id="heart" src="../assets/heart.png"/>
             </div>
-            <div id="two">
-                <img id="meal" src="../assets/feast.jpg"/>
+            <div id="heartfour">
+                <img id="heart" src="../assets/heart.png"/>
             </div>
-            <div id="twotext">
-                x 1
-            </div>
-            <div id="three">
-                <img id="meal" src="../assets/feast.jpg"/>
-            </div>
-            <div id="threetext">
-                x 1
-            </div>            
-            <img id="animal" v-bind:src="selectedanimal[1].picture">
-            <div id="four">
-                <img id="meal" src="../assets/feast.jpg"/>
-            </div>
-            <div id="fourtext">
-                x 1
-            </div>                         
-            <div id="five">
-                <img id="meal" src="../assets/feast.jpg"/>
-            </div>
-            <div id="fivetext">
-                x 1
-            </div>
-            <div id="six">
-                <img id="meal" src="../assets/feast.jpg"/>
-            </div>   
-            <div id="sixtext">
-                x 1
-            </div>                 
-            </div>
-        <p>THANK YOU FOR YOUR DONATION</p>
-        <p id="order">Your order is #{{this.orderNumber}}</p>
-          <button @click="homepage()">Help more animals</button>
-          <div id="heartone">
-              <img id="heart" src="../assets/heart.png"/>
-          </div>          
-          <div id="hearttwo">
-              <img id="heart" src="../assets/heart.png"/>
-          </div>
-         <div id="heartthree">
-              <img id="heart" src="../assets/heart.png"/>
-          </div>
-           <div id="heartfour">
-              <img id="heart" src="../assets/heart.png"/>
-          </div>
 
+        </div>
     </div>
 </template>
 <script>
+import NavigationBar from "./NavigationBar.vue";
+
 export default {
     name: "SuccessfulTreat",
+    components: {
+        NavigationBar,
+    },
     data() {
         return {
             orderNumber: 0
