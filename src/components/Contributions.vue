@@ -14,7 +14,7 @@
 <script>
 import PageHeader from "./PageHeader.vue"
 import ContributionCard from './ContributionCard.vue';
-import database from "../firebase.js";
+import database, { auth } from "../firebase.js";
 import NavigationBar from './NavigationBar.vue';
 
 export default {
@@ -26,8 +26,7 @@ export default {
     },
     data() {
         return {
-            // animalList: [],
-            currUser: "QNqhGFZ0EVtmArEaV3vt",
+            currUser: auth.currentUser.uid,
             contributionList: null,
         }
     },
