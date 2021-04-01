@@ -1,38 +1,34 @@
 <template>
-    <div>
-        <NavigationBar/>
-        <div id="payment">
+    <div id="payment">
+        <br>
+        <form>
+            Payment Amount: <p>10.00 SGD</p> feast for {{temp[1].name}}<br><br>
+            <label for="ccn">Credit Card/Debit Card Number: </label>
+            <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX"><br>
             <br>
-            <form>
-                Payment Amount: <p>10.00 SGD</p> feast for {{temp[1].name}}<br><br>
-                <label for="ccn">Credit Card/Debit Card Number: </label>
-                <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX"><br>
-                <br>
-                <label for="name">Name on card: </label>
-                <input id="name" type="text">
-                <br><br>
-                <label for="expriy">Expiry Date: </label>
-                <input id="expiry" type="date">
-                <br><br>
-                <label for="ccv">CCV: </label>
-                <input id="ccv" type="tel" maxlength="3" placeholder="X X X"><br><br>   
-                <button @click="back()">Back</button>
-                <button @click="proceed()">Continue</button>
-            </form>
-        </div>
+            <label for="name">Name on card: </label>
+            <input id="name" type="text">
+            <br><br>
+            <label for="expriy">Expiry Date: </label>
+            <input id="expiry" type="date">
+            <br><br>
+            <label for="ccv">CCV: </label>
+            <input id="ccv" type="tel" maxlength="3" placeholder="X X X"><br><br>   
+            <button @click="back()">Back</button>
+            <button @click="proceed()">Continue</button>
+        </form>
     </div>
 </template>
+
 <script>
-import NavigationBar from "./NavigationBar.vue";
+import database from '../firebase.js'
+import firebase from 'firebase'
 
 export default {
     name: "MealPayment",
-    components: {
-        NavigationBar,
-    },
     data() {
         return {
-            selectedanimal: []
+            selectedanimal: [],
         }
     },
     props: ['temp'],
@@ -46,12 +42,79 @@ export default {
                 })
         },
         proceed: function() {
+            var animalId = this.temp[0]
+            database.collection('transactions').add({
+                amount: 10,
+                animalId: animalId,
+                foodType: 'meal',
+                time: new Date(),  
+                userId: 'QNqhGFZ0EVtmArEaV3vt'            
+            }).then(function(docRef) {
+                database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                    transactions: firebase.firestore.FieldValue.arrayUnion(docRef.id)
+            });
+            })
+
+            database.collection("users").doc('QNqhGFZ0EVtmArEaV3vt').get().then((querySnapShot) => {
+                this.contributions = querySnapShot.data().contributions
+            }).then(() => {
+                for (const x in this.yeet) {
+                    if (x == animalId) {
+                        var mealCount = this.contributions[x][0]
+                        var feastCount = this.contributions[x][1]
+                        var ranking = this.contributions[x][2]
+
+                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(mealCount)
+                        })
+                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(feastCount)
+                        })   
+                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(ranking)
+                        })                           
+                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(mealCount+1)
+                        })    
+                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(feastCount)
+                        })   
+                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(ranking)
+                        })        
+                        
+                        database.collection('animals').doc(animalId).update({
+                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(mealCount)
+                        })
+                        database.collection('animals').doc(animalId).update({
+                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(feastCount)
+                        })
+                        database.collection('animals').doc(animalId).update({
+                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(ranking)
+                        })
+                        database.collection('animals').doc(animalId).update({
+                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(mealCount+1)
+                        })
+                        database.collection('animals').doc(animalId).update({
+                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(feastCount)
+                        })
+                        database.collection('animals').doc(animalId).update({
+                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(ranking)
+                        })
+
+                       
+                    }
+                }
+            })
+        
+  
+            
             this.$router.push({
                 path: '/successfulmeal',
                 name: 'successfulmeal',
                 params: {selectedanimal: this.temp},
                 props: true 
-                })
+                }) 
         }
     },
 }
