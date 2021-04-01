@@ -31,7 +31,7 @@
     </div>
 </template>
 <script>
-import { auth } from "../firebase.js";
+import database, { auth } from "../firebase.js";
 
 export default {
     name: "SignUp",
@@ -57,8 +57,16 @@ export default {
             } else {
                 return auth.createUserWithEmailAndPassword(this.email, this.password)
                     .then((userCredential) => {
-                        var user = userCredential.user;
-                        console.log(user);
+                        // var user = userCredential.user;
+                        // console.log(user);
+
+                        var userId = userCredential.user.uid;
+                        console.log(userId);
+
+                        database.collection("users").doc(userId).set({
+                            name: this.username,
+                            status: "Animal Protector"
+                        })
 
                         auth.onAuthStateChanged((user) => {
                             if (user) {
