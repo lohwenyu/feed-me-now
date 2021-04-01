@@ -1,40 +1,40 @@
 <template>
-    <div>
-        <NavigationBar/>
-        <div id="all">
-            <div id="left">
-            <h1>{{animal.name}}</h1>
-            <img id="picture" v-bind:src="animal.picture">
-            </div>
-            <div id="right">
-                <h2>{{animalInformation[0].commonName}}</h2>
-                <p>COMMON NAME: {{animalInformation[0].commonName}}</p>
-                <p>SCIENTIFIC NAME: {{animalInformation[0].scientificName}}</p>
-                <p>{{animalInformation[0].information[0]}}
-                <br><br>
-                {{animalInformation[0].information[1]}}
-                </p>
-            <button @click="mealPayment()">
-                <h2>Treat a meal</h2>
-                    <p>10 SGD</p>
-            </button>
-            <button @click="feastPayment()">
-                <h2>Treat a feast</h2>
-                    <p>20 SGD</p>
-            </button>
-            </div>
-
-        </div>
+<div>
+    <NavigationBar/>
+  <div id="all">
+    <div id="left">
+    <h1>{{animal.name}}</h1>
+    <img id="picture" v-bind:src="animal.picture">
     </div>
+    <div id="right">
+        <h2>{{animalInformation[0].commonName}}</h2>
+        <p>COMMON NAME: {{animalInformation[0].commonName}}</p>
+        <p>SCIENTIFIC NAME: {{animalInformation[0].scientificName}}</p>
+        <p>{{animalInformation[0].information[0]}}
+          <br><br>
+          {{animalInformation[0].information[1]}}
+        </p>
+    <button @click="mealPayment()">
+        <h2>Treat a meal</h2>
+            <p>10 SGD</p>
+    </button>
+    <button @click="feastPayment()">
+        <h2>Treat a feast</h2>
+            <p>20 SGD</p>
+    </button>
+    </div>
+
+  </div>
+</div>
 </template>
 <script>
-import database from "../firebase.js";
-import NavigationBar from "./NavigationBar.vue";
+import database from "../firebase.js"
+import NavigationBar from "./NavigationBar";
 
 export default {
     name: "FeedMe",
     components: {
-        NavigationBar,
+        NavigationBar
     },
     data() {
         return {
@@ -81,7 +81,7 @@ h1 {
     font-size: 50px;
 }
 #left {
-    padding-left: 10px;
+    padding-inline: 3%;
     float:left;
     width: 35%;
 }
@@ -90,8 +90,8 @@ h1 {
     width:65%
 }
 #picture {
-    width: calc(600px - 60px);
-    height: calc(800px - 300px);
+    width: 100%;
+    height: auto;
     object-fit: cover
 }
 button {
