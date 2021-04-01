@@ -46,6 +46,7 @@ export default {
     props: ['selectedanimal'],
     methods: {
         initialiseData: function() {
+            console.log(this.selectedanimal)
             this.animal = this.selectedanimal[1]
             database.collection('animalInformation').doc(this.selectedanimal[1].animalInformation)
             .get().then(doc => {

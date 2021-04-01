@@ -56,7 +56,7 @@ export default {
             })
         },
         route: function(event) {
-           let id = event.target.getAttribute('id');
+            let id = event.target.getAttribute('id');
             this.$router.push({
                 path: '/feedme',
                 name: 'feedme',
