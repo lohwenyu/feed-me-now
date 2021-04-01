@@ -7,11 +7,11 @@
                     <img src="../assets/logo.png" alt=""/>
                     <form id="loginForm">
                         <div class="inputContainer">
-                            <div class="iconContainer"><font-awesome-icon icon="user-circle" size="2x"/></div>
+                            <div class="iconContainer"><font-awesome-icon icon="user-circle" size="lg"/></div>
                             <input id="username" type="text" placeholder="Username"><br>
                         </div>
                         <div class="inputContainer">
-                            <div class="iconContainer"><font-awesome-icon icon="lock" size="2x"/></div>
+                            <div class="iconContainer"><font-awesome-icon icon="lock" size="lg"/></div>
                             <input id="password" type="password" placeholder="Password">
                         </div>
                         <p><button type="button" id="forgetButton">Forgot Password?</button></p>
