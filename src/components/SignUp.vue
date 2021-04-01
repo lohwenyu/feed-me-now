@@ -41,7 +41,6 @@ export default {
             email: "",
             password: "",
             confirmPassword: "",
-            created: false
         }
     },
     methods: {
@@ -57,9 +56,6 @@ export default {
             } else {
                 return auth.createUserWithEmailAndPassword(this.email, this.password)
                     .then((userCredential) => {
-                        // var user = userCredential.user;
-                        // console.log(user);
-
                         var userId = userCredential.user.uid;
                         console.log(userId);
 
@@ -77,8 +73,7 @@ export default {
                     .catch((error) => {
                         var errorMessage = error.message;
                         window.alert(errorMessage);
-                    }
-                );
+                    });
             }
         },
         login: function() {
