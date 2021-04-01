@@ -7,12 +7,12 @@
                     <img src="../assets/logo.png" alt=""/>
                     <form id="loginForm">
                         <div class="inputContainer">
-                            <div class="iconContainer"><font-awesome-icon icon="user-circle" size="lg"/></div>
-                            <input id="username" type="text" placeholder="Username"><br>
+                            <div class="iconContainer"><font-awesome-icon icon="envelope" size="lg"/></div>
+                            <input id="email" v-model="email" type="email" placeholder="Email"><br>
                         </div>
                         <div class="inputContainer">
                             <div class="iconContainer"><font-awesome-icon icon="lock" size="lg"/></div>
-                            <input id="password" type="password" placeholder="Password">
+                            <input id="password" v-model="password" type="password" placeholder="Password">
                         </div>
                         <p><button type="button" id="forgetButton">Forgot Password?</button></p>
                         <button type="button" id="loginButton" v-on:click="login()">Sign In</button>
@@ -24,16 +24,36 @@
     </div>
 </template>
 <script>
+import { auth } from "../firebase.js";
+
 export default {
     name: "Login",
     data() {
         return {
-
+            email: "",
+            password: ""
         }
     },
     methods: {
-        login: function() {
-            this.$router.push({ path: '/home' })
+        login: async function() {
+            if (this.email === "") {
+                window.alert("Please enter email!")
+            } else if (this.password === "") {
+                window.alert("Please enter password!")
+            } else {
+                return auth.signInWithEmailAndPassword(this.email, this.password)
+                    .then(() => {
+                        auth.onAuthStateChanged((user) => {
+                            if (user) {
+                                this.$router.push({ path: '/home' })
+                            }
+                        })
+                    })
+                    .catch((error) => {
+                        var errorMessage = error.message;
+                        window.alert(errorMessage);
+                    });
+            }
         },
         signUp: function() {
             this.$router.push({ path: '/signup' })
