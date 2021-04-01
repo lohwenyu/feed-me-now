@@ -20,7 +20,7 @@
                         </div>
                         <div class="inputContainer">
                             <div class="iconContainer"><font-awesome-icon icon="check-double" size="lg"/></div>
-                            <input id="password" v-model="confirmPassword" type="password" placeholder="Confirm Password">
+                            <input id="confirmPassword" v-model="confirmPassword" type="password" placeholder="Confirm Password">
                         </div>
                         <button type="button" id="signUpButton" v-on:click="signUp()">Sign Up</button>
                         <p id="login">Already have an account? <button type="button" id="loginButton" v-on:click="login()">Login here.</button></p>
@@ -44,7 +44,7 @@ export default {
         }
     },
     methods: {
-        signUp: function() {
+        signUp: async function() {
             if (this.username === "") {
                 window.alert("Please fill in username field!")
             } else if (this.email === "") {

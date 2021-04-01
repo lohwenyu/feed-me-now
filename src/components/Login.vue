@@ -35,7 +35,7 @@ export default {
         }
     },
     methods: {
-        login: function() {
+        login: async function() {
             if (this.email === "") {
                 window.alert("Please enter email!")
             } else if (this.password === "") {
