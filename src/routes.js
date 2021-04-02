@@ -13,13 +13,13 @@ import FeastPayment from './components/FeastPayment.vue'
 import SuccessfulFeast from './components/SuccessfulFeast.vue'
 
 export default [
-    { path: '/', component: Login },
+    { path: '/', component: Landing},
+    { path: '/landing', component: Landing },
     { path: '/login', component: Login },
     { path: '/signup', component: SignUp },
     { path: '/home', name:'home', component: Home },
     { path: '/contactus', component: ContactUs},
     { path: '/contributions', component: Contributions},
-    { path: '/landing', component: Landing},
     { path: '/leaderboard', component: Leaderboard},
     { path: '/feedme', name:'feedme', component: FeedMe, props:true},
     { path: '/mealpayment', name:'mealpayment', component: MealPayment, props:true},
