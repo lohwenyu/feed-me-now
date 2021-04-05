@@ -1,24 +1,27 @@
 <template>
-    <div class="homepage">
-        <div id="title">
-            Feed an Animal Today 
-            <img id="logo" src='../assets/our_logo.png'/>
-        </div>
-        <div id="container">
-            <ul>
-                <li v-for="(animal, index) in animals" :key="index" id="animal">
-                        <img id="animalPic" v-bind:src="animal[1].picture">
-                        <br>
-                        {{ animal[1].name }}
-                        <br>
-                        {{ animal[1].description }}
-                        <br>
-                        <br>
-                        <br>
-                        <!-- <button id="FeedMeButton"  > Feed Me </button> -->
-                        <button v-bind:id=index @click="route($event)" > Feed Me </button>
-                </li>
-            </ul>
+    <div>
+        <NavigationBar/>
+        <div class="homepage">
+            <div id="title">
+                Feed an Animal Today 
+                <img id="logo" src='../assets/logo.png'/>
+            </div>
+            <div id="container">
+                <ul>
+                    <li v-for="(animal, index) in animals" :key="index" id="animal">
+                            <img id="animalPic" v-bind:src="animal[1].picture">
+                            <br>
+                            {{ animal[1].name }}
+                            <br>
+                            {{ animal[1].description }}
+                            <br>
+                            <br>
+                            <br>
+                            <!-- <button id="FeedMeButton"  > Feed Me </button> -->
+                            <button v-bind:id=index @click="route($event)" > Feed Me </button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     
@@ -27,9 +30,12 @@
 
 <script>
 import database from '../firebase.js'
+import NavigationBar from "./NavigationBar.vue";
 
 export default {
+    name: "Home",
     components : {
+        NavigationBar
     } , 
     data() {
         return {
@@ -50,7 +56,7 @@ export default {
             })
         },
         route: function(event) {
-           let id = event.target.getAttribute('id');
+            let id = event.target.getAttribute('id');
             this.$router.push({
                 path: '/feedme',
                 name: 'feedme',

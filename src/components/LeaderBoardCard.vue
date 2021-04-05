@@ -8,22 +8,31 @@
             <img v-bind:src="animal.picture">
             <div class="row">
                 <FeedCounter v-bind:mealQuantity="array[0]" v-bind:feastQuantity="array[1]"/>
-                <FeedAgainButton class="column"/>
+                <FeedAgainButton class="column" v-bind:animalId="animalId" v-bind:animal="animal"/>
             </div>
         </div>
-        <p>still working on contributors part</p>
+        <div id="ranking">
+             <span><strong>You are the </strong></span><br>
+             <span style="font-size:40px"><strong>#{{array[2]}} </strong></span><br>
+             <span><strong> contributor </strong></span>
+             <p>with {{array[0]+2*array[1]}} contributions</p>
+        </div>
+        <ContributorBoard v-bind:animalId="animalId"/>
     </div>
 </template>
+
 <script>
 import FeedAgainButton from './FeedAgainButton.vue';
 import FeedCounter from "./FeedCounter.vue";
 import database from "../firebase.js";
+import ContributorBoard from "./ContributorBoard";
 
 export default {
     name: "ContributionCard",
     components: {
         FeedCounter,
-        FeedAgainButton
+        FeedAgainButton,
+        ContributorBoard
     },
     props: {
         animalId: {
@@ -98,6 +107,16 @@ img {
     font-size: 15px;
     text-transform: uppercase;
 }
+#ranking{
+     width: 15%;
+     float: left;
+     text-align: center;
+     margin-top: 20px;
+     margin-left: 50px;
+ }
+ #ranking span{
+     font-size: 30px;
+ }
 .row {
     align-items: center;
     flex-wrap: wrap;

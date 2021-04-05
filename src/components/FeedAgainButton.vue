@@ -1,9 +1,28 @@
 <template>
-    <button type="button">FEED AGAIN</button>
+    <button v-on:click="feedAgain()" type="button">FEED AGAIN</button>
 </template>
 <script>
 export default {
-    name: "FeedAgainButton"
+    name: "FeedAgainButton",
+    props: {
+        animalId: {
+            type: String
+        },
+        animal: {
+            type: Object
+        }
+    },
+    methods: {
+        feedAgain: function() {
+            console.log(this.animal)
+            this.$router.push({
+                path: '/feedme',
+                name: 'feedme',
+                params: {selectedanimal: [this.animalId, this.animal]},
+                props: true 
+            })  
+        }
+    }
 }
 </script>
 <style scoped>

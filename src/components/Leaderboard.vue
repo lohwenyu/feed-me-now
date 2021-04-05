@@ -1,16 +1,21 @@
 <template>
     <div>
-        <PageHeader v-bind:header="'Leaderboard'" v-bind:icon="'trophy'"/>
-        <p>Top 3 contributors of every animal per month will receive a pair 
-            of zoo tickets inclusive of a live feeding session!</p>
-        <div class="row">
-            <div class="column" v-for="([animalId, array], index) in Object.entries(user_contri)" :key="index">
-                <LeaderBoardCard v-bind:animalId="animalId" v-bind:array="array"/>
+        <NavigationBar/>
+        <div>
+            <PageHeader v-bind:header="'Leaderboard'" v-bind:icon="'trophy'"/>
+            <p style="font-size:18px"><strong>Top 3 contributors of every animal per month will receive a pair 
+                of zoo tickets inclusive of a live feeding session!</strong><br>
+                Every meal bought will be considered as 1 contribution and every feast will be considered as 2 contributions.</p>
+            <div class="row">
+                <div class="column" v-for="([animalId, array], index) in Object.entries(user_contri)" :key="index">
+                    <LeaderBoardCard v-bind:animalId="animalId" v-bind:array="array"/>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import NavigationBar from './NavigationBar.vue';
 import PageHeader from "./PageHeader.vue";
 import database from '../firebase.js'
 import LeaderBoardCard from './LeaderBoardCard.vue';
@@ -19,6 +24,7 @@ export default {
     name: "Leaderboard",
     components: {
         PageHeader,
+        NavigationBar,
         LeaderBoardCard,
     },
     data() {
@@ -45,5 +51,8 @@ export default {
 <style scoped>
 p{
     margin-left: 50px;
+}
+.row{
+    padding: 10px;
 }
 </style>

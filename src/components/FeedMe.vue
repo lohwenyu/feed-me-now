@@ -1,4 +1,6 @@
 <template>
+<div>
+    <NavigationBar/>
   <div id="all">
     <div id="left">
     <h1>{{animal.name}}</h1>
@@ -23,12 +25,17 @@
     </div>
 
   </div>
+</div>
 </template>
 <script>
 import database from "../firebase.js"
+import NavigationBar from "./NavigationBar";
 
 export default {
     name: "FeedMe",
+    components: {
+        NavigationBar
+    },
     data() {
         return {
             animal: [],
@@ -39,6 +46,7 @@ export default {
     props: ['selectedanimal'],
     methods: {
         initialiseData: function() {
+            console.log(this.selectedanimal)
             this.animal = this.selectedanimal[1]
             database.collection('animalInformation').doc(this.selectedanimal[1].animalInformation)
             .get().then(doc => {
@@ -74,7 +82,7 @@ h1 {
     font-size: 50px;
 }
 #left {
-    padding-left: 10px;
+    padding-inline: 3%;
     float:left;
     width: 35%;
 }
@@ -83,8 +91,8 @@ h1 {
     width:65%
 }
 #picture {
-    width: calc(600px - 60px);
-    height: calc(800px - 300px);
+    width: 100%;
+    height: auto;
     object-fit: cover
 }
 button {
