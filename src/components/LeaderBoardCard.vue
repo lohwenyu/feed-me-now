@@ -8,7 +8,7 @@
             <img v-bind:src="animal.picture">
             <div class="row">
                 <FeedCounter v-bind:mealQuantity="array[0]" v-bind:feastQuantity="array[1]"/>
-                <FeedAgainButton class="column"/>
+                <FeedAgainButton class="column" v-bind:animalId="animalId" v-bind:animal="animal"/>
             </div>
         </div>
         <div id="ranking">
