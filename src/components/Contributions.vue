@@ -27,13 +27,15 @@ export default {
     data() {
         return {
             currUser: auth.currentUser.uid,
-            contributionList: null,
+            contributionList: [],
         }
     },
     methods: {
         fetchContributions: function() {
             database.collection('users').doc(this.currUser).get().then(doc => {
-                this.contributionList = doc.data().contributions
+                if (doc.data().contributions !== undefined) {
+                    this.contributionList = doc.data().contributions
+                }
             }).then(() =>{
                 console.log(this.contributionList)
             })
