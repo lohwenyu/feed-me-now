@@ -2,7 +2,7 @@
     <div id="payment">
         <br>
         <form>
-            Payment Amount: <p>20.00 SGD</p> feast for {{temp[1].name}}<br><br>
+            Payment Amount: <p>20.00 SGD</p> Feast for {{temp[1].name}}<br><br>
             <label for="ccn">Credit Card/Debit Card Number: </label>
             <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX"><br>
             <br>
