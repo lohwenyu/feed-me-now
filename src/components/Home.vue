@@ -1,28 +1,26 @@
 <template>
-    <div>
+    <div class="homepage">
         <NavigationBar/>
-        <div class="homepage">
-            <div id="title">
-                Feed an Animal Today 
-                <img id="logo" src='../assets/logo.png'/>
-            </div>
-            <div id="container">
-                <ul>
-                    <li v-for="(animal, index) in animals" :key="index" id="animal">
-                            <img id="animalPic" v-bind:src="animal[1].picture">
-                            <br>
-                            {{ animal[1].name }}
-                            <br>
-                            {{ animal[1].description }}
-                            <br>
-                            <br>
-                            <br>
-                            <!-- <button id="FeedMeButton"  > Feed Me </button> -->
-                            <button v-bind:id=index @click="route($event)" > Feed Me </button>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <PageHeader v-bind:header="'Home'" v-bind:icon="'mdi-home'"/>
+        <v-container fill-height fluid>
+            <v-row dense align="center">
+                <v-col v-for="(animal, index) in animals" :key="index" :cols="6" >
+                    <v-card>
+                        <v-img :src="animal[1].picture" max-height="450"></v-img>
+                        <v-card-title> {{ animal[1].name }} </v-card-title>
+                        <v-card-subtitle> {{ animal[1].description }} </v-card-subtitle>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-button v-bind:id=index @click="route($event)" align='right'>
+                                Feed Me 
+                                <v-icon> mdi-food </v-icon>
+                            </v-button>
+                        </v-card-actions>
+                    </v-card>                    
+                </v-col>
+            </v-row>
+        </v-container>
+
     </div>
     
 </template>
@@ -31,11 +29,13 @@
 <script>
 import database from '../firebase.js'
 import NavigationBar from "./NavigationBar.vue";
+import PageHeader from "./PageHeader.vue"
 
 export default {
     name: "Home",
     components : {
-        NavigationBar
+        NavigationBar ,
+        PageHeader
     } , 
     data() {
         return {
@@ -73,71 +73,5 @@ export default {
 }
 </script>
 
-<style scoped>
-* {
-    margin : 0 ; 
-    padding : 0 ; 
-    box-sizing: border-box ;
-    height: 100%;
-}
-button {
-    border-radius:12px;
-    background-color: rgb(168, 212, 208);
-    padding-inline: 10px;
-    margin-inline: 12px;
-    width : 100px ;
-    height: 60px ;
-    float: right ; 
-    bottom : 300px ;
-}
-header{
-  width : 100% ;
-}
-
-#container {
-    position: relative;
-    width : 1900px ;
-    height: 800px;
-    margin: 240px auto;
-
-    bottom : 200px ; 
-    
-}
-
-#animal {
-        position : relative; 
-        width: calc(600px - 10px);
-        height: calc(800px - 100px);
-        background-color: #FFF;
-        float: left; 
-        margin : 15px ; 
-        
-}
-
-#animalPic {
-    width: calc(600px - 10px);
-    height: calc(800px - 300px);
-    object-fit: cover
-}
-
-#FeedMeButton {
-    width : 100px ;
-    height: 60px ;
-    float: right ; 
-    bottom : 300px ;
-}
-
-#logo {
-    float: right ;
-    top : 0px ; 
-    
-
-}
-
-#title {
-    height : 100px ;
-    width : 100% ; 
-}
 
 
-</style>
