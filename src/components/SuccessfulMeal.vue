@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NavigatopmBar/>
+        <NavigationBar/>
         <div id="center">
             <div id="background">
                 <img id="meal" src="../assets/mealBackground.jpg"/>  
