@@ -12,6 +12,8 @@ import SuccessfulMeal from './components/SuccessfulMeal.vue'
 import FeastPayment from './components/FeastPayment.vue'
 import SuccessfulFeast from './components/SuccessfulFeast.vue'
 
+import Dashboard from "./components/Dashboard.vue"
+
 export default [
     { path: '/', component: Landing},
     { path: '/landing', component: Landing },
@@ -25,7 +27,8 @@ export default [
     { path: '/mealpayment', name:'mealpayment', component: MealPayment, props:true},
     { path: '/successfulmeal', name:'successfulmeal', component: SuccessfulMeal, props:true},
     { path: '/feastpayment', name:'feastpayment', component: FeastPayment, props:true},
-    { path: '/sfeast', name:'sfeast', component: SuccessfulFeast, props:true}
+    { path: '/sfeast', name:'sfeast', component: SuccessfulFeast, props:true},
+    { path: '/dashboard', component: Dashboard},
 ]
 
 
