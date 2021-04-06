@@ -77,7 +77,7 @@ export default {
             }
         },
         login: function() {
-            this.$router.push({ path: '/login' })
+            this.$router.push({ path: '/login' }).then(() => location.reload())
         }
     }
 }
