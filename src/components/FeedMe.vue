@@ -10,9 +10,8 @@
         <h2>{{animalInformation[0].commonName}}</h2>
         <p>COMMON NAME: {{animalInformation[0].commonName}}</p>
         <p>SCIENTIFIC NAME: {{animalInformation[0].scientificName}}</p>
-        <p>{{animalInformation[0].information[0]}}
-          <br><br>
-          {{animalInformation[0].information[1]}}
+        <p v-for="(information, index) in animalInformation[0].information" :key="index">
+            {{ information }}
         </p>
     <button @click="mealPayment()">
         <h2>Treat a meal</h2>

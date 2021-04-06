@@ -32,7 +32,7 @@ export default {
     props: ['selectedanimal'],
     methods: {
         homepage: function() {
-            this.$router.push('/').then(() => location.reload())
+            this.$router.push('/home').then(() => location.reload())
         }
     },
     created: function() {
