@@ -56,7 +56,7 @@ export default {
             }
         },
         signUp: function() {
-            this.$router.push({ path: '/signup' })
+            this.$router.push({ path: '/signup' }).then(() => location.reload())
         }
     }
 }
