@@ -1,32 +1,41 @@
 <template>
-<div>
-    <NavigationBar/>
-  <div id="all">
-    <div id="left">
-    <h1>{{animal.name}}</h1>
-    <img id="picture" v-bind:src="animal.picture">
-    </div>
-    <div id="right">
-        <h2>{{animalInformation[0].commonName}}</h2>
-        <p>COMMON NAME: {{animalInformation[0].commonName}}</p>
-        <p>SCIENTIFIC NAME: {{animalInformation[0].scientificName}}</p>
-        <p>{{animalInformation[0].information[0]}}
-          <br><br>
-          {{animalInformation[0].information[1]}}
-        </p>
-    <button @click="mealPayment()">
-        <h2>Treat a meal</h2>
-            <p>10 SGD</p>
-    </button>
-    <button @click="feastPayment()">
-        <h2>Treat a feast</h2>
-            <p>20 SGD</p>
-    </button>
-    </div>
-
-  </div>
-</div>
+ <div>
+     <NavigationBar/>
+     <v-container>
+         <v-row dense align="center">
+             <v-col :cols="12">
+                 <v-card>
+                     <v-img :src="animal.picture" max-height="500"></v-img>
+                     <v-card-title> 
+                        Common Name : {{ animalInformation[0].commonName}} 
+                        <br>
+                        Scientific Name : {{ animalInformation[0].scientificName }}     
+                    </v-card-title>
+                     <v-card-subtitle> 
+                        - {{ animalInformation[0].information[0] }}
+                        <br>
+                        - {{ animalInformation[0].information[1] }}
+                     </v-card-subtitle>
+                     <v-card-actions>
+                         <v-spacer></v-spacer>
+                         <v-btn color="#BBDEFB" @click="mealPayment()"> 
+                             <span> Treat A Meal (S$10) </span>
+                             <v-icon> mdi-hamburger </v-icon>
+                         </v-btn>
+                         <v-spacer></v-spacer>
+                         <v-btn color="#BBDEFB" @click="feastPayment()">
+                             <span> Treat A Feast (S$20) </span>
+                             <v-icon> mdi-food </v-icon>
+                         </v-btn> 
+                         <v-spacer></v-spacer>
+                     </v-card-actions>
+                 </v-card>
+             </v-col>
+         </v-row>
+     </v-container>
+ </div>  
 </template>
+
 <script>
 import database from "../firebase.js"
 import NavigationBar from "./NavigationBar";
@@ -77,28 +86,3 @@ export default {
     }
 }
 </script>
-<style scoped>
-h1 {
-    font-size: 50px;
-}
-#left {
-    padding-inline: 3%;
-    float:left;
-    width: 35%;
-}
-#right {
-    float:left;
-    width:65%
-}
-#picture {
-    width: 100%;
-    height: auto;
-    object-fit: cover
-}
-button {
-  border-radius:12px;
-  background-color: rgb(168, 212, 208);
-  padding-inline: 10px;
-  margin-inline: 12px;
-}
-</style>

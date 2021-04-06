@@ -1,22 +1,28 @@
 <template>
-    <div id="payment">
-        <br>
-        <form>
-            Payment Amount: <p>20.00 SGD</p> Feast for {{temp[1].name}}<br><br>
-            <label for="ccn">Credit Card/Debit Card Number: </label>
-            <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX"><br>
+    <div>
+        <v-card>
+            <v-card-title> Payment Amount of S$20 for {{temp[1].name}}'s Feast </v-card-title>
+            <v-card-subtitle> Credit Card Information </v-card-subtitle>
+            <v-text-field label="Name On Card" prepend-icon="person"></v-text-field>
             <br>
-            <label for="name">Name on card: </label>
-            <input id="name" type="text">
-            <br><br>
-            <label for="expriy">Expiry Date: </label>
-            <input id="expiry" type="date">
-            <br><br>
-            <label for="ccv">CCV: </label>
-            <input id="ccv" type="tel" maxlength="3" placeholder="X X X"><br><br>   
-            <button @click="back()">Back</button>
-            <button @click="proceed()">Continue</button>
-        </form>
+            <v-text-field label="Credit Card Number" prepend-icon="payment" v-model="creditCardNumber"></v-text-field>
+            <br>
+            <v-text-field label="CVV" prepend-icon="payment" v-model="cvvNumber"></v-text-field>
+            <br>
+            <v-text-field label="Expiry Date" prepend-icon="today"></v-text-field>
+            <br>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="#A8D4D0" @click="back()"> 
+                    <v-icon> arrow_back </v-icon>
+                    Back </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn color="#A8D4D0" @click="proceed()"> Continue 
+                    <v-icon> arrow_forward </v-icon>
+                </v-btn>
+                <v-spacer></v-spacer>
+            </v-card-actions>
+        </v-card>
     </div>
 </template>
 <script>
@@ -27,7 +33,11 @@ export default {
     name: "FeastPayment",
     data() {
         return {
-            selectedanimal: []
+            selectedanimal: [],
+            creditCardHolder: "" , 
+            creditCardNumber: "" , 
+            cvvNumber: "" , 
+            expiryDate: ""
         }
     },
     props: ['temp'],
@@ -41,103 +51,87 @@ export default {
                 })
         },
         proceed: function() {
-            var animalId = this.temp[0]
-            database.collection('transactions').add({
-                amount: 20,
-                animalId: this.temp[0],
-                foodType: 'feast',
-                time: new Date(),  
-                userId: 'QNqhGFZ0EVtmArEaV3vt'            
-            }).then(function(docRef) {
-                database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                    transactions: firebase.firestore.FieldValue.arrayUnion(docRef.id)
-            });
-            })
-
-            database.collection("users").doc('QNqhGFZ0EVtmArEaV3vt').get().then((querySnapShot) => {
-                this.contributions = querySnapShot.data().contributions
-            }).then(() => {
-                for (const x in this.contributions) {
-                    if (x == animalId) {
-                        var mealCount = this.contributions[x][0]
-                        var feastCount = this.contributions[x][1]
-                        var ranking = this.contributions[x][2]
-
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(mealCount)
-                        })
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(feastCount)
-                        })   
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(ranking)
-                        })                           
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(mealCount)
-                        })    
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(feastCount+1)
-                        })   
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(ranking)
-                        })        
-                        
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(mealCount)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(feastCount)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(ranking)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(mealCount)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(feastCount+1)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(ranking)
-                        })
-
-                       
-                    }
-                }
-            })
-
-            this.$router.push({
-                path: '/sfeast',
-                name: 'sfeast',
-                params: {selectedanimal: this.temp},
-                props: true 
+            if(this.creditCardHolder.length == 0){
+                window.alert("Please enter a name!")
+            } else if(this.creditCardNumber.length != 19){
+                window.alert("invalid Credit Card Number!")
+            } else if (this.cvvNumber.length != 3){
+                window.alert("Invalid CVV!")
+            } else if (this.expiryDate.length == 0){
+                window.alert("Please enter an Expiry Date!")
+            } else {
+                var animalId = this.temp[0]
+                database.collection('transactions').add({
+                    amount: 10,
+                    animalId: animalId,
+                    foodType: 'meal',
+                    time: new Date(),  
+                    userId: 'QNqhGFZ0EVtmArEaV3vt'            
+                }).then(function(docRef) {
+                    database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                        transactions: firebase.firestore.FieldValue.arrayUnion(docRef.id)
+                });
                 })
+
+                database.collection("users").doc('QNqhGFZ0EVtmArEaV3vt').get().then((querySnapShot) => {
+                    this.contributions = querySnapShot.data().contributions
+                }).then(() => {
+                    for (const x in this.yeet) {
+                        if (x == animalId) {
+                            var mealCount = this.contributions[x][0]
+                            var feastCount = this.contributions[x][1]
+                            var ranking = this.contributions[x][2]
+
+                            database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                                ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(mealCount)
+                            })
+                            database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                                ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(feastCount)
+                            })   
+                            database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                                ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(ranking)
+                            })                           
+                            database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                                ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(mealCount+1)
+                            })    
+                            database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                                ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(feastCount)
+                            })   
+                            database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
+                                ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(ranking)
+                            })        
+                            
+                            database.collection('animals').doc(animalId).update({
+                                'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(mealCount)
+                            })
+                            database.collection('animals').doc(animalId).update({
+                                'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(feastCount)
+                            })
+                            database.collection('animals').doc(animalId).update({
+                                'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(ranking)
+                            })
+                            database.collection('animals').doc(animalId).update({
+                                'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(mealCount+1)
+                            })
+                            database.collection('animals').doc(animalId).update({
+                                'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(feastCount)
+                            })
+                            database.collection('animals').doc(animalId).update({
+                                'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(ranking)
+                            })
+
+                        
+                        }
+                    }
+                })
+                this.$router.push({
+                    path: '/successfulmeal',
+                    name: 'successfulmeal',
+                    params: {selectedanimal: this.temp},
+                    props: true 
+                    }) 
+                }
         }
     },
 }
 </script>
-<style scoped>
-#payment {
-    text-align: center;
-    display: block;
-}
-form {
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-}
-p {
-    text-align: center;
-    font-weight: bold;
-    font-size: 35px;
-}
-button {
-    border-radius:12px;
-    background-color: rgb(168, 212, 208);
-    margin-inline: 50px;
-    width: 150px;
-    height: 50px;
-    font-size: 17px;
-}
-</style>
