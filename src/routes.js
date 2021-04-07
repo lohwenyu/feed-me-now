@@ -27,7 +27,7 @@ export default [
     { path: '/mealpayment', name:'mealpayment', component: MealPayment, props:true},
     { path: '/successfulmeal', name:'successfulmeal', component: SuccessfulMeal, props:true},
     { path: '/feastpayment', name:'feastpayment', component: FeastPayment, props:true},
-    { path: '/sfeast', name:'sfeast', component: SuccessfulFeast, props:true},
+    { path: '/successfulfeast', name:'successfulfeast', component: SuccessfulFeast, props:true},
     { path: '/dashboard', component: Dashboard},
 ]
 
