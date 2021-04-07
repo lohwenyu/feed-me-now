@@ -3,21 +3,24 @@
         <p><strong>Top 3 Contributors</strong></p>
             <div class="column" v-for="(contributor, key, index) in this.animal.contributors" :key="index">
                 <span v-if= "contributor[2]==1">
+                    <font-awesome-icon icon="paw" size="sm"/>
                     {{key}}
-                    {{contributor}}
+                    ({{contributor[0]+contributor[1]}})
                 </span>
             </div>
             <div class="column" v-for="(contributor, key, index) in this.animal.contributors" :key="index">
                 <span v-if= "contributor[2]==2">
+                    <font-awesome-icon icon="paw" size="sm"/>
                     {{key}}
-                    {{contributor}}
+                    ({{contributor[0]+contributor[1]}})
                 </span>
                 
             </div>
             <div class="column" v-for="(contributor, key, index) in this.animal.contributors" :key="index">
                 <span v-if= "contributor[2]==3">                    
+                    <font-awesome-icon icon="paw" size="sm"/>
                     {{key}}
-                    {{contributor}}
+                    ({{contributor[0]+contributor[1]}})
                 </span>
             </div>
     </div>
@@ -36,7 +39,7 @@ export default {
     data() {
         return {
             animal: Object,
-            user_info: Object,
+            users: [],
         }
     },
     methods: {
@@ -49,16 +52,15 @@ export default {
             });
         },
         fetchInformation: function(){
-            database.collection('users').get().then((querySnapShot)=>{
-                let item={}
-                querySnapShot.forEach(doc=>{
-                    item=doc.data()
-                    this.user_info.push(item) 
-                })  
-            }).then( ()=> {
-                console.log(this.user_info);
-            });
-        },   
+            database.collection('users').get().then((querySnapShot) => {
+                let item = {}
+                querySnapShot.forEach(doc => {
+                    item = doc.data()
+                    this.users.push([doc.id,item])
+
+                })
+            })
+        },
     },
     created() {
         this.fetchAnimal()
