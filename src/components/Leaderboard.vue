@@ -17,7 +17,7 @@
 <script>
 import NavigationBar from './NavigationBar.vue';
 import PageHeader from "./PageHeader.vue";
-import database from '../firebase.js'
+import database, { auth } from "../firebase.js";
 import LeaderBoardCard from './LeaderBoardCard.vue';
 
 export default {
@@ -30,7 +30,7 @@ export default {
     data() {
        return{
             user_contri: Object,
-            doc_id: "QNqhGFZ0EVtmArEaV3vt",
+            doc_id: auth.currentUser.uid,
             animal_info: []
         }
     },
