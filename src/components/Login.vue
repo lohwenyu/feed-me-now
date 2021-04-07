@@ -45,7 +45,7 @@ export default {
                     .then(() => {
                         auth.onAuthStateChanged((user) => {
                             if (user) {
-                                this.$router.push({ path: '/home' })
+                                this.$router.push({ path: '/home' }).then(() => location.reload())
                             }
                         })
                     })
