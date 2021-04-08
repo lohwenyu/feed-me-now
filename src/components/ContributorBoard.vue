@@ -1,26 +1,25 @@
 <template>
     <div id=mainboard>
         <p><strong>Top 3 Contributors</strong></p>
-            <div class="column" v-for="(contributor, key, index) in this.animal.contributors" :key="index">
-                <span v-if= "contributor[2]==1">
+            <div class="column">
+                <span>
                     <font-awesome-icon icon="paw" size="sm"/>
-                    {{key}}
-                    ({{contributor[0]+contributor[1]}})
+                    {{ first[0] }}
+                    ({{ first[1] }})
                 </span>
             </div>
-            <div class="column" v-for="(contributor, key, index) in this.animal.contributors" :key="index">
-                <span v-if= "contributor[2]==2">
+            <div class="column">
+                <span>
                     <font-awesome-icon icon="paw" size="sm"/>
-                    {{key}}
-                    ({{contributor[0]+contributor[1]}})
+                    {{ second[0] }}
+                    ({{ second[1] }})
                 </span>
-                
             </div>
-            <div class="column" v-for="(contributor, key, index) in this.animal.contributors" :key="index">
-                <span v-if= "contributor[2]==3">                    
+            <div class="column">
+                <span>
                     <font-awesome-icon icon="paw" size="sm"/>
-                    {{key}}
-                    ({{contributor[0]+contributor[1]}})
+                    {{ third[0] }}
+                    ({{ third[1] }})
                 </span>
             </div>
     </div>
@@ -38,29 +37,49 @@ export default {
     },
     data() {
         return {
-            animal: Object,
-            users: [],
+            contributors: Object,
+            users: null,
+            first: [],
+            second: [],
+            third: []
         }
     },
     methods: {
         fetchAnimal: function() {
             database.collection('animals').doc(this.animalId).get().then(doc => {
-                this.animal = doc.data();
+                this.contributors = doc.data().contributors;
             }).then(() => {
-                console.log(this.animal);
-                this.fetchInformation()
-            });
-        },
-        fetchInformation: function(){
-            database.collection('users').get().then((querySnapShot) => {
-                let item = {}
-                querySnapShot.forEach(doc => {
-                    item = doc.data()
-                    this.users.push([doc.id,item])
-
-                })
+                this.users = Object.keys(this.contributors)
+            }).then(() => {
+                this.fetchTopContributors()
             })
+
         },
+        fetchTopContributors: function() {
+            var i;
+            for (i=0;i<this.users.length; i++) {
+                var userId = this.users[i];
+                var user = this.contributors[userId]
+                if (user[2]==1) {
+                    const temp = user
+                    database.collection('users').doc(userId).get().then(doc => {
+                        this.first = [doc.data().name, temp[0] + temp[1]]
+                    })
+                } else if (user[2]==2) {
+                    const temp = user
+                    database.collection('users').doc(userId).get().then(doc => {
+                        this.second = [doc.data().name, temp[0] + temp[1]]
+                    })
+                } else if (user[2]==3) {
+                    const temp = user
+                    database.collection('users').doc(userId).get().then(doc => {
+                        this.third = [doc.data().name, temp[0] + temp[1]]
+                    })
+                } else {
+                    continue
+                }
+            }
+        }
     },
     created() {
         this.fetchAnimal()
