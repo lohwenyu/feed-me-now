@@ -63,17 +63,17 @@ export default {
                 if (user[2]==1) {
                     const temp = user
                     database.collection('users').doc(userId).get().then(doc => {
-                        this.first = [doc.data().name, temp[0] + temp[1]]
+                        this.first = [doc.data().name, temp[0] + 2*temp[1]]
                     })
                 } else if (user[2]==2) {
                     const temp = user
                     database.collection('users').doc(userId).get().then(doc => {
-                        this.second = [doc.data().name, temp[0] + temp[1]]
+                        this.second = [doc.data().name, temp[0] + 2*temp[1]]
                     })
                 } else if (user[2]==3) {
                     const temp = user
                     database.collection('users').doc(userId).get().then(doc => {
-                        this.third = [doc.data().name, temp[0] + temp[1]]
+                        this.third = [doc.data().name, temp[0] + 2*temp[1]]
                     })
                 } else {
                     continue
