@@ -39,7 +39,7 @@ export default {
             }).then(() =>{
                 console.log(this.contributionList)
             })
-        }
+        },
     },
     created() {
         this.fetchContributions();
