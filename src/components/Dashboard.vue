@@ -5,7 +5,7 @@
             <BubbleGraph v-bind:dataCollection="bubbleGraphData" v-bind:loadingCount="countryCount"></BubbleGraph>
         </div>
         <div>
-            <ThreatCard v-bind:count="threatCardData.singapore.array"></ThreatCard>
+            <ThreatCard v-bind:count="threatCardData.singapore.array" v-bind:isLoading="barLoading"></ThreatCard>
         </div>
     </div>
 </template>
@@ -96,12 +96,11 @@ export default {
             threatCardData: {
                 singapore: {
                     array: [0, 0, 0, 0, 0],
-                    isLoading: true,
                 }, 
                 other: {
                     filled: false,
                     array: [0, 0, 0, 0, 0],
-                    isLoading: true
+                    isLoading: null
                 }
             }
         }
@@ -154,27 +153,35 @@ export default {
                     if (data.category == "DD") {
                         this.barGraphData.datasets[0].data[0] += 1
                         this.barLoading -= 1
+                        this.threatCardData.singapore.array[0] +=1
                     } else if (data.category == "LC" || data.category == "LR/lc") {
                         this.barGraphData.datasets[0].data[1] += 1
                         this.barLoading -= 1
+                        this.threatCardData.singapore.array[1] +=1
                     } else if (data.category == "NT" || data.category == "LR/nt" || data.category == "LR/cd") {
                         this.barGraphData.datasets[0].data[2] += 1
                         this.barLoading -= 1
+                        this.threatCardData.singapore.array[2] +=1
                     } else if (data.category == "VU") {
                         this.barGraphData.datasets[0].data[3] += 1
                         this.barLoading -= 1
+                        this.threatCardData.singapore.array[3] +=1
                     } else if (data.category == "EN") {
                         this.barGraphData.datasets[0].data[4] += 1
                         this.barLoading -= 1
+                        this.threatCardData.singapore.array[3] +=1
                     } else if (data.category == "CR") {
                         this.barGraphData.datasets[0].data[5] += 1
                         this.barLoading -= 1
+                        this.threatCardData.singapore.array[3] +=1
                     } else if (data.category == "EW") {
                         this.barGraphData.datasets[0].data[6] += 1
                         this.barLoading -= 1
+                        this.threatCardData.singapore.array[4] +=1
                     } else if (data.category == "EX") {
                         this.barGraphData.datasets[0].data[7] += 1
                         this.barLoading -= 1
+                        this.threatCardData.singapore.array[4] +=1
                     }
                 })
             })

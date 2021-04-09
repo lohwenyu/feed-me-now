@@ -1,5 +1,5 @@
 <template>
-    <div id="container">
+    <div id="container" v-if="isLoading == 0">
         <div id="container1">
             <div class="threatLevel"><p>Data Deficient</p></div>
             <div class="count"><p>{{ count[0] }}</p></div>
@@ -27,9 +27,13 @@ export default {
     name: "ThreatCard",
     props: {
         count: {
-            type: Array
+            type: Array,
+            default: null
         },
-    }    
+        isLoading: {
+            type: Number,
+        }
+    },
 }
 </script>
 <style scoped>
