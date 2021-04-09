@@ -21,8 +21,6 @@
 </template>
 
 <script>
-import database from '../firebase.js'
-import firebase from 'firebase'
 
 export default {
     name: "MealPayment",
@@ -41,81 +39,14 @@ export default {
                 props: true 
                 })
         },
-        proceed: function() {
-            var animalId = this.temp[0]
-            database.collection('transactions').add({
-                amount: 10,
-                animalId: animalId,
-                foodType: 'meal',
-                time: new Date(),  
-                userId: 'QNqhGFZ0EVtmArEaV3vt'            
-            }).then(function(docRef) {
-                database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                    transactions: firebase.firestore.FieldValue.arrayUnion(docRef.id)
-            });
-            })
-
-            database.collection("users").doc('QNqhGFZ0EVtmArEaV3vt').get().then((querySnapShot) => {
-                this.contributions = querySnapShot.data().contributions
-            }).then(() => {
-                for (const x in this.yeet) {
-                    if (x == animalId) {
-                        var mealCount = this.contributions[x][0]
-                        var feastCount = this.contributions[x][1]
-                        var ranking = this.contributions[x][2]
-
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(mealCount)
-                        })
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(feastCount)
-                        })   
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(ranking)
-                        })                           
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(mealCount+1)
-                        })    
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(feastCount)
-                        })   
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(ranking)
-                        })        
-                        
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(mealCount)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(feastCount)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(ranking)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(mealCount+1)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(feastCount)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(ranking)
-                        })
-
-                       
-                    }
-                }
-            })
-        
-  
-            
+        proceed: function() {   
             this.$router.push({
                 path: '/successfulmeal',
                 name: 'successfulmeal',
                 params: {selectedanimal: this.temp},
                 props: true 
                 }) 
-        }
+        },
     },
 }
 </script>

@@ -18,6 +18,8 @@
 
 <script>
 import NavigationBar from "./NavigationBar.vue";
+import database, {auth} from '../firebase.js'
+import firebase from 'firebase'
 
 export default {
     name: "SuccessfulTreat",
@@ -27,7 +29,8 @@ export default {
     data() {
         return {
             orderNumber: 0,
-            number: []
+            number: [],
+            currUser: auth.currentUser.uid,   
         }
     },
     props: ['selectedanimal'],
@@ -37,6 +40,92 @@ export default {
         },
     },
     created: function() {
+        var animalId = this.selectedanimal[0]
+        var currUser = this.currUser
+        database.collection('users').doc(this.currUser).get().then((querySnapShot) => {
+            this.name = querySnapShot.data().contributions
+            }).then(() => {
+                if (typeof this.name === 'undefined') {
+                    database.collection('users').doc(this.currUser).set({
+                        contributions: {animalId:[1,0,1]}
+                    })
+                } else {
+                    for (var y in this.name) {
+                        if (y==animalId) {
+                            var repeated = true
+                            break
+                        } else {
+                            continue;
+                        }
+                    }
+                    if (typeof repeated === 'undefined') {
+                        database.collection('users').doc(this.currUser).update({
+                            ['contributions.'+animalId]: [1,0,1]
+                        })
+                    }       
+                }
+            })
+
+
+            database.collection('animals').doc(animalId).get().then((querySnapShot) => {
+                this.contributor = querySnapShot.data().contributors
+            }).then(() => {
+                if (typeof this.contributor === 'undefined') {
+                    database.collection('animals').doc(animalId).set({
+                        contributors: {currUser:[1,0,1]}
+                    })
+                } else {
+                    for (var y in this.contributor) {
+                        if (y==currUser) {
+                            var repeatedUser = true
+                            break
+                        } else {
+                            continue
+                        }
+                    }
+                    if (typeof repeatedUser === 'undefined') {
+                        database.collection('animals').doc(animalId).update({
+                            ['contributors.'+currUser]:[1,0,1]
+                        })
+                    } 
+                }
+            }) 
+        
+            database.collection('transactions').add({
+                amount: 10,
+                animalId: animalId,
+                foodType: 'meal',
+                time: new Date(),  
+                userId: currUser            
+            }).then(function(docRef) {
+                database.collection('users').doc(currUser).update({
+                    transactions: firebase.firestore.FieldValue.arrayUnion(docRef.id)
+            });
+            })
+
+            database.collection("users").doc(currUser).get().then((querySnapShot) => {
+                this.contributions = querySnapShot.data().contributions
+            }).then(() => {
+                console.log(this.contributions)
+                for (const x in this.contributions) {
+                    if (x == animalId) {
+                        var mealCount = this.contributions[x][0]
+                        var feastCount = this.contributions[x][1]
+                        var points = this.contributions[x][2]
+
+                        database.collection('users').doc(currUser).update({
+                             ['contributions.'+animalId]: [],
+                             ['contributions.'+animalId]: [mealCount+1, feastCount, points+1]
+                        })                       
+                        database.collection('animals').doc(animalId).update({
+                            ['contributors.'+ currUser]: [],
+                            ['contributors.'+ currUser]: [mealCount+1, feastCount, points+1],                            
+                        })             
+                    }
+                }
+            })
+
+
         this.orderNumber = Math.round(Math.random() * 100000000)
     }
 

@@ -20,14 +20,13 @@
     </div>
 </template>
 <script>
-import database from '../firebase.js'
-import firebase from 'firebase'
 
 export default {
     name: "FeastPayment",
     data() {
         return {
-            selectedanimal: []
+            selectedanimal: [],
+     
         }
     },
     props: ['temp'],
@@ -41,74 +40,9 @@ export default {
                 })
         },
         proceed: function() {
-            var animalId = this.temp[0]
-            database.collection('transactions').add({
-                amount: 20,
-                animalId: this.temp[0],
-                foodType: 'feast',
-                time: new Date(),  
-                userId: 'QNqhGFZ0EVtmArEaV3vt'            
-            }).then(function(docRef) {
-                database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                    transactions: firebase.firestore.FieldValue.arrayUnion(docRef.id)
-            });
-            })
-
-            database.collection("users").doc('QNqhGFZ0EVtmArEaV3vt').get().then((querySnapShot) => {
-                this.contributions = querySnapShot.data().contributions
-            }).then(() => {
-                for (const x in this.contributions) {
-                    if (x == animalId) {
-                        var mealCount = this.contributions[x][0]
-                        var feastCount = this.contributions[x][1]
-                        var ranking = this.contributions[x][2]
-
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(mealCount)
-                        })
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(feastCount)
-                        })   
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayRemove(ranking)
-                        })                           
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(mealCount)
-                        })    
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(feastCount+1)
-                        })   
-                        database.collection('users').doc('QNqhGFZ0EVtmArEaV3vt').update({
-                             ['contributions.'+animalId]: firebase.firestore.FieldValue.arrayUnion(ranking)
-                        })        
-                        
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(mealCount)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(feastCount)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayRemove(ranking)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(mealCount)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(feastCount+1)
-                        })
-                        database.collection('animals').doc(animalId).update({
-                            'contributors.QNqhGFZ0EVtmArEaV3vt': firebase.firestore.FieldValue.arrayUnion(ranking)
-                        })
-
-                       
-                    }
-                }
-            })
-
             this.$router.push({
-                path: '/successfulfeast',
-                name: 'successfulfeast',
+                path: '/sfeast',
+                name: 'sfeast',
                 params: {selectedanimal: this.temp},
                 props: true 
                 })
