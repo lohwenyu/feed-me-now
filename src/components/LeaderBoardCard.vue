@@ -13,18 +13,18 @@
         </div>
         <div id="ranking">
              <span><strong>You are the </strong></span><br>
-             <span style="font-size:40px"><strong>#{{array[2]}} </strong></span><br>
+             <span style="font-size:40px"><strong>#{{this.finalRanking}} </strong></span><br>
              <span><strong> contributor </strong></span>
-             <p>with {{array[0]+2*array[1]}} contributions</p>
+             <p>with {{array[2]}} contributions</p>
         </div>
-        <ContributorBoard v-bind:animalId="animalId"/>
+        <ContributorBoard v-bind:rankedContributors="rankedContributors" v-bind:animalId="animalId"/>
     </div>
 </template>
 
 <script>
 import FeedAgainButton from './FeedAgainButton.vue';
 import FeedCounter from "./FeedCounter.vue";
-import database from "../firebase.js";
+import database, {auth} from "../firebase.js";
 import ContributorBoard from "./ContributorBoard";
 
 export default {
@@ -45,7 +45,10 @@ export default {
     data() {
         return {
             animal: null,
-            information: []
+            information: [],
+            currUser: auth.currentUser.uid,
+            finalRanking: 0,
+            rankedContributors: []
         }
     },
     methods: {
@@ -53,7 +56,6 @@ export default {
             database.collection('animals').doc(this.animalId).get().then(doc => {
                 this.animal = doc.data();
             }).then(() => {
-                console.log(this.animal);
                 this.fetchInformation()
             });
         },
@@ -61,10 +63,35 @@ export default {
             database.collection('animalInformation').doc(this.animal.animalInformation).get().then(doc => {
                 this.information.push(doc.data());
             })
-        }
+        },
+        sorted: function() {
+            database.collection('animals').doc(this.animalId).get().then((querySnapShot) => {
+                this.contributors = querySnapShot.data().contributors
+            }).then(() => {
+                for (const contributorId in this.contributors) {
+                    this.rankedContributors.push({"ID": contributorId, "points": this.contributors[contributorId][2]})
+                }
+                this.rankedContributors.sort(this.compare_points)
+                var ranking = this.rankedContributors.findIndex(x => x.ID === this.currUser) + 1
+                this.finalRanking = ranking
+            })
+            this.rankedContributors.sort(this.compare_points)
+ 
+        },
+        compare_points: function(a,b) {
+            if (a.points<b.points) {
+                return 1;
+            } else if (a.points>b.points){
+                return -1;
+            } else {
+                return 0;
+            }
+        },
+
     },
     created() {
         this.fetchAnimal()
+        this.sorted()
     }
 }
 </script>

@@ -1,27 +1,14 @@
 <template>
     <div id=mainboard>
-        <p><strong>Top 3 Contributors</strong></p>
-            <div class="column">
-                <span>
-                    <font-awesome-icon icon="paw" size="sm"/>
-                    {{ first[0] }}
-                    ({{ first[1] }})
+        <p><strong>Top {{this.length}} Contributors</strong></p>
+        <ul v-for="object in this.sortedNmaes.sort(this.compare_points).slice(0,3)" v-bind:key="object.ID">
+            <div class="column"><span>
+            <font-awesome-icon icon="paw" size="sm"/>
+                {{object.name}} ({{object.points}})
                 </span>
-            </div>
-            <div class="column">
-                <span>
-                    <font-awesome-icon icon="paw" size="sm"/>
-                    {{ second[0] }}
-                    ({{ second[1] }})
-                </span>
-            </div>
-            <div class="column">
-                <span>
-                    <font-awesome-icon icon="paw" size="sm"/>
-                    {{ third[0] }}
-                    ({{ third[1] }})
-                </span>
-            </div>
+                </div>
+        </ul>
+
     </div>
 </template>
 
@@ -31,58 +18,56 @@ import database from "../firebase.js";
 export default {
     name: "ContributorBoard",
     props: {
+        rankedContributors: {
+            type: Array
+        },
         animalId: {
             type: String
         }
     },
     data() {
         return {
-            contributors: Object,
-            users: null,
-            first: [],
-            second: [],
-            third: []
+            length: 3,
+            names: [],
+            sortedNmaes: []
         }
     },
     methods: {
-        fetchAnimal: function() {
-            database.collection('animals').doc(this.animalId).get().then(doc => {
-                this.contributors = doc.data().contributors;
-            }).then(() => {
-                this.users = Object.keys(this.contributors)
-            }).then(() => {
-                this.fetchTopContributors()
-            })
-
-        },
-        fetchTopContributors: function() {
-            var i;
-            for (i=0;i<this.users.length; i++) {
-                var userId = this.users[i];
-                var user = this.contributors[userId]
-                if (user[2]==1) {
-                    const temp = user
-                    database.collection('users').doc(userId).get().then(doc => {
-                        this.first = [doc.data().name, temp[0] + 2*temp[1]]
-                    })
-                } else if (user[2]==2) {
-                    const temp = user
-                    database.collection('users').doc(userId).get().then(doc => {
-                        this.second = [doc.data().name, temp[0] + 2*temp[1]]
-                    })
-                } else if (user[2]==3) {
-                    const temp = user
-                    database.collection('users').doc(userId).get().then(doc => {
-                        this.third = [doc.data().name, temp[0] + 2*temp[1]]
-                    })
-                } else {
-                    continue
-                }
+        compare_points: function(a,b) {
+            if (a.points<b.points) {
+                return 1;
+            } else if (a.points>b.points){
+                return -1;
+            } else {
+                return 0;
             }
-        }
+        },
     },
-    created() {
-        this.fetchAnimal()
+    created: function() {
+        var animalId = this.animalId
+        console.log(this.rankedContributors)
+        for (var x in this.rankedContributors) {
+            console.log(this.rankedContributors[x].ID)
+            database.collection("users").doc(this.rankedContributors[x].ID).get().then((querySnapShot) => {
+                this.contributions = querySnapShot.data().contributions
+                this.name = querySnapShot.data().name
+            }).then(() => {
+                console.log(this.contributions)
+                console.log(this.name)
+                for (const x in this.contributions) {
+                    if (x == animalId) {
+                        var points = this.contributions[x][2]
+                        this.names.push({"name":this.name,"points":points})
+                    }
+                    
+                }
+            })
+        }
+        //this.names.sort(this.compare_points)
+        if (this.rankedContributors.length < 3) {
+            this.length = this.rankedContributors.length
+        }
+        this.sortedNmaes = this.names
     }
 }
 </script>
@@ -96,5 +81,12 @@ export default {
     padding: 20px;
     text-align: center;
     border-radius: 25px;
+    padding-right: 3.5%;
+}
+#column{
+    text-align: center;
+}
+p{
+    padding-left: 10%;
 }
 </style>

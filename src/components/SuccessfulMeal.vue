@@ -46,8 +46,8 @@ export default {
             this.name = querySnapShot.data().contributions
             }).then(() => {
                 if (typeof this.name === 'undefined') {
-                    database.collection('users').doc(this.currUser).set({
-                        contributions: {animalId:[1,0,1]}
+                    database.collection('users').doc(this.currUser).update({
+                        contributions: {[animalId]:[1,0,1]}
                     })
                 } else {
                     for (var y in this.name) {
@@ -71,8 +71,8 @@ export default {
                 this.contributor = querySnapShot.data().contributors
             }).then(() => {
                 if (typeof this.contributor === 'undefined') {
-                    database.collection('animals').doc(animalId).set({
-                        contributors: {currUser:[1,0,1]}
+                    database.collection('animals').doc(animalId).update({
+                        contributors: {[currUser]:[1,0,1]}
                     })
                 } else {
                     for (var y in this.contributor) {
