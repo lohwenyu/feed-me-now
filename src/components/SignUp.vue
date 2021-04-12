@@ -77,7 +77,7 @@ export default {
             }
         },
         login: function() {
-            this.$router.push({ path: '/login' }).then(() => location.reload())
+            this.$router.push({ path: '/login' })
         }
     }
 }
@@ -137,18 +137,7 @@ input {
     outline: none;
     width: 200px;
     font-size: 15px;
-}
-#forgetButton {
-    background: none;
-    border: none;
-    outline: none;
-    font-size: 13px;
-    padding: 0px;
-    color: white;
-}
-#forgetButton:hover {
-    transition: ease-in-out 0.2s;
-    color: black;
+    cursor: pointer;
 }
 #signUpButton {
     margin-top: 10px;
@@ -165,6 +154,7 @@ input {
     transition: ease-in-out 0.2s;
     background-color: white;
     color: black;
+    cursor: pointer;
 }
 #login {
     font-size: 13px;
@@ -179,5 +169,6 @@ input {
 #loginButton:hover {
     transition: ease-in-out 0.2s;
     color: black;
+    cursor: pointer;
 }
 </style>

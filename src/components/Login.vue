@@ -14,7 +14,7 @@
                             <div class="iconContainer"><font-awesome-icon icon="lock" size="lg"/></div>
                             <input id="password" v-model="password" type="password" placeholder="Password">
                         </div>
-                        <p><button type="button" id="forgetButton">Forgot Password?</button></p>
+                        <!-- <p><button type="button" id="forgetButton">Forgot Password?</button></p> -->
                         <button type="button" id="loginButton" v-on:click="login()">Sign In</button>
                         <p id="signUp">Don't have an account? <button type="button" id="signUpButton" v-on:click="signUp()">Sign up here.</button></p>
                     </form>
@@ -56,7 +56,7 @@ export default {
             }
         },
         signUp: function() {
-            this.$router.push({ path: '/signup' }).then(() => location.reload())
+            this.$router.push({ path: '/signup' })
         }
     }
 }
@@ -116,8 +116,9 @@ input {
     outline: none;
     width: 200px;
     font-size: 15px;
+    cursor: pointer;
 }
-#forgetButton {
+/* #forgetButton {
     background: none;
     border: none;
     outline: none;
@@ -128,8 +129,9 @@ input {
 #forgetButton:hover {
     transition: ease-in-out 0.2s;
     color: black;
-}
+} */
 #loginButton {
+    margin-top: 10px;
     width: 300px;
     height: 30px;
     outline: none;
@@ -143,6 +145,7 @@ input {
     transition: ease-in-out 0.2s;
     background-color: white;
     color: black;
+    cursor: pointer;
 }
 #signUp {
     font-size: 13px;
@@ -157,5 +160,6 @@ input {
 #signUpButton:hover {
     transition: ease-in-out 0.2s;
     color: black;
+    cursor: pointer;
 }
 </style>

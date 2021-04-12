@@ -72,5 +72,6 @@ export default {
     color: #055684;
     background: white;
     transition: ease-in-out 200ms;
+    cursor: pointer;
 }
 </style>
