@@ -61,7 +61,9 @@ export default {
     },
     watch: {
         loadingCount: function() {
+            // console.log(this.loadingCount)
             if (this.loadingCount == 0) {
+                // console.log(this.dataCollection)
                 this.renderChart(this.dataCollection, this.options)
             }
         }

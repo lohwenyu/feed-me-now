@@ -1,5 +1,5 @@
 <template>
-    <div id="container" v-if="isLoading == 0">
+    <div id="container" v-show="isLoading==0">
         <div id="container1">
             <div class="threatLevel"><p>Data Deficient</p></div>
             <div class="count"><p>{{ count[0] }}</p></div>
@@ -38,8 +38,8 @@ export default {
 </script>
 <style scoped>
 #container {
-    height: 20vh;
-    width: 60vw;
+    height: 120px;
+    width: 500px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -48,32 +48,32 @@ export default {
 }
 #container1 {
     background-color: rgb(44, 89, 157);
-    height: 15vh;
-    width: 10vw;
+    height: 100px;
+    width: 90px;
 }
 #container2 {
     background-color: rgb(91, 132, 196);
-    height: 15vh;
-    width: 10vw;
+    height: 100px;
+    width: 90px;
 }
 #container3 {
     background-color: rgb(252, 162, 110);
-    height: 15vh;
-    width: 10vw;
+    height: 100px;
+    width: 90px;
 }
 #container4 {
     background-color: rgb(251, 152, 80);
-    height: 15vh;
-    width: 10vw;
+    height: 100px;
+    width: 90px;
 }
 #container5 {
     background-color: rgb(249, 129, 37);
-    height: 15vh;
-    width: 10vw;
+    height: 100px;
+    width: 90px;
 }
 .threatLevel {
-    height: 10vh;
-    font-size: 1.6vw;
+    height: 70px;
+    font-size: 14px;
     font-weight: 600;
     text-align: center;
     display: flex;
@@ -81,8 +81,8 @@ export default {
     align-items: center;
 }
 .count {
-    height: 5vh;
-    font-size: 2.3vw;
+    height: 30px;
+    font-size: 18px;
     font-weight: 900;
     text-align: center;
     display: flex;
