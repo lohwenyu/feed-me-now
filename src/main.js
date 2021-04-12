@@ -31,6 +31,7 @@ auth.onAuthStateChanged(async user => {
 
     //start app
     app = new Vue({
+      vuetify,
       router: myRouter,
       created() {
         //redirect if user not logged in
