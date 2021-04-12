@@ -6,8 +6,10 @@
                     <span id="titleText">Help Them Today</span>
                     <p id="subtitleText">The Singapore Zoo is losing funds due to the pandemic and many animals are starving. 
                         Help them now by clicking on the button below and make a change now!</p>
-                    <button v-on:click="contribute()" type="button">Contribute Now</button>
-                    <button v-on:click="dashboard()" type="button">View Dashboard</button>
+                    <div id="buttonContainer">
+                        <button v-on:click="contribute()" type="button">Contribute Now</button>
+                        <button v-on:click="dashboard()" type="button">View Dashboard</button>
+                    </div>
                 </div>
             </div>
             <div class="column"></div>
@@ -46,12 +48,13 @@ export default {
     clear: both;
 }
 .column {
-    width:50%;
+    width:40%;
     float:left;
     display: flex;
     flex-wrap: wrap;
-    padding: 50px;
+    padding: 5%;
     margin-top: 80px
+
 }
 #titleText {
     font-size: 50px;
@@ -59,6 +62,10 @@ export default {
 }
 #subtitleText {
     font-size: 18px;
+}
+#buttonContainer {
+    display: flex;
+    flex-direction: column;
 }
 button {
     background: #055684;
