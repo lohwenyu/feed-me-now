@@ -6,7 +6,8 @@
                     <span id="titleText">Help Them Today</span>
                     <p id="subtitleText">The Singapore Zoo is losing funds due to the pandemic and many animals are starving. 
                         Help them now by clicking on the button below and make a change now!</p>
-                    <button v-on:click="contribute()" id="contributeButton" type="button">Contribute Now</button>
+                    <button v-on:click="contribute()" type="button">Contribute Now</button>
+                    <button v-on:click="dashboard()" type="button">View Dashboard</button>
                 </div>
             </div>
             <div class="column"></div>
@@ -22,6 +23,9 @@ export default {
     methods: {
         contribute: function() {
             this.$router.push({ path: '/login' })
+        },
+        dashboard: function() {
+            this.$router.push({ path: '/dashboard' }).then(() => location.reload())
         }
     }
 }
@@ -56,7 +60,7 @@ export default {
 #subtitleText {
     font-size: 18px;
 }
-#contributeButton {
+button {
     background: #055684;
     border: none;
     outline: none;
@@ -67,8 +71,9 @@ export default {
     height: 70px;
     border-radius: 100px;
     font-weight: bold;
+    margin-bottom: 20px;
 }
-#contributeButton:hover {
+button:hover {
     color: #055684;
     background: white;
     transition: ease-in-out 200ms;
