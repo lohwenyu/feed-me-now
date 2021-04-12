@@ -99,7 +99,7 @@ h1 {
     padding-inline: 5%;
     float:left;
     width: 35%;
-    height: 180px;
+    height: 30vh;
 }
 #picture {
     width: 100%;
@@ -109,17 +109,13 @@ h1 {
 #right {
     float:left;
     width:50%;
-    /* display: flex;
-    flex-direction: column; */
 }
 .nameContainer {
-    /* margin-top: 5px; */
     margin-bottom: 15px;
 }
 .nameText {
     background-color: #E5E5BA;
     width: fit-content;
-    /* font-size: 15px; */
     padding-inline: 10px;
     padding-top: 3px;
     padding-bottom: 3px;
