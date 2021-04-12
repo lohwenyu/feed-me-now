@@ -1,22 +1,28 @@
 <template>
-    <div id="payment">
-        <br>
-        <form>
-            Payment Amount: <p>10.00 SGD</p> Meal for {{temp[1].name}}<br><br>
-            <label for="ccn">Credit Card/Debit Card Number: </label>
-            <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX"><br>
+    <div>
+        <v-card>
+            <v-card-title> Payment Amount of S$10 for {{temp[1].name}}'s Meal </v-card-title>
+            <v-card-subtitle> Credit Card Information </v-card-subtitle>
+            <v-text-field label="Name On Card" prepend-icon="person" v-model="creditCardHolder"></v-text-field>
             <br>
-            <label for="name">Name on card: </label>
-            <input id="name" type="text">
-            <br><br>
-            <label for="expriy">Expiry Date: </label>
-            <input id="expiry" type="date">
-            <br><br>
-            <label for="ccv">CCV: </label>
-            <input id="ccv" type="tel" maxlength="3" placeholder="X X X"><br><br>   
-            <button @click="back()">Back</button>
-            <button @click="proceed()">Continue</button>
-        </form>
+            <v-text-field label="Credit Card Number" prepend-icon="payment" v-model="creditCardNumber"></v-text-field>
+            <br>
+            <v-text-field label="CVV" prepend-icon="payment" v-model="cvvNumber"></v-text-field>
+            <br>
+            <v-text-field label="Expiry Date" prepend-icon="today" v-model="expiryDate"></v-text-field>
+            <br>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="#A8D4D0" @click="back()"> 
+                    <v-icon> arrow_back </v-icon>
+                    Back </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn color="#A8D4D0" @click="proceed()"> Continue 
+                    <v-icon> arrow_forward </v-icon>
+                </v-btn>
+                <v-spacer></v-spacer>
+            </v-card-actions>
+        </v-card>
     </div>
 </template>
 
@@ -39,14 +45,25 @@ export default {
                 props: true 
                 })
         },
-        proceed: function() {   
-            this.$router.push({
-                path: '/successfulmeal',
-                name: 'successfulmeal',
-                params: {selectedanimal: this.temp},
-                props: true 
-                }) 
-        },
+        proceed: function() {
+            if(this.creditCardHolder.length == 0){
+                window.alert("Please Enter A Name!")
+            } else if (this.creditCardNumber.length != 16){
+                window.alert("invalid Credit Card Number!")
+            } else if (this.cvvNumber.length != 3){
+                window.alert("Invalid CVV!")
+            } else if (this.expiryDate.length == 0){
+                window.alert("Please Enter An Expiry Date!")
+            } else {
+                this.$router.push({
+                    path: '/successfulmeal',
+                    name: 'successfulmeal',
+                    params: {selectedanimal: this.temp},
+                    props: true 
+                    })
+            }
+                    
+        }
     },
 }
 </script>
