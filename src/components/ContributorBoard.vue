@@ -1,3 +1,4 @@
+
 <template>
     <div id=mainboard>
         <p><strong>Top {{this.length}} Contributors</strong></p>
