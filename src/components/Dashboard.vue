@@ -2,8 +2,8 @@
     <div id="container">
         <div id="spinnerContainer" v-show="(countryCount!=0) || (barLoading!=0)">
             <span id="spinner"><PacmanLoader v-bind:color="`rgb(150, 176, 138)`"/></span>
-            <div id="timeLeftContainer">
-                <span v-show="countryCount!=null && barLoading!=null">Estimated time left: {{ timeLeft }} seconds</span>
+            <div id="timeLeftContainer" v-show="countryCount!=null && barLoading!=null">
+                <span>Estimated time left: {{ timeLeft }} seconds</span>
             </div>
         </div>
         <div v-show="countryCount==0">

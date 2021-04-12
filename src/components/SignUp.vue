@@ -4,7 +4,7 @@
             <div class="column"></div>
             <div class="column">
                 <div id="formContainer">
-                    <img src="../assets/logo.png" alt=""/>
+                    <button id="logoButton"  v-on:click="redirectDashboard()"><img src="../assets/logo.png" alt=""/></button>
                     <form id="loginForm">
                         <div class="inputContainer">
                             <div class="iconContainer"><font-awesome-icon icon="user-circle" size="lg"/></div>
@@ -78,6 +78,9 @@ export default {
         },
         login: function() {
             this.$router.push({ path: '/login' })
+        },
+        redirectDashboard: function() {
+            this.$router.push({ path: '/dashboard' }).then(() => location.reload())
         }
     }
 }
@@ -104,11 +107,22 @@ export default {
     flex-wrap: wrap;
     justify-content: center; 
 }
-img {
+#logoButton {
+    background: none;
+    outline: none;
+    border: none;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+#logoButton:hover {
+    cursor: pointer;
+}
+/* img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+} */
 .inputContainer {
     width: 300px;
     height: 50px;
