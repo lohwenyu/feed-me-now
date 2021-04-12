@@ -59,8 +59,8 @@ export default {
                 window.alert("Please Enter An Expiry Date!")
             } else {
                 this.$router.push({
-                    path: '/sfeast',
-                    name: 'sfeast',
+                    path: '/successfulfeast',
+                    name: 'successfulfeast',
                     params: {selectedanimal: this.temp},
                     props: true 
                     })
