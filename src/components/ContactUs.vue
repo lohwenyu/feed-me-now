@@ -1,29 +1,39 @@
 <template>
     <div>
         <NavigationBar/>
-        <div>
-            <PageHeader v-bind:header="'Contact Us'" v-bind:icon="'address-book'"/>
-            <div class="row">
-                <div class="column" id="feedback">
-                    <p class="header">Leave a Feedback</p>
-                    <p>We welcome any feedback (200 char).</p>
-                    <textarea rows="5" v-model.trim="feedback"/>
-                    <span>{{ feedback.length }}/200</span>
-                    <button class="submitButton" type="submit" v-on:click="submitFeedBack()">Submit</button>
-                </div>
-                <div id="breakLine"></div>
-                <div class="column" id="transactionEnquiry">
-                    <p class="header">Transaction Enquiry</p>
-                    <p>Transaction Number:</p>
-                    <textarea rows="1" v-model="transactionId"/>
-                    <p>Tell us what was wrong with your transaction.</p>
-                    <textarea rows="10" v-model="transactionIssue"/>
-                    <button class="submitButton" type="button" v-on:click="submitEnquiry()">Submit</button>
-                </div>
-            </div>
-            <p class="alternative">Or</p>
-            <p class="alternative">Simple write in to <a href="customer_service@feedmenow.com">Feed Me Now</a>.</p>
-        </div>
+        <PageHeader v-bind:header="'Contact Us'" v-bond:icon="'address-book'"/>
+        <v-card> 
+                <v-card-title> Tell us how we can serve you better </v-card-title>
+                <v-form class="px-3">
+                    <v-textarea counter outlined no-resize rows='4' label="Feedback (Max 200 characters)" v-model="feedback" prepend-icon="edit"></v-textarea>
+                </v-form>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn depressed rounded @click="submitFeedBack()" color="#CFF1FF"> 
+                        Submit Feedback 
+                        <v-icon> east </v-icon>
+                    </v-btn>
+                    <v-spacer></v-spacer>
+             </v-card-actions>
+        </v-card>
+        <br>
+        <br>
+        <br>
+        <v-card>
+            <v-card-title> Transaction Enquiry </v-card-title>
+                <v-form>
+                    <v-text-field outlined label="Transaction Number" v-model="transactionId" prepend-icon="search"></v-text-field>
+                    <v-textarea outlined no-resize rows='4' label="Tell us what was wrong with your transaction" v-model="transactionIssue" prepend-icon="edit"></v-textarea>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn depressed rounded @click="submitEnquiry()" color="#CFF1FF" > 
+                            Submit Enquiry 
+                            <v-icon> east </v-icon>
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                    </v-card-actions>
+                </v-form>
+        </v-card>
     </div>
 </template>
 <script>
@@ -42,12 +52,15 @@ export default {
             currUser: "QNqhGFZ0EVtmArEaV3vt", //replace with firebase getter
             feedback: "",
             transactionId: "",
-            transactionIssue: ""
+            transactionIssue: "" 
         }
     },
     methods: {
         submitFeedBack: function() {
-            if (this.feedback.length > 200) {
+            if(this.feedback.length == 0){
+                window.alert("Feedback cannot be empty!")
+            }
+            else if (this.feedback.length > 200) {
                 window.alert("Feedback has to be less than 200 characters long. Do consider contacting us through email for detailed feedback. Thank you!")
             } else {
                 var feedbackRef = database.collection("feedback").doc();
@@ -104,8 +117,8 @@ export default {
     padding-right: 40px;
 }
 #breakLine {
-    width: 1px;
-    height: 440px;
+    width: 440pxpx;
+    height: 1px;
     background-color: #000000;
 }
 #transactionEnquiry {
