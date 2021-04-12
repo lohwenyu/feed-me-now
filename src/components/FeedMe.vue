@@ -2,25 +2,35 @@
 <div>
     <NavigationBar/>
   <div id="all">
+    <div id="animalName">
+        <h1>{{ animal.name }}</h1>
+    </div>
     <div id="left">
-    <h1>{{animal.name}}</h1>
-    <img id="picture" v-bind:src="animal.picture">
+        <img id="picture" v-bind:src="animal.picture">
     </div>
     <div id="right">
-        <h2>{{animalInformation[0].commonName}}</h2>
-        <p>COMMON NAME: {{animalInformation[0].commonName}}</p>
-        <p>SCIENTIFIC NAME: {{animalInformation[0].scientificName}}</p>
+        <div class="nameContainer">
+            <span>COMMON NAME</span>
+            <span class="nameText">{{animalInformation[0].commonName}}</span>
+        </div>
+        <div class="nameContainer">
+            <span>SCIENTIFIC NAME</span>
+            <span id="scientific" class="nameText">{{animalInformation[0].scientificName}}</span>
+        </div>
         <p v-for="(information, index) in animalInformation[0].information" :key="index">
             {{ information }}
         </p>
-    <button @click="mealPayment()">
-        <h2>Treat a meal</h2>
-            <p>10 SGD</p>
-    </button>
-    <button @click="feastPayment()">
-        <h2>Treat a feast</h2>
-            <p>20 SGD</p>
-    </button>
+        <div id="buttonContainer">
+            <button @click="mealPayment()">
+                <span class="buttonText">Treat a meal</span>
+                <span class="amountText">10 SGD</span>
+            </button>
+            <button @click="feastPayment()">
+                <span class="buttonText">Treat a meal</span>
+                <span class="amountText">20 SGD</span>
+            </button>
+        </div>
+    
     </div>
 
   </div>
@@ -77,27 +87,74 @@ export default {
 }
 </script>
 <style scoped>
+#animalName {
+    width: auto;
+    padding-inline: 5%;
+    margin-top: 40px;
+}
 h1 {
-    font-size: 50px;
+    font-size: 40px;
 }
 #left {
-    padding-inline: 3%;
+    padding-inline: 5%;
     float:left;
     width: 35%;
-}
-#right {
-    float:left;
-    width:65%
+    height: 180px;
 }
 #picture {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover
 }
+#right {
+    float:left;
+    width:50%;
+    /* display: flex;
+    flex-direction: column; */
+}
+.nameContainer {
+    /* margin-top: 5px; */
+    margin-bottom: 15px;
+}
+.nameText {
+    background-color: #E5E5BA;
+    width: fit-content;
+    /* font-size: 15px; */
+    padding-inline: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    margin-inline-start: 10px;
+}
+#scientific {
+    font-style: italic;
+}
+#buttonContainer {
+    display: flex;
+}
 button {
-  border-radius:12px;
-  background-color: rgb(168, 212, 208);
-  padding-inline: 10px;
-  margin-inline: 12px;
+    background-color: rgba(64, 168, 213, 0.24);
+    width: 140px;
+    height: 70px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+    flex-direction: column;
+    margin: 10px;
+}
+button:hover {
+    background-color: rgba(64, 168, 213, 0.5);
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+}
+.buttonText {
+    font-weight: 600;
+    font-size: 18px;
+}
+.amountText {
+    font-size: 15px;
 }
 </style>
