@@ -41,8 +41,8 @@ export default {
         },
         proceed: function() {
             this.$router.push({
-                path: '/sfeast',
-                name: 'sfeast',
+                path: '/successfulfeast',
+                name: 'successfulfeast',
                 params: {selectedanimal: this.temp},
                 props: true 
                 })
