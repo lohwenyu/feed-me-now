@@ -1,6 +1,5 @@
 <script>
 import { Bubble } from 'vue-chartjs'
-
 export default {
     name: "BubbleGraph",
     extends: Bubble,
