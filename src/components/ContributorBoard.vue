@@ -1,25 +1,14 @@
 <template>
     <div id=mainboard>
-        <p><strong>Top 3 Contributors</strong></p>
-            <div class="column" v-for="(contributor, key, index) in this.animal.contributors" :key="index">
-                <span v-if= "contributor[2]==1">
-                    {{key}}
-                    {{contributor}}
+        <p><strong>Top {{this.length}} Contributors</strong></p>
+        <ul v-for="object in this.sortedNmaes.sort(this.compare_points).slice(0,3)" v-bind:key="object.ID">
+            <div class="column"><span>
+            <font-awesome-icon icon="paw" size="sm"/>
+                {{object.name}} ({{object.points}})
                 </span>
-            </div>
-            <div class="column" v-for="(contributor, key, index) in this.animal.contributors" :key="index">
-                <span v-if= "contributor[2]==2">
-                    {{key}}
-                    {{contributor}}
-                </span>
-                
-            </div>
-            <div class="column" v-for="(contributor, key, index) in this.animal.contributors" :key="index">
-                <span v-if= "contributor[2]==3">                    
-                    {{key}}
-                    {{contributor}}
-                </span>
-            </div>
+                </div>
+        </ul>
+
     </div>
 </template>
 
@@ -29,39 +18,56 @@ import database from "../firebase.js";
 export default {
     name: "ContributorBoard",
     props: {
+        rankedContributors: {
+            type: Array
+        },
         animalId: {
             type: String
         }
     },
     data() {
         return {
-            animal: Object,
-            user_info: Object,
+            length: 3,
+            names: [],
+            sortedNmaes: []
         }
     },
     methods: {
-        fetchAnimal: function() {
-            database.collection('animals').doc(this.animalId).get().then(doc => {
-                this.animal = doc.data();
-            }).then(() => {
-                console.log(this.animal);
-                this.fetchInformation()
-            });
+        compare_points: function(a,b) {
+            if (a.points<b.points) {
+                return 1;
+            } else if (a.points>b.points){
+                return -1;
+            } else {
+                return 0;
+            }
         },
-        fetchInformation: function(){
-            database.collection('users').get().then((querySnapShot)=>{
-                let item={}
-                querySnapShot.forEach(doc=>{
-                    item=doc.data()
-                    this.user_info.push(item) 
-                })  
-            }).then( ()=> {
-                console.log(this.user_info);
-            });
-        },   
     },
-    created() {
-        this.fetchAnimal()
+    created: function() {
+        var animalId = this.animalId
+        console.log(this.rankedContributors)
+        for (var x in this.rankedContributors) {
+            console.log(this.rankedContributors[x].ID)
+            database.collection("users").doc(this.rankedContributors[x].ID).get().then((querySnapShot) => {
+                this.contributions = querySnapShot.data().contributions
+                this.name = querySnapShot.data().name
+            }).then(() => {
+                console.log(this.contributions)
+                console.log(this.name)
+                for (const x in this.contributions) {
+                    if (x == animalId) {
+                        var points = this.contributions[x][2]
+                        this.names.push({"name":this.name,"points":points})
+                    }
+                    
+                }
+            })
+        }
+        //this.names.sort(this.compare_points)
+        if (this.rankedContributors.length < 3) {
+            this.length = this.rankedContributors.length
+        }
+        this.sortedNmaes = this.names
     }
 }
 </script>
@@ -75,5 +81,12 @@ export default {
     padding: 20px;
     text-align: center;
     border-radius: 25px;
+    padding-right: 3.5%;
+}
+#column{
+    text-align: center;
+}
+p{
+    padding-left: 10%;
 }
 </style>

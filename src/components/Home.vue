@@ -5,7 +5,8 @@
         <v-container fill-height fluid>
             <v-row dense align="center">
                 <v-col v-for="(animal, index) in animals" :key="index" :cols="6" >
-                    <v-card>
+                    <br>
+                    <v-card max-width="650" max-height="650">
                         <v-img :src="animal[1].picture" max-height="450"></v-img>
                         <v-card-title> {{ animal[1].name }} </v-card-title>
                         <v-card-subtitle> {{ animal[1].description }} </v-card-subtitle>

@@ -66,7 +66,7 @@ export default {
 
                         auth.onAuthStateChanged((user) => {
                             if (user) {
-                                this.$router.push({ path: '/home' })
+                                this.$router.push({ path: '/home' }).then(() => location.reload())
                             }
                         })
                     })
@@ -77,7 +77,7 @@ export default {
             }
         },
         login: function() {
-            this.$router.push({ path: '/login' })
+            this.$router.push({ path: '/login' }).then(() => location.reload())
         }
     }
 }

@@ -21,7 +21,7 @@
                     <v-list-tile-action>
                         <v-icon> home </v-icon>
                     </v-list-tile-action>
-                    <router-link to='/home'>
+                    <router-link to='/home' exact>
                         <v-btn text> Home </v-btn>
                     </router-link>
                     <br>
@@ -29,7 +29,7 @@
                     <v-list-tile-action>
                         <v-icon> dashboard </v-icon>
                     </v-list-tile-action>
-                    <router-link to='/contributions'>
+                    <router-link to='/contributions' exact>
                         <v-btn text> Your Contributions </v-btn>
                     </router-link>
                     <br>
@@ -37,7 +37,7 @@
                     <v-list-tile-action>
                         <v-icon> insights </v-icon>
                     </v-list-tile-action>
-                    <router-link to='/leaderboard'>
+                    <router-link to='/leaderboard' exact>
                         <v-btn text> Leaderboard </v-btn>
                     </router-link>
                     <br>
@@ -45,7 +45,7 @@
                     <v-list-tile-action>
                         <v-icon> phone </v-icon>
                     </v-list-tile-action>
-                    <router-link to='/contactus'>
+                    <router-link to='/contactus' exact>
                         <v-btn text> Contact Us </v-btn>
                     </router-link>
                     
