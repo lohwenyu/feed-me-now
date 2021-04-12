@@ -20,8 +20,31 @@ const myRouter =  new VueRouter({
   mode:'history'
 })
 
-new Vue({
-  render: h => h(App),
-  vuetify,
-  router:myRouter
-}).$mount('#app')
+import { auth } from "./firebase.js";
+
+let app;
+auth.onAuthStateChanged(async user => {
+  if (!app) {
+    //wait to get user
+    // var user = await firebase.auth().currentUser;
+    // user.
+
+    //start app
+    app = new Vue({
+      router: myRouter,
+      created() {
+        //redirect if user not logged in
+        if (!user) {
+          this.$router.push("/login");
+        }
+      },
+      render: h => h(App)
+    }).$mount("#app");
+  }
+});
+
+// new Vue({
+//   render: h => h(App),
+//   router:myRouter
+// }).$mount('#app')
+

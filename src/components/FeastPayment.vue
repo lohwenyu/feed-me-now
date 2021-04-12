@@ -36,7 +36,6 @@ export default {
             creditCardNumber: "" , 
             cvvNumber: "" , 
             expiryDate: ""
-     
         }
     },
     props: ['temp'],
@@ -66,7 +65,6 @@ export default {
                     props: true 
                     })
             }
-                    
         }
     },
 }
