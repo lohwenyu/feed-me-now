@@ -1,27 +1,40 @@
 <template>
     <div>
-        <div>
-            <BarGraph v-bind:dataCollection="barGraphData" v-bind:isLoading="barLoading"></BarGraph>
-            <BubbleGraph v-bind:dataCollection="bubbleGraphData" v-bind:loadingCount="countryCount"></BubbleGraph>
+        <div id="spinnerContainer" v-show="(countryCount!=0) || (barLoading!=0)">
+            <span id="spinner"><PacmanLoader/></span>
+            <span v-show="countryCount!=null && barLoading!=null">Estimated time left: {{ timeLeft }} seconds</span>
         </div>
-        <div>
-            <ThreatCard v-bind:count="threatCardData.singapore.array" v-bind:isLoading="barLoading"></ThreatCard>
+        <div v-show="countryCount==0">
+            <div>
+                <div id="barContainer">
+                    <p>Singapore's IUCN Species Count</p>
+                    <BarGraph v-bind:dataCollection="barGraphData" v-bind:isLoading="barLoading" v-bind:loadingCount="countryCount" ></BarGraph>
+                </div>
+                <div id="bubbleContainer">
+                    <p>Proportion of Endangered Species in the World</p>
+                    <BubbleGraph v-bind:dataCollection="bubbleGraphData" v-bind:loadingCount="countryCount"></BubbleGraph>
+                </div>
+            </div>
+            <div>
+                <ThreatCard v-bind:count="threatCardData.singapore.array" v-bind:isLoading="barLoading"></ThreatCard>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import PacmanLoader from 'vue-spinner/src/PacmanLoader.vue'
 import axios from "axios";
 import ThreatCard from './ThreatCard.vue';
 import BarGraph from "./BarGraph.vue";
 import BubbleGraph from "./BubbleGraph.vue";
-
 export default {
     name: "Dashboard",
     components: {
         ThreatCard,
         BarGraph,
-        BubbleGraph
+        BubbleGraph,
+        PacmanLoader
     },
     data() {
         return {
@@ -102,7 +115,13 @@ export default {
                     array: [0, 0, 0, 0, 0],
                     isLoading: null
                 }
-            }
+            },
+            total: 0,
+        }
+    },
+    computed: {
+        timeLeft: function() {
+            return Math.round(this.countryCount/this.total * 30)
         }
     },
     methods: {
@@ -110,6 +129,7 @@ export default {
             axios.get(`https://apiv3.iucnredlist.org/api/v3/country/list?token=b5b6245df07b4070472855de9b6124dc3c984b6e93b8ef93530d729526654d71`)
             .then(response => {
                 this.countryCount = response.data.results.length;
+                this.total = response.data.results.length;
                 response.data.results.forEach(data => {
                     const isoCode = data.isocode
                     const link = `https://apiv3.iucnredlist.org/api/v3/country/getspecies/` + isoCode + `?token=b5b6245df07b4070472855de9b6124dc3c984b6e93b8ef93530d729526654d71`
@@ -143,7 +163,6 @@ export default {
                     })
                 })
             })
-
         },
         fetchBar: function() {
             axios.get(`https://apiv3.iucnredlist.org/api/v3/country/getspecies/SG?token=b5b6245df07b4070472855de9b6124dc3c984b6e93b8ef93530d729526654d71`)
@@ -194,5 +213,32 @@ export default {
 }
 </script>
 <style scoped>
-
+*{
+    box-sizing: border-box;
+}
+#spinnerContainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#spinner {
+    margin: 10px;
+}
+#barContainer {
+    height: 70vh;
+    width: 70vw;
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+}
+#bubbleContainer {
+    height: 70vh;
+    width: 70vw;
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+}
 </style>
