@@ -142,6 +142,7 @@ textarea {
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
+    box-shadow: 1px 1px rgba(64, 168, 213, 0.5);
 }
 .submitButton:hover {
     background-color: rgba(64, 168, 213, 0.5);

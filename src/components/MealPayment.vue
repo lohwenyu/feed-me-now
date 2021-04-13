@@ -203,6 +203,7 @@ button {
     align-items: center;
     border: none;
     outline: none;
+    box-shadow: 1px 1px rgba(64, 168, 213, 0.5);
 }
 button:hover {
     background-color: rgba(64, 168, 213, 0.5);

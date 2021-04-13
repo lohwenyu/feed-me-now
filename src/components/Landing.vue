@@ -79,9 +79,10 @@ button {
     border-radius: 100px;
     font-weight: bold;
     margin-bottom: 20px;
+    box-shadow: 2px 2px rgb(255, 255, 255, 0.5);
 }
 button:hover {
-    color: #055684;
+    color: rgb(5, 86, 132);
     background: white;
     transition: ease-in-out 200ms;
     cursor: pointer;
