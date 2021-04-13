@@ -231,8 +231,6 @@ export default {
     background-image: url("https://i.pinimg.com/originals/2c/59/55/2c5955633852d7f0ce71e42d8e4d5684.jpg");
     background-size: cover;
     background-attachment: fixed;
-    /* padding-bottom: 20px;
-    padding-top: 20px; */
 }
 #dashboardContainer {
     background-image: url("https://i.pinimg.com/originals/2c/59/55/2c5955633852d7f0ce71e42d8e4d5684.jpg");
@@ -304,6 +302,7 @@ export default {
     margin-left: auto;
     font-weight: bold;
     border-radius: 100px;
+    box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
 }
 #contributeButton:hover {
     color: white;

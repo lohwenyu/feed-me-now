@@ -177,18 +177,24 @@ p {
     font-weight: 100;
 }
 button {
-    border-radius:12px;
-    background-color: rgb(168, 212, 208);
-    padding-inline: 10px;
-    margin-inline: 12px;
-    width : 300px ;
-    height: 60px ;
-    bottom : 300px ;
+    background-color: rgba(142, 218, 250, 0.24);
+    width : 300px;
+    height: 60px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 20px;
-    text-align: center;
-    margin-left: auto;
+    border: none;
+    outline: none;
     margin-right: auto;
-    display: block;
+    margin-left: auto;
+    box-shadow: 1px 1px rgba(64, 168, 213, 0.5);
 }
 
+button:hover {
+    background-color: rgba(64, 168, 213, 0.5);
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+}
 </style>

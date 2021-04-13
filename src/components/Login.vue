@@ -154,6 +154,7 @@ input {
     font-size: 15px;
     background-color: black;
     color: white;
+    box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
 }
 #loginButton:hover {
     transition: ease-in-out 0.2s;

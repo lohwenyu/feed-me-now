@@ -136,6 +136,7 @@ button {
     position: absolute;
     right: 20px;
     bottom: 20px;
+    box-shadow: 1px 1px rgba(64, 168, 213, 0.5);
 }
 
 button:hover {
