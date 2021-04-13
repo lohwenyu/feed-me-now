@@ -32,10 +32,11 @@
 import database from '../firebase.js'
 import NavigationBar from "./NavigationBar.vue";
 
+
 export default {
     name: "Home",
     components : {
-        NavigationBar
+        NavigationBar 
     } , 
     data() {
         return {

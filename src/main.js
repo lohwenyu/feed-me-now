@@ -20,6 +20,7 @@ const myRouter =  new VueRouter({
 })
 
 import { auth } from "./firebase.js";
+import vuetify from './plugins/vuetify';
 
 let app;
 auth.onAuthStateChanged(async user => {
@@ -31,12 +32,15 @@ auth.onAuthStateChanged(async user => {
     //start app
     app = new Vue({
       router: myRouter,
+
       created() {
         //redirect if user not logged in
         if (!user) {
           this.$router.push("/login");
         }
       },
+
+      vuetify,
       render: h => h(App)
     }).$mount("#app");
   }

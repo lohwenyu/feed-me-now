@@ -39,7 +39,7 @@ export default {
 </script>
 <style scoped>
 #container {
-    height: 80px;
+    height: 60px;
     width: 200px;
     background-color: #CCD2A8;
     margin-left: auto;
