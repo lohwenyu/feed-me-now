@@ -302,7 +302,7 @@ export default {
     margin-left: auto;
     font-weight: bold;
     border-radius: 100px;
-    box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
+    box-shadow: 1px 1px rgb(0, 0, 0, 0.5);
 }
 #contributeButton:hover {
     color: white;

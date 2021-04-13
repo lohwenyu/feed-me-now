@@ -79,7 +79,7 @@ button {
     border-radius: 100px;
     font-weight: bold;
     margin-bottom: 20px;
-    box-shadow: 2px 2px rgb(58, 128, 168, 0.5);
+    box-shadow: 2px 2px rgb(255, 255, 255, 0.5);
 }
 button:hover {
     color: rgb(5, 86, 132);
