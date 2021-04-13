@@ -5,7 +5,6 @@
                 <span>You are buying a<div id="mealContainer">Meal for {{temp[1].name}}</div></span>
                 <span>Payment Amount: <b>10.00 SGD</b></span>
             </div>
-            
             <form id="cardDetailsContainer">
                 <div class="formDiv">
                     <label for="name">Cardholder's Name</label>
@@ -44,14 +43,13 @@ export default {
     name: "MealPayment",
     data() {
         return {
-            currUser: auth.currentUser,
+            currUser: auth.currentUser.uid,
             selectedanimal: [],
             name: null,
             ccn: null,
             expiry: null,
             cvv: null,
             save: false, 
-            // existing: null,
         }
     },
     props: ['temp'],
@@ -62,7 +60,7 @@ export default {
                 name: 'feedme',
                 params: {selectedanimal: this.temp},
                 props: true 
-                })
+            })
         },
         proceed: function() { 
             if (! this.name) {
@@ -99,10 +97,10 @@ export default {
         checkSavedDetails: function() {
             database.collection("users").doc(this.currUser).get().then(doc => {
                 if (doc.data().creditCardDetails) {
-                    // this.existing = true
+                    this.save = true
                     var card = doc.data().creditCardDetails
                     this.name = card.name
-                    this.ccn - card.ccn
+                    this.ccn = card.ccn
                     this.expiry = card.expiry
                     this.cvv = card.cvv
                 }

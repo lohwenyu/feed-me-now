@@ -44,14 +44,13 @@ export default {
     name: "MealPayment",
     data() {
         return {
-            currUser: auth.currentUser,
+            currUser: auth.currentUser.uid,
             selectedanimal: [],
             name: null,
             ccn: null,
             expiry: null,
             cvv: null,
             save: false, 
-            // existing: null,
         }
     },
     props: ['temp'],
@@ -62,7 +61,7 @@ export default {
                 name: 'feedme',
                 params: {selectedanimal: this.temp},
                 props: true 
-                })
+            })
         },
         proceed: function() { 
             if (! this.name) {
@@ -99,10 +98,10 @@ export default {
         checkSavedDetails: function() {
             database.collection("users").doc(this.currUser).get().then(doc => {
                 if (doc.data().creditCardDetails) {
-                    // this.existing = true
+                    this.save = true
                     var card = doc.data().creditCardDetails
                     this.name = card.name
-                    this.ccn - card.ccn
+                    this.ccn = card.ccn
                     this.expiry = card.expiry
                     this.cvv = card.cvv
                 }
