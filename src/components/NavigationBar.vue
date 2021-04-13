@@ -59,7 +59,6 @@ a {
     color: #000000;
 }
 a:hover { 
-    /* can change the style of this if needed */
     color: #000000;
     transition: ease-in-out 200ms;
 }

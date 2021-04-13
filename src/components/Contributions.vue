@@ -2,9 +2,7 @@
     <div>
         <NavigationBar/>
         <div id="mainContainer">
-            <PageHeader v-bind:header="'Your Contributions'" v-bind:icon="'heart'"/>
-            <p style="font-size:18px"><strong>AHHHHH IDK WHAT TO SAY HEREEEE</strong><br>
-                Check out the Leader Board tab to see how you fare against the other contributors</p>
+            <PageHeader v-bind:header="'Your Contributions'" v-bind:icon="'heart'" v-bind:description="description" v-bind:subDescription="subDescription"/>
             <div class="row">
                 <div class="column" v-for="([animalId, array], index) in Object.entries(contributionList)" :key="index">
                     <ContributionCard v-bind:animalId="animalId" v-bind:array="array"/>
@@ -30,6 +28,8 @@ export default {
         return {
             currUser: auth.currentUser.uid,
             contributionList: [],
+            description: "Thank you for your contributions thus far!",
+            subDescription: "Check out the Leader Board tab to see how you fare against the other contributors!"
         }
     },
     methods: {

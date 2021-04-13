@@ -106,6 +106,7 @@ export default {
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
+    box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
 }
 img {
     width: 300px;

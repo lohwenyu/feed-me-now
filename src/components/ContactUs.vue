@@ -2,9 +2,7 @@
     <div>
         <NavigationBar/>
         <div>
-            <PageHeader v-bind:header="'Contact Us'" v-bind:icon="'address-book'"/>
-            <p id="subtitle"><strong>Got a question or enquiry?</strong><br>
-                You can leave a message using the contact form below or email to customerservice@fmn.sg.</p>
+            <PageHeader v-bind:header="'Contact Us'" v-bind:icon="'address-book'" v-bind:description="description" v-bind:subDescription="subDescription"/>
             <div class="row">
                 <div class="column" id="feedback">
                     <p class="header">Leave a Feedback</p>
@@ -44,7 +42,9 @@ export default {
             currUser: "QNqhGFZ0EVtmArEaV3vt", //replace with firebase getter
             feedback: "",
             transactionId: "",
-            transactionIssue: ""
+            transactionIssue: "",
+            description: "Got a question or enquiry?",
+            subDescription: "You can leave a message using the contact form below or email to customerservice@fmn.sg."
         }
     },
     methods: {
