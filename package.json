@@ -17,7 +17,8 @@
     "firebase": "^8.3.0",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.1",
-    "vue-router": "^3.5.1"
+    "vue-router": "^3.5.1",
+    "vue-spinner": "^1.0.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.0",
