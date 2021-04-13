@@ -13,6 +13,7 @@
         <p v-for="(information, index) in animalInformation[0].information" :key="index">
             {{ information }}
         </p>
+        <br>
     <button @click="mealPayment()">
         <h2>Treat a meal</h2>
             <p>10 SGD</p>
@@ -86,18 +87,21 @@ h1 {
     width: 35%;
 }
 #right {
-    float:left;
-    width:65%
+    float: left;
+    width: 60%;
+    margin-top: 50px;
 }
 #picture {
     width: 100%;
     height: auto;
-    object-fit: cover
+    object-fit: cover;
 }
 button {
-  border-radius:12px;
-  background-color: rgb(168, 212, 208);
-  padding-inline: 10px;
-  margin-inline: 12px;
-}
+    border-radius:12px;
+    background-color: rgba(64, 168, 213, 0.24);
+    padding-inline: 10px;
+    margin-inline: 12px;
+    border: none;
+    outline: none;
+    }
 </style>

@@ -3,6 +3,8 @@
         <NavigationBar/>
         <div>
             <PageHeader v-bind:header="'Contact Us'" v-bind:icon="'address-book'"/>
+            <p id="subtitle"><strong>Got a question or enquiry?</strong><br>
+                You can leave a message using the contact form below or email to customerservice@fmn.sg.</p>
             <div class="row">
                 <div class="column" id="feedback">
                     <p class="header">Leave a Feedback</p>
@@ -144,5 +146,11 @@ textarea {
 .submitButton:hover {
     background-color: rgba(64, 168, 213, 0.5);
     transition: ease-in-out 0.2s;
+}
+
+#subtitle{
+    margin-left: 50px;
+    margin-top: 20px;
+    font-size: 18px;
 }
 </style>
