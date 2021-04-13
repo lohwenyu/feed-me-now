@@ -2,23 +2,21 @@
     <div>
         <NavigationBar/>
         <div class="homepage">
-            <PageHeader v-bind:header="'Feed An Animal Today!'" v-bind:icon="'heart'"/>
-            <p style="font-size:18px"><strong>Join us to fill the belly of an animal of your choice today. All money received will be used to provided the animals with a more nourishing meal.</strong><br>
-                Check out the Leader Board tab for more information on how to win a pair of zoo tickets with exclusive live feeding session with the animals!</p>
+            <PageHeader v-bind:header="'Feed An Animal Today!'" v-bind:icon="'heart'" v-bind:description="description" v-bind:subDescription="subDescription"/>
             <div id="container">
                 <ul>
                     <div v-for="(animal, index) in animals" :key="index" id="animal">
-                            <img id="animalPic" v-bind:src="animal[1].picture">
-                            <div id="animalDetails">
-                                <span style="font-size:30px">{{ animal[1].name }}</span>
-                                <br>
-                                 <span>ADD SPECIES NAME HERE</span>
-                                <div id="description">
-                                    {{ animal[1].description }}
-                                    <br><br>
-                                    <button v-bind:id=index @click="route($event)" > Feed Me </button>
-                                </div>
+                        <img id="animalPic" v-bind:src="animal[1].picture">
+                        <div id="animalDetails">
+                            <span style="font-size:30px">{{ animal[1].name }}</span>
+                            <br>
+                                <span>ADD SPECIES NAME HERE</span>
+                            <div id="description">
+                                {{ animal[1].description }}
+                                <br><br>
+                                <button v-bind:id=index @click="route($event)" > Feed Me </button>
                             </div>
+                        </div>
                     </div>
                 </ul>
             </div>
@@ -41,7 +39,9 @@ export default {
     data() {
         return {
             animals : [],
-            selectedanimal: []
+            selectedanimal: [],
+            description: "Join us to fill the belly of an animal of your choice today. All money received will be used to provided the animals with a more nourishing meal.",
+            subDescription: "Check out the Leader Board tab for more information on how to win a pair of zoo tickets with exclusive live feeding session with the animals!"
         }
     } ,
     methods : {
@@ -75,12 +75,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-    margin : 0 ; 
-    padding : 0 ; 
-    box-sizing: border-box ;
-    height: 100%;
-}
 button {
     background-color: rgba(142, 218, 250, 0.24);
     width: 140px;
@@ -94,25 +88,22 @@ button {
     outline: none;
 }
 
-header{
-  width : 100% ;
-}
-
-#container {
-    position: relative;
-    width : 100% ;
-    height: auto;
-    margin: auto;
+button:hover {
+    background-color: rgba(64, 168, 213, 0.5);
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
 }
 
 #animal {
-        position : relative; 
-        width: 450px;
-        height: 580px;
-        background-color: #FFF;
-        float: left; 
-        margin-top: 40px;
-        margin-left: 60px;  
+    position : relative; 
+    width: 450px;
+    height: 580px;
+    background-color: #FFF;
+    float: left; 
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 60px;  
+    box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
 }
 
 #animalPic {

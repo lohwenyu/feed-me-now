@@ -5,27 +5,6 @@
                 <span>You are buying a<div id="mealContainer">Meal for {{temp[1].name}}</div></span>
                 <span>Payment Amount: <b>10.00 SGD</b></span>
             </div>
-
-            <!-- <form id="cardDetailsContainer" v-if="existing">
-                <div class="formDiv">
-                    <label for="name">Cardholder's Name</label>
-                    <input id="name" type="text" v-model.lazy="name" value="name" disabled>
-                </div>
-                <div class="formDiv">
-                    <label for="ccn">Credit Card/Debit Card Number</label>
-                    <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" v-model.lazy="ccn" value="name" disabled>
-                </div>
-                <div id="expiryCvvContainer">
-                    <div class="formDiv" id="expiryContainer">
-                        <label for="expiry">Expiry Date</label>
-                        <input id="expiry" type="date" v-model.lazy="expiry">
-                    </div>
-                    <div class="formDiv" id="cvvContainer">
-                        <label for="cvv">CVV</label>
-                        <input id="cvv" type="tel" maxlength="3" placeholder="XXX" v-model.lazy="cvv">
-                    </div>
-                </div>
-            </form> -->
             
             <form id="cardDetailsContainer">
                 <div class="formDiv">

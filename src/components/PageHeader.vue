@@ -1,7 +1,8 @@
 <template>
     <div id="headerContainer">
         <div id= "title" style="font-size:30px"><font-awesome-icon id="icon" v-bind:icon="icon" size="lg"/>{{ header }}</div>
-        <img id="logo" src='../assets/logo.png'/>
+        <span id="description">{{ description }}</span>
+        <span id="subDescription">{{ subDescription }}</span>
     </div>
 </template>
 <script>
@@ -13,27 +14,38 @@ export default {
         },
         icon: {
             type: String
+        },
+        description: {
+            type: String
+        },
+        subDescription: {
+            type: String
         }
     }
 }
 </script>
 <style scoped>
 #headerContainer {
-    margin-left: 40px;
     margin-top: 40px;
-    width: 100%;
-    height: 50px;
+    margin-bottom: 20px;
+    padding-inline: 5%;
+    display: flex;
+    flex-direction: column;
 }
 #icon {
     margin-right: 10px;
 }
 #title{
-    float: left;
+    margin-bottom: 20px;
 }
-#logo{
-    float: right;
-    margin-right: 40px;
-    margin-top: -10px;
-    width: 7%
+#description {
+    /* padding-inline: 5%; */
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+#subDescription {
+    /* padding-inline: 5%; */
+    font-size: 18px;
 }
 </style>
