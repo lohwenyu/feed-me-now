@@ -1,22 +1,23 @@
 <template>
-    <div id="payment">
-        <br>
-        <form>
-            Payment Amount: <p>20.00 SGD</p> Feast for {{temp[1].name}}<br><br>
-            <label for="ccn">Credit Card/Debit Card Number: </label>
-            <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX"><br>
-            <br>
-            <label for="name">Name on card: </label>
-            <input id="name" type="text">
-            <br><br>
-            <label for="expriy">Expiry Date: </label>
-            <input id="expiry" type="date">
-            <br><br>
-            <label for="ccv">CCV: </label>
-            <input id="ccv" type="tel" maxlength="3" placeholder="X X X"><br><br>   
-            <button @click="back()">Back</button>
-            <button @click="proceed()">Continue</button>
-        </form>
+    <div>
+        <div id="payment">
+            <form>
+                Payment Amount: <p>20.00 SGD</p> Feast for {{temp[1].name}}<br><br>
+                <label for="ccn">Credit Card/Debit Card Number: </label>
+                <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX"><br>
+                <br>
+                <label for="name">Name on card: </label>
+                <input id="name" type="text">
+                <br><br>
+                <label for="expriy">Expiry Date: </label>
+                <input id="expiry" type="date">
+                <br><br>
+                <label for="ccv">CCV: </label>
+                <input id="ccv" type="tel" maxlength="3" placeholder="X X X"><br><br>   
+                <button @click="back()">Back</button>
+                <button @click="proceed()">Continue</button>
+            </form>
+        </div>
     </div>
 </template>
 <script>
@@ -67,11 +68,20 @@ p {
     font-size: 35px;
 }
 button {
-    border-radius:12px;
-    background-color: rgb(168, 212, 208);
-    margin-inline: 50px;
-    width: 150px;
-    height: 50px;
-    font-size: 17px;
+    background-color: rgba(64, 168, 213, 0.24);
+    width: 140px;
+    height: 70px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    border: none;
+    outline: none;
+}
+button:hover {
+    background-color: rgba(64, 168, 213, 0.5);
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
 }
 </style>
