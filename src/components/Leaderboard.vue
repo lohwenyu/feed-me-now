@@ -8,6 +8,10 @@
                 <LeaderBoardCard v-bind:animalId="animalId" v-bind:array="array"/>
             </div>
             </div>
+            <div id="counterDetails">
+                <span><img class="icon" src="../assets/meal.jpg"/> represents number of meals         </span>
+                <span><img class="icon" src="../assets/feast.jpg"/> represents number of feasts </span>
+            </div>
         </div>
     </div>
 </template>
@@ -52,5 +56,13 @@ p{
 }
 .row{
     padding: 10px;
+}
+img{
+    width:30px;
+}
+
+#counterDetails{
+    margin-left:135px;
+    margin-bottom: 50px;
 }
 </style>
