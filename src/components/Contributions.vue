@@ -1,15 +1,17 @@
 <template>
-    <div>
-        <NavigationBar/>
-        <div id="mainContainer">
-            <PageHeader v-bind:header="'Your Contributions'" v-bind:icon="'heart'"/>
-            <div class="row">
-                <div class="column" v-for="([animalId, array], index) in Object.entries(contributionList)" :key="index">
-                    <ContributionCard v-bind:animalId="animalId" v-bind:array="array"/>
+    <v-app>
+        <div>
+            <NavigationBar/>
+            <div id="mainContainer">
+                <PageHeader v-bind:header="'Your Contributions'" v-bind:icon="'heart'" v-bind:description="description" v-bind:subDescription="subDescription"/>
+                <div class="row">
+                    <div class="column" v-for="([animalId, array], index) in Object.entries(contributionList)" :key="index">
+                        <ContributionCard v-bind:animalId="animalId" v-bind:array="array"/>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </v-app>
 </template>
 <script>
 import PageHeader from "./PageHeader.vue"
@@ -28,6 +30,8 @@ export default {
         return {
             currUser: auth.currentUser.uid,
             contributionList: [],
+            description: "Thank you for your contributions thus far!",
+            subDescription: "Check out the Leader Board tab to see how you fare against the other contributors!"
         }
     },
     methods: {
@@ -47,6 +51,10 @@ export default {
 }
 </script>
 <style scoped>
+.v-application {
+    background-color: #e4ebdd;
+}
+
 #mainContainer {
     align-items: center;
 }
@@ -66,5 +74,10 @@ export default {
 }
 .column {
     float:left;
+}
+
+p{
+    margin-left: 50px;
+    margin-top: 20px;
 }
 </style>

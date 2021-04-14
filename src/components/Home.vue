@@ -1,47 +1,47 @@
 <template>
-    <div>
-        <NavigationBar/>
-        <div class="homepage">
-            <div id="title">
-                Feed an Animal Today 
-                <img id="logo" src='../assets/logo.png'/>
-            </div>
-            <div id="container">
-                <ul>
-                    <li v-for="(animal, index) in animals" :key="index" id="animal">
-                            <img id="animalPic" v-bind:src="animal[1].picture">
-                            <br>
-                            {{ animal[1].name }}
-                            <br>
-                            {{ animal[1].description }}
-                            <br>
-                            <br>
-                            <br>
-                            <!-- <button id="FeedMeButton"  > Feed Me </button> -->
-                            <button v-bind:id=index @click="route($event)" > Feed Me </button>
-                    </li>
-                </ul>
+    <v-app>
+        <div>
+            <NavigationBar/>
+            <div class="homepage">
+                <PageHeader v-bind:header="'Feed An Animal Today!'" v-bind:icon="'heart'" v-bind:description="description" v-bind:subDescription="subDescription"/>
+                <div id="container">
+                    <div v-for="(animal, index) in animals" :key="index" id="animal">
+                        <img id="animalPic" v-bind:src="animal[1].picture">
+                        <div id="animalDetails">
+                            <span style="font-size:30px">{{ animal[1].name }}</span>
+                            <div id="speciesContainer">
+                                <span>{{ information[index].commonName }}</span>
+                            </div>
+                            <span id="description">{{ animal[1].description }}</span>
+                            <button v-bind:id=index @click="route($event)">Feed Me!</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    
+    </v-app>
 </template>
 
 
 <script>
 import database from '../firebase.js'
 import NavigationBar from "./NavigationBar.vue";
+import PageHeader from "./PageHeader.vue";
 
 
 export default {
     name: "Home",
     components : {
-        NavigationBar 
+        NavigationBar,
+        PageHeader
     } , 
     data() {
         return {
             animals : [],
-            selectedanimal: []
+            selectedanimal: [],
+            information: [],
+            description: "Join us to fill the belly of an animal of your choice today. All money received will be used to provided the animals with a more nourishing meal.",
+            subDescription: "Check out the Leader Board tab for more information on how to win a pair of zoo tickets with exclusive live feeding session with the animals!"
         }
     } ,
     methods : {
@@ -53,6 +53,10 @@ export default {
                     item.show = false 
                     this.animals.push([doc.id,item])
 
+                    database.collection('animalInformation').doc(item.animalInformation).get().then(animalDoc => {
+                        this.information.push(animalDoc.data());
+                        console.log(animalDoc.data())
+                    })
                 })
             })
         },
@@ -75,70 +79,75 @@ export default {
 </script>
 
 <style scoped>
-* {
-    margin : 0 ; 
-    padding : 0 ; 
-    box-sizing: border-box ;
-    height: 100%;
-}
-button {
-    border-radius:12px;
-    background-color: rgb(168, 212, 208);
-    padding-inline: 10px;
-    margin-inline: 12px;
-    width : 100px ;
-    height: 60px ;
-    float: right ; 
-    bottom : 300px ;
-}
-header{
-  width : 100% ;
-}
-
-#container {
-    position: relative;
-    width : 1900px ;
-    height: 800px;
-    margin: 240px auto;
-
-    bottom : 200px ; 
-    
-}
 
 #animal {
-        position : relative; 
-        width: calc(600px - 10px);
-        height: calc(800px - 100px);
-        background-color: #FFF;
-        float: left; 
-        margin : 15px ; 
-        
+    position : relative; 
+    width: 450px;
+    height: 580px;
+    background-color: #FFF;
+    float: left; 
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 60px;  
+    box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
+    flex-direction: column;
 }
 
 #animalPic {
-    width: calc(600px - 10px);
-    height: calc(800px - 300px);
+    width: 100%;
+    height: 300px;
     object-fit: cover
 }
 
-#FeedMeButton {
-    width : 100px ;
-    height: 60px ;
-    float: right ; 
-    bottom : 300px ;
+#animalDetails{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-#logo {
-    float: right ;
-    top : 0px ; 
-    
-
+#speciesContainer {
+    width: 100%;
+    height: auto;
+    background-color: #E5E5BA;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+#speciesContainer span {
+    margin-inline-start: 8px;
+    font-size: 15px;
+    text-transform: uppercase;
 }
 
-#title {
-    height : 100px ;
-    width : 100% ; 
+#description{
+    margin-top: 5px;
 }
 
+button {
+    background-color: rgba(142, 218, 250, 0.24);
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    box-shadow: 1px 1px rgba(64, 168, 213, 0.5);
+}
 
+button:hover {
+    background-color: rgba(64, 168, 213, 0.5);
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+}
+.v-application {
+        background-color: #e4ebdd;
+}
 </style>

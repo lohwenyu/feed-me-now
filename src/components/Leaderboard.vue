@@ -1,18 +1,17 @@
 <template>
-    <div>
-        <NavigationBar/>
+    <v-app>
         <div>
-            <PageHeader v-bind:header="'Leaderboard'" v-bind:icon="'trophy'"/>
-            <p style="font-size:18px"><strong>Top 3 contributors of every animal per month will receive a pair 
-                of zoo tickets inclusive of a live feeding session!</strong><br>
-                Every meal bought will be considered as 1 contribution and every feast will be considered as 2 contributions.</p>
-            <div class="row">
+            <NavigationBar/>
+            <div>
+                <PageHeader v-bind:header="'Leaderboard'" v-bind:icon="'trophy'" v-bind:description="description" v-bind:subDescription="subDescription"/>
+                <div class="row">
                 <div class="column" v-for="([animalId, array], index) in Object.entries(userContribution)" :key="index">
                     <LeaderBoardCard v-bind:animalId="animalId" v-bind:array="array"/>
                 </div>
+                </div>
             </div>
         </div>
-    </div>
+    </v-app>
 </template>
 <script>
 import NavigationBar from './NavigationBar.vue';
@@ -31,13 +30,15 @@ export default {
        return {
             userContribution: Object,
             currUser: auth.currentUser.uid,
+            description: "Top 3 contributors of each animal per month will receive a pair of zoo tickets inclusive of a live feeding session!",
+            subDescription: "Every meal bought will be considered as 1 contribution and every feast will be considered as 2 contributions."
         }
     },
     methods:{
         fetchContributions:function() {
             database.collection("users").doc(this.currUser).get().then((querySnapShot)=>{
                 this.userContribution = querySnapShot.data().contributions
-            }).then(() =>{
+            }).then(() => {
                 console.log(this.userContribution)
             })
         },
@@ -48,6 +49,9 @@ export default {
 }
 </script>
 <style scoped>
+.v-application {
+    background-color: #e4ebdd;
+}
 p{
     margin-left: 50px;
 }

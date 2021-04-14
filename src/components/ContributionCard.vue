@@ -71,6 +71,7 @@ export default {
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
+    box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
 }
 img {
     width: 100%;

@@ -1,28 +1,32 @@
 <template>
-    <div id="container">
-        <div id="spinnerContainer" v-show="(countryCount!=0) || (barLoading!=0)">
-            <span id="spinner"><PacmanLoader v-bind:color="`rgb(150, 176, 138)`"/></span>
-            <div id="timeLeftContainer" v-show="countryCount!=null && barLoading!=null">
-                <span>Estimated time left: {{ timeLeft }} seconds</span>
+    <div>
+        <div id="loadingContainer" v-show="(countryCount!=0) || (barLoading!=0)">
+            <div id="spinnerContainer">
+                <span id="spinner"><PacmanLoader v-bind:color="`rgb(150, 176, 138)`"/></span>
+                <div id="timeLeftContainer" v-show="countryCount!=null && barLoading!=null">
+                    <span>Estimated time left: {{ timeLeft }} seconds</span>
+                </div>
             </div>
         </div>
-        <div v-show="countryCount==0">
-            <div id="headerContainer">
-                <button id="logoButton" v-on:click="redirectLogin()"><img id="logo" src="../assets/logo.png"></button>
-                <span id="header">Dashboard</span>
-                <button id="contributeButton" v-on:click="redirectLogin()">Contribute Now</button>
-            </div>
+        <div id="dashboardContainer" v-show="countryCount==0">
             <div>
-                <div id="barContainer">
-                    <p class="graphTitle">Singapore's IUCN Species Count</p>
-                    <BarGraph v-bind:dataCollection="barGraphData" v-bind:isLoading="barLoading" v-bind:loadingCount="countryCount" ></BarGraph>
+                <div id="headerContainer">
+                    <button id="logoButton" v-on:click="redirectLogin()"><img id="logo" src="../assets/logo.png"></button>
+                    <span id="header">Dashboard</span>
+                    <button id="contributeButton" v-on:click="redirectLogin()">Contribute Now</button>
                 </div>
-                <div id="threatContainer">
-                    <ThreatCard v-bind:count="threatCardData.singapore.array" v-bind:isLoading="barLoading"></ThreatCard>
-                </div>
-                <div id="bubbleContainer">
-                    <p class="graphTitle">Proportion of Endangered Species in the World</p>
-                    <BubbleGraph v-bind:dataCollection="bubbleGraphData" v-bind:loadingCount="countryCount"></BubbleGraph>
+                <div>
+                    <div id="barContainer">
+                        <p class="graphTitle">Singapore's IUCN Species Count</p>
+                        <BarGraph v-bind:dataCollection="barGraphData" v-bind:isLoading="barLoading" v-bind:loadingCount="countryCount" ></BarGraph>
+                    </div>
+                    <div id="threatContainer">
+                        <ThreatCard v-bind:count="threatCardData.singapore.array" v-bind:isLoading="barLoading"></ThreatCard>
+                    </div>
+                    <div id="bubbleContainer">
+                        <p class="graphTitle">Proportion of Endangered Species in the World</p>
+                        <BubbleGraph v-bind:dataCollection="bubbleGraphData" v-bind:loadingCount="countryCount"></BubbleGraph>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,7 +54,7 @@ export default {
                 datasets: [
                     {
                         label: "≤5% endangered",
-                        backgroundColor: '#5B84C4',
+                        backgroundColor: 'rgb(20, 107, 58, 0.8)',
                         pointBackgroundColor: 'white',
                         borderWidth: 1,
                         pointBorderColor: '#000000',
@@ -58,7 +62,7 @@ export default {
                     },
                     {
                         label: "5%-10% endangered",
-                        backgroundColor: '#fca26e',
+                        backgroundColor: 'rgb(248, 178, 41, 0.8)',
                         pointBackgroundColor: 'white',
                         borderWidth: 1,
                         pointBorderColor: '#000000',
@@ -66,7 +70,7 @@ export default {
                     },
                     {
                         label: ">10% endangered",
-                        backgroundColor: '#f98125',
+                        backgroundColor: 'rgb(234, 70, 48, 0.8)',
                         pointBackgroundColor: 'white',
                         borderWidth: 1,
                         pointBorderColor: '#000000',
@@ -91,24 +95,24 @@ export default {
                     label: "Species Count",
                     data: [0,0,0,0,0,0,0,0],
                     backgroundColor: [
-                        "rgb(44, 89, 157, 0.7)",
-                        "rgb(91, 132, 196, 0.7)",
-                        "rgb(252, 162, 110, 0.7)",
-                        "rgb(251, 152, 80, 0.7)",
-                        "rgb(251, 152, 80, 0.7)",
-                        "rgb(251, 152, 80, 0.7)",
-                        "rgb(249, 129, 37, 0.7)",
-                        "rgb(249, 129, 37, 0.7)"
+                        "rgb(22, 91, 51, 0.8)",
+                        "rgb(20, 107, 58, 0.8)",
+                        "rgb(248, 178, 41, 0.8)",
+                        "rgb(234, 70, 48, 0.8)",
+                        "rgb(234, 70, 48, 0.8)",
+                        "rgb(234, 70, 48, 0.8)",
+                        "rgb(187, 37, 40, 0.8)",
+                        "rgb(187, 37, 40, 0.8)"
                     ],
                     borderColor: [
-                        "rgb(44, 89, 157)",
-                        "rgb(91, 132, 196)",
-                        "rgb(252, 162, 110)",
-                        "rgb(251, 152, 80)",
-                        "rgb(251, 152, 80)",
-                        "rgb(251, 152, 80)",
-                        "rgb(249, 129, 37)",
-                        "rgb(249, 129, 37)"
+                        "rgb(22, 91, 51)",
+                        "rgb(20, 107, 58)",
+                        "rgb(248, 178, 41)",
+                        "rgb(234, 70, 48)",
+                        "rgb(234, 70, 48)",
+                        "rgb(234, 70, 48)",
+                        "rgb(187, 37, 40)",
+                        "rgb(187, 37, 40)"
                     ],
                     minBarLength: 1,
                 }]
@@ -223,7 +227,12 @@ export default {
 }
 </script>
 <style scoped>
-#container {
+#loadingContainer {
+    background-image: url("https://i.pinimg.com/originals/2c/59/55/2c5955633852d7f0ce71e42d8e4d5684.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+#dashboardContainer {
     background-image: url("https://i.pinimg.com/originals/2c/59/55/2c5955633852d7f0ce71e42d8e4d5684.jpg");
     background-size: cover;
     background-attachment: fixed;
@@ -262,7 +271,7 @@ export default {
     /* background-color: white; */
 }
 #header {
-    font-size: 25px;
+    font-size: 40px;
     font-weight: bold;
     padding: 30px;
 }
@@ -293,6 +302,7 @@ export default {
     margin-left: auto;
     font-weight: bold;
     border-radius: 100px;
+    box-shadow: 1px 1px rgb(0, 0, 0, 0.5);
 }
 #contributeButton:hover {
     color: white;

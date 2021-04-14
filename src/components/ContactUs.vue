@@ -1,31 +1,47 @@
 <template>
     <div>
+        <v-app>
         <NavigationBar/>
-        <div>
-            <PageHeader v-bind:header="'Contact Us'" v-bind:icon="'address-book'"/>
-            <div class="row">
-                <div class="column" id="feedback">
-                    <p class="header">Leave a Feedback</p>
-                    <p>We welcome any feedback (200 char).</p>
-                    <textarea rows="5" v-model.trim="feedback"/>
-                    <span>{{ feedback.length }}/200</span>
-                    <button class="submitButton" type="submit" v-on:click="submitFeedBack()">Submit</button>
-                </div>
-                <div id="breakLine"></div>
-                <div class="column" id="transactionEnquiry">
-                    <p class="header">Transaction Enquiry</p>
-                    <p>Transaction Number:</p>
-                    <textarea rows="1" v-model="transactionId"/>
-                    <p>Tell us what was wrong with your transaction.</p>
-                    <textarea rows="10" v-model="transactionIssue"/>
-                    <button class="submitButton" type="button" v-on:click="submitEnquiry()">Submit</button>
-                </div>
-            </div>
-            <p class="alternative">Or</p>
-            <p class="alternative">Simple write in to <a href="customer_service@feedmenow.com">Feed Me Now</a>.</p>
-        </div>
+        <PageHeader v-bind:header="'Contact Us'" v-bind:icon="'address-book'" v-bind:description="description" v-bind:subDescription="subDescription"/>
+        <v-container>
+            <v-row :justify="center">
+                <v-col cols="12">
+                    <v-card height="100%" flat>
+                        <v-card-title> Leave your feedback here </v-card-title>
+                            <v-textarea v-model.trim="feedback" :counter="200" :rules="feedbackRules" label="Feedback" required no-resize outlined>
+                            </v-textarea>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn @click="submitFeedBack()" color="#40A8D4"> Submit Feedback 
+                                <v-icon right> arrow_right </v-icon>
+                            </v-btn>
+                            <v-spacer></v-spacer>
+                        </v-card-actions>
+                        <br>
+                        <br>
+                        <v-divider color="#000"></v-divider>
+                        <br>
+                        <br>
+                        <v-card-title> Transaction Enquiry </v-card-title>
+                        <v-text-field  label="Transaction Number" outlined :rules="transactionNumberRules" v-model="transactionId"> Transaction Number </v-text-field>
+                        <br>
+                        <v-textarea v-model.trim="transactionIssue" :rules="transactionEnquiryRules" label="What went wrong with your transaction?" required no-resize outlined>
+                        </v-textarea>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="#40A8D4" @click="submitEnquiry()"> Submit Enquiry  
+                                <v-icon right> arrow_right </v-icon>
+                            </v-btn>
+                            <v-spacer></v-spacer>
+                        </v-card-actions>
+                    </v-card>
+                </v-col>
+            </v-row>
+        </v-container>
+        </v-app>
     </div>
 </template>
+
 <script>
 import PageHeader from "./PageHeader.vue";
 import database, { firestore } from "../firebase";
@@ -42,7 +58,9 @@ export default {
             currUser: "QNqhGFZ0EVtmArEaV3vt", //replace with firebase getter
             feedback: "",
             transactionId: "",
-            transactionIssue: ""
+            transactionIssue: "",
+            description: "Got a question or enquiry?",
+            subDescription: "You can leave a message using the contact form below or email to customerservice@fmn.sg."
         }
     },
     methods: {
@@ -84,65 +102,9 @@ export default {
     }
 }
 </script>
+
 <style scoped>
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 30px;
-}
-.row:after {
-    display: table;
-    clear: both;
-}
-.column {
-    float:left;
-}
-#feedback {
-    width: 49%;
-    padding-left: 40px;
-    padding-right: 40px;
-}
-#breakLine {
-    width: 1px;
-    height: 440px;
-    background-color: #000000;
-}
-#transactionEnquiry {
-    width: 49%;
-    padding-left: 40px;
-    padding-right: 40px;
-}
-.header {
-    font-size: 25px;
-}
-textarea {
-    width: 100%;
-    resize: none;
-    font-size: 15px;
-}
-.alternative {
-    text-align: center;
-    font-size: 20px;
-}
-.submitButton {
-    background-color: rgba(64, 168, 213, 0.24);
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 15px;
-    border: none;
-    outline: none;
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-}
-.submitButton:hover {
-    background-color: rgba(64, 168, 213, 0.5);
-    transition: ease-in-out 0.2s;
-}
+    .v-application {
+        background-color: #e4ebdd;
+    }
 </style>

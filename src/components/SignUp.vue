@@ -77,7 +77,7 @@ export default {
             }
         },
         login: function() {
-            this.$router.push({ path: '/login' })
+            this.$router.push({ path: '/login' }).then(() => location.reload())
         },
         redirectDashboard: function() {
             this.$router.push({ path: '/dashboard' }).then(() => location.reload())
@@ -163,6 +163,7 @@ input {
     font-size: 15px;
     background-color: black;
     color: white;
+    box-shadow: 1px 1px rgb(255, 255, 255, 0.5);
 }
 #signUpButton:hover {
     transition: ease-in-out 0.2s;

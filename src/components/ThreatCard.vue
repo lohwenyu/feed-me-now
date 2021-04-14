@@ -57,27 +57,32 @@ export default {
     align-items: center;
 }
 #container1 {
-    background-color: rgb(44, 89, 157);
+    /* background-color: rgb(44, 89, 157); */
+    background-color: rgb(22, 91, 51, 0.8);
     height: 110px;
     width: 15%;
 }
 #container2 {
-    background-color: rgb(91, 132, 196);
+    /* background-color: rgb(91, 132, 196); */
+    background-color: rgb(20, 107, 58, 0.8);
     height: 110px;
     width: 15%;
 }
 #container3 {
-    background-color: rgb(252, 162, 110);
+    /* background-color: rgb(252, 162, 110); */
+    background-color: rgb(248, 178, 41, 0.8);
     height: 110px;
     width: 15%;
 }
 #container4 {
-    background-color: rgb(251, 152, 80);
+    /* background-color: rgb(251, 152, 80); */
+    background-color: rgb(234, 70, 48, 0.8);
     height: 110px;
     width: 15%;
 }
 #container5 {
-    background-color: rgb(249, 129, 37);
+    /* background-color: rgb(249, 129, 37); */
+    background-color: rgb(187, 37, 40, 0.8);
     height: 110px;
     width: 15%;
 }
