@@ -28,7 +28,7 @@
 </template>
 <script>
 import PageHeader from "./PageHeader.vue";
-import database, { firestore } from "../firebase";
+import database, { firestore , auth} from "../firebase";
 import NavigationBar from './NavigationBar.vue';
 
 export default {
@@ -39,7 +39,7 @@ export default {
     },
     data() {
         return {
-            currUser: "QNqhGFZ0EVtmArEaV3vt", //replace with firebase getter
+            currUser: auth.currentUser.uid, 
             feedback: "",
             transactionId: "",
             transactionIssue: "",
