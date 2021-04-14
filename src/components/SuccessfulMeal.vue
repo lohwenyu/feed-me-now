@@ -10,6 +10,7 @@
             </div>
         </div>
         <p>THANK YOU FOR YOUR DONATION</p>
+        <p id="email">A verification email has been sent!</p>
         <p id="order">Your order is #{{this.orderNumber}}</p>
           <button @click="homepage()">Help more animals</button>
 
@@ -171,8 +172,12 @@ p {
     font-size: 30px;
     text-align: center;
 }
+#email{
+    font-size: 20px;
+    font-weight: 100;
+}
 #order {
-    font-size: 25x;
+    font-size: 25px;
     font-weight: 100;
 }
 button {
