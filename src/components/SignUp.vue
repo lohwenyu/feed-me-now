@@ -4,7 +4,7 @@
             <div class="column"></div>
             <div class="column">
                 <div id="formContainer">
-                    <img src="../assets/logo.png" alt=""/>
+                    <button id="logoButton"  v-on:click="redirectDashboard()"><img src="../assets/logo.png" alt=""/></button>
                     <form id="loginForm">
                         <div class="inputContainer">
                             <div class="iconContainer"><font-awesome-icon icon="user-circle" size="lg"/></div>
@@ -77,7 +77,10 @@ export default {
             }
         },
         login: function() {
-            this.$router.push({ path: '/login' }).then(() => location.reload())
+            this.$router.push({ path: '/login' })
+        },
+        redirectDashboard: function() {
+            this.$router.push({ path: '/dashboard' }).then(() => location.reload())
         }
     }
 }
@@ -104,11 +107,22 @@ export default {
     flex-wrap: wrap;
     justify-content: center; 
 }
-img {
+#logoButton {
+    background: none;
+    outline: none;
+    border: none;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+#logoButton:hover {
+    cursor: pointer;
+}
+/* img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+} */
 .inputContainer {
     width: 300px;
     height: 50px;
@@ -137,18 +151,7 @@ input {
     outline: none;
     width: 200px;
     font-size: 15px;
-}
-#forgetButton {
-    background: none;
-    border: none;
-    outline: none;
-    font-size: 13px;
-    padding: 0px;
-    color: white;
-}
-#forgetButton:hover {
-    transition: ease-in-out 0.2s;
-    color: black;
+    cursor: pointer;
 }
 #signUpButton {
     margin-top: 10px;
@@ -165,6 +168,7 @@ input {
     transition: ease-in-out 0.2s;
     background-color: white;
     color: black;
+    cursor: pointer;
 }
 #login {
     font-size: 13px;
@@ -179,5 +183,6 @@ input {
 #loginButton:hover {
     transition: ease-in-out 0.2s;
     color: black;
+    cursor: pointer;
 }
 </style>

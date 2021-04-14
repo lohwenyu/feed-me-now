@@ -1,6 +1,5 @@
 <script>
 import { Bubble } from 'vue-chartjs'
-
 export default {
     name: "BubbleGraph",
     extends: Bubble,
@@ -19,11 +18,11 @@ export default {
 				scales: {
 					yAxes: [{
 						ticks: {
-							beginAtZero: true
+							beginAtZero: true,
 						},
 						gridLines: {
 							display: true
-						}
+						},
 					}],
 					xAxes: [{
 						ticks: {
@@ -55,7 +54,7 @@ export default {
 				},
 				responsive: true,
 				maintainAspectRatio: false,
-				height: 200
+				// height: 200
             },
         }
     },
