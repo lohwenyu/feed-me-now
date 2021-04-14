@@ -61,6 +61,7 @@ export default {
                 name: 'feedme',
                 params: {selectedanimal: this.temp},
                 props: true 
+
             })
         },
         proceed: function() { 

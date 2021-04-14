@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="homepage">
         <NavigationBar/>
         <div class="homepage">
             <PageHeader v-bind:header="'Feed An Animal Today!'" v-bind:icon="'heart'" v-bind:description="description" v-bind:subDescription="subDescription"/>
@@ -17,6 +17,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 

@@ -24,6 +24,7 @@
             <p class="alternative">Or</p>
             <p class="alternative">Simple write in to <a href="customer_service@feedmenow.com">Feed Me Now</a>.</p>
         </div>
+
     </div>
 </template>
 <script>
@@ -45,11 +46,15 @@ export default {
             transactionIssue: "",
             description: "Got a question or enquiry?",
             subDescription: "You can leave a message using the contact form below or email to customerservice@fmn.sg."
+
         }
     },
     methods: {
         submitFeedBack: function() {
-            if (this.feedback.length > 200) {
+            if(this.feedback.length == 0){
+                window.alert("Feedback cannot be empty!")
+            }
+            else if (this.feedback.length > 200) {
                 window.alert("Feedback has to be less than 200 characters long. Do consider contacting us through email for detailed feedback. Thank you!")
             } else {
                 var feedbackRef = database.collection("feedback").doc();
@@ -106,8 +111,8 @@ export default {
     padding-right: 40px;
 }
 #breakLine {
-    width: 1px;
-    height: 440px;
+    width: 440pxpx;
+    height: 1px;
     background-color: #000000;
 }
 #transactionEnquiry {

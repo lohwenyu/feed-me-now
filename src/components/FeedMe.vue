@@ -38,7 +38,9 @@
 
   </div>
 </div>
+
 </template>
+
 <script>
 import database from "../firebase.js"
 import NavigationBar from "./NavigationBar";

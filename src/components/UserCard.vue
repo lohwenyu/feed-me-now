@@ -40,7 +40,7 @@ export default {
 <style scoped>
 #container {
     height: 80px;
-    width: 200px;
+    width: 280px;
     background-color: #CCD2A8;
     margin-left: auto;
     margin-right: 0;

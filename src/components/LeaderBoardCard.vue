@@ -159,4 +159,5 @@ img {
 .column {
     float:left;
 }
+
 </style>

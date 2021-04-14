@@ -33,6 +33,7 @@
                 <button @click="proceed()">Continue</button>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -105,6 +106,7 @@ export default {
                     this.cvv = card.cvv
                 }
             })
+
         }
     },
     created() {
