@@ -116,7 +116,7 @@ export default {
                     var card = doc.data().creditCardDetails
                     this.name = card.name
                     this.savedccn = card.cnn
-                    this.ccn = "XXXX XXXX XXXX " + card.ccn.substring(12)
+                    this.ccn = "XXXXXXXXXXXX" + card.ccn.substring(12)
                     this.expiry = card.expiry
                     this.cvv = card.cvv
                 }
