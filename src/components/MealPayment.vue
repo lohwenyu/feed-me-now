@@ -50,6 +50,7 @@ export default {
             expiry: null,
             cvv: null,
             save: false, 
+            savedccn: null,
         }
     },
     props: ['temp'],
@@ -65,8 +66,8 @@ export default {
         proceed: function() { 
             if (! this.name) {
                 window.alert("Please fill in Cardholder's Name!")
-            } else if (! this.ccn) {
-                window.alert("Please fill in Credit Card Number!")
+            } else if (! this.ccn | this.ccn.length!=16) {
+                window.alert("Please fill in valid Credit Card Number!")
             } else if (! this.expiry) {
                 window.alert("Please fill in Expiry Date!")
             } else if (! this.cvv) {
@@ -75,17 +76,30 @@ export default {
                 console.log("hi")
                 if (this.save) {
                     console.log("here")
-                    database.collection("users").doc(this.currUser).update({
-                        "creditCardDetails": {
-                            "name": this.name,
-                            "ccn": this.ccn,
-                            "expiry": this.expiry,
-                            "cvv": this.cvv
-                        }
-                    }).then(() => {
-                        console.log("hello")
-                    })
-                } 
+                    if (this.savedccn==null | this.savedccn != this.ccn){
+                        database.collection("users").doc(this.currUser).update({
+                            "creditCardDetails": {
+                                "name": this.name,
+                                "ccn": this.ccn,
+                                "expiry": this.expiry,
+                                "cvv": this.cvv
+                            }
+                        }).then(() => {
+                            console.log("hello1")
+                        })}
+                    else{
+                        database.collection("users").doc(this.currUser).update({
+                            "creditCardDetails": {
+                                "name": this.name,
+                                "ccn": this.savedccn,
+                                "expiry": this.expiry,
+                                "cvv": this.cvv
+                            }
+                        }).then(() => {
+                            console.log("hello2")
+                        })
+                    }
+                }
                 this.$router.push({
                     path: '/successfulmeal',
                     name: 'successfulmeal',
@@ -100,7 +114,8 @@ export default {
                     this.save = true
                     var card = doc.data().creditCardDetails
                     this.name = card.name
-                    this.ccn = card.ccn
+                    this.savedccn = card.cnn
+                    this.ccn = "XXXXXXXXXXXX" + card.ccn.substring(12)
                     this.expiry = card.expiry
                     this.cvv = card.cvv
                 }

@@ -97,7 +97,7 @@ export default {
 </script>
 <style scoped>
 #mainContainer {
-    width: 1200px;
+    width: 1300px;
     height: 380px;
     background-color: #FFFFFF;
     word-wrap: break-word;

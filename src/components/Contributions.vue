@@ -9,6 +9,10 @@
                 </div>
             </div>
         </div>
+        <div id="counterDetails">
+            <span><img class="icon" src="../assets/meal.jpg"/> represents number of meals         </span>
+            <span><img class="icon" src="../assets/feast.jpg"/> represents number of feasts </span>
+        </div>
     </div>
 </template>
 <script>
@@ -29,7 +33,7 @@ export default {
             currUser: auth.currentUser.uid,
             contributionList: [],
             description: "Thank you for your contributions thus far!",
-            subDescription: "Check out the Leader Board tab to see how you fare against the other contributors!"
+            subDescription: "Check out the Leader Board tab to see how you fare against the other contributors!" 
         }
     },
     methods: {
@@ -55,23 +59,15 @@ export default {
 .row {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
-.row>* {
-    flex: 0 0 33.3333%;
-    min-width: 410px;
-    max-width: none;
-    max-height: 550px;
+img{
+    width:30px;
 }
-.row:after {
-    display: table;
-    clear: both;
-}
-.column {
-    float:left;
-}
-
-p{
-    margin-left: 50px;
-    margin-top: 20px;
+#counterDetails{
+    margin-left:70px;
+    margin-bottom: 50px;
 }
 </style>
+
+            
