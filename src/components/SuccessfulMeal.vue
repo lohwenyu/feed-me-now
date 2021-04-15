@@ -11,15 +11,14 @@
         </div>
         <p>THANK YOU FOR YOUR DONATION</p>
         <p id="order">Your order is #{{this.orderNumber}}</p>
-          <button @click="homepage()">Help more animals</button>
+          <button @click="homepage()">Help More Animals</button>
 
     </div>
 </template>
 
 <script>
 import NavigationBar from "./NavigationBar.vue";
-import database, {auth} from '../firebase.js'
-import firebase from 'firebase'
+import database, { firestore, auth } from '../firebase.js'
 
 export default {
     name: "SuccessfulTreat",
@@ -36,12 +35,11 @@ export default {
     props: ['selectedanimal'],
     methods: {
         homepage: function() {
-            this.$router.push('/home').then(() => location.reload())
+            this.$router.push('/home')
         },
     },
     created: function() {
         var animalId = this.selectedanimal[0]
-        var currUser = this.currUser
         database.collection('users').doc(this.currUser).get().then((querySnapShot) => {
             this.name = querySnapShot.data().contributions
             }).then(() => {
@@ -67,66 +65,66 @@ export default {
             })
 
 
-            database.collection('animals').doc(animalId).get().then((querySnapShot) => {
-                this.contributor = querySnapShot.data().contributors
-            }).then(() => {
-                if (typeof this.contributor === 'undefined') {
+        database.collection('animals').doc(animalId).get().then((querySnapShot) => {
+            this.contributor = querySnapShot.data().contributors
+        }).then(() => {
+            if (typeof this.contributor === 'undefined') {
+                database.collection('animals').doc(animalId).update({
+                    contributors: {[this.currUser]:[1,0,1]}
+                })
+            } else {
+                for (var y in this.contributor) {
+                    if (y==this.currUser) {
+                        var repeatedUser = true
+                        break
+                    } else {
+                        continue
+                    }
+                }
+                if (typeof repeatedUser === 'undefined') {
                     database.collection('animals').doc(animalId).update({
-                        contributors: {[currUser]:[1,0,1]}
+                        ['contributors.'+this.currUser]:[1,0,1]
                     })
-                } else {
-                    for (var y in this.contributor) {
-                        if (y==currUser) {
-                            var repeatedUser = true
-                            break
-                        } else {
-                            continue
-                        }
-                    }
-                    if (typeof repeatedUser === 'undefined') {
-                        database.collection('animals').doc(animalId).update({
-                            ['contributors.'+currUser]:[1,0,1]
-                        })
-                    } 
-                }
-            }) 
+                } 
+            }
+        }) 
+    
+        var transactionDocRef = database.collection('transactions').doc()
+        this.orderNumber = transactionDocRef.id
+        transactionDocRef.set({
+            amount: 10,
+            animalId: animalId,
+            foodType: 'meal',
+            time: new Date(),  
+            userId: this.currUser            
+        })
         
-            database.collection('transactions').add({
-                amount: 10,
-                animalId: animalId,
-                foodType: 'meal',
-                time: new Date(),  
-                userId: currUser            
-            }).then(function(docRef) {
-                database.collection('users').doc(currUser).update({
-                    transactions: firebase.firestore.FieldValue.arrayUnion(docRef.id)
-            });
-            })
+        database.collection('users').doc(this.currUser).update({
+            transactions: firestore.FieldValue.arrayUnion(this.orderNumber)
+        })
 
-            database.collection("users").doc(currUser).get().then((querySnapShot) => {
-                this.contributions = querySnapShot.data().contributions
-            }).then(() => {
-                console.log(this.contributions)
-                for (const x in this.contributions) {
-                    if (x == animalId) {
-                        var mealCount = this.contributions[x][0]
-                        var feastCount = this.contributions[x][1]
-                        var points = this.contributions[x][2]
+        database.collection("users").doc(this.currUser).get().then((querySnapShot) => {
+            this.contributions = querySnapShot.data().contributions
+        }).then(() => {
+            console.log(this.contributions)
+            for (const x in this.contributions) {
+                if (x == animalId) {
+                    var mealCount = this.contributions[x][0]
+                    var feastCount = this.contributions[x][1]
+                    var points = this.contributions[x][2]
 
-                        database.collection('users').doc(currUser).update({
-                             ['contributions.'+animalId]: [],
-                             ['contributions.'+animalId]: [mealCount+1, feastCount, points+1]
-                        })                       
-                        database.collection('animals').doc(animalId).update({
-                            ['contributors.'+ currUser]: [],
-                            ['contributors.'+ currUser]: [mealCount+1, feastCount, points+1],                            
-                        })             
-                    }
+                    database.collection('users').doc(this.currUser).update({
+                            ['contributions.'+animalId]: [],
+                            ['contributions.'+animalId]: [mealCount+1, feastCount, points+1]
+                    })                       
+                    database.collection('animals').doc(animalId).update({
+                        ['contributors.'+ this.currUser]: [],
+                        ['contributors.'+ this.currUser]: [mealCount+1, feastCount, points+1],                            
+                    })             
                 }
-            })
+            }
+        })
 
-
-        this.orderNumber = Math.round(Math.random() * 100000000)
     }
 
 }
@@ -177,6 +175,7 @@ p {
 }
 button {
     background-color: rgba(142, 218, 250, 0.24);
+    box-shadow: 1px 1px rgba(64, 168, 213, 0.5);
     width : 300px;
     height: 60px;
     border-radius: 10px;
@@ -192,7 +191,6 @@ button {
 
 button:hover {
     background-color: rgba(64, 168, 213, 0.5);
-    box-shadow: 1px 1px rgba(64, 168, 213, 0.5);
     transition: ease-in-out 0.2s;
     cursor: pointer;
 }
