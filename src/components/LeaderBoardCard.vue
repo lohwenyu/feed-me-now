@@ -115,16 +115,6 @@ export default {
     display: flex;
     flex-direction: column;
 }
-img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-}
-#animalContainer {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
 #name {
     font-size: 30px;
 }
@@ -143,16 +133,32 @@ img {
     font-size: 15px;
     text-transform: uppercase;
 }
+#animalContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+img {
+    width: 25%;
+    height: 200px;
+    object-fit: cover;
+}
+
 #ranking{
+    width: 20%;
     text-align: center;
  }
  #ranking span{
     font-size: 30px;
  }
 .row {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
     align-items: center;
-    flex-wrap: wrap;
-    justify-content:space-evenly;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    /* justify-content:space-evenly; */
 }
 .row:after {
     display: table;
