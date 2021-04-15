@@ -1,14 +1,12 @@
 <template>
     <div>
         <img id="logo" src='../assets/logo.png'/>
-        <router-link to="/home" exact>
-        <font-awesome-icon icon="home" size="sm"/>  Home
-        </router-link>
-        <router-link to="/contributions" exact><font-awesome-icon icon="heart" size="sm"/>  Your Contributions</router-link>
-        <router-link to="/leaderboard" exact><font-awesome-icon icon="trophy" size="sm"/>  Leaderboard</router-link>
-        <router-link to="/contactus" exact><font-awesome-icon icon="address-book" size="sm"/>  Contact Us</router-link>
-        <router-link to="/homedashboard" exact><font-awesome-icon icon="chart-bar" size="sm"/>  Dashboard</router-link>
-        <router-link v-on:click.native="logout()" to="/login" exact><font-awesome-icon icon="sign-out-alt" size="sm"/>  Logout</router-link>
+        <router-link to="/home" exact><font-awesome-icon icon="home" size="sm"/><span class="pageTitle">Home</span></router-link>
+        <router-link to="/contributions" exact><font-awesome-icon icon="heart" size="sm"/><span class="pageTitle">Your Contributions</span></router-link>
+        <router-link to="/leaderboard" exact><font-awesome-icon icon="trophy" size="sm"/><span class="pageTitle">Leaderboard</span></router-link>
+        <router-link to="/contactus" exact><font-awesome-icon icon="address-book" size="sm"/><span class="pageTitle">Contact Us</span></router-link>
+        <router-link to="/homedashboard" exact><font-awesome-icon icon="chart-bar" size="sm"/><span class="pageTitle">Dashboard</span></router-link>
+        <router-link v-on:click.native="logout()" to="/login" exact><font-awesome-icon icon="sign-out-alt" size="sm"/><span class="pageTitle">Logout</span></router-link>
         <UserCard/>
     </div>
   
@@ -44,7 +42,8 @@ export default {
 
 <style scoped>
 #logo {
-    height: 65px
+    height: 65px;
+    margin-right:15px;
 }
 div {
     background:rgb(150, 176, 138);
@@ -68,5 +67,8 @@ a {
 a:hover { 
     color: #000000;
     transition: ease-in-out 200ms;
+}
+.pageTitle {
+    margin-left: 5px;
 }
 </style>
