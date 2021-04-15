@@ -5,11 +5,12 @@ import Routescomp from './routes.js'
 
 
 import { library } from "@fortawesome/fontawesome-svg-core"
-import { faUserCircle, faLock, faAddressBook, faHeart, faTrophy, faCheckDouble, faEnvelope, faPaw, faChevronRight, faHome, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faUserCircle, faLock, faAddressBook, faHeart, faTrophy, faCheckDouble, faEnvelope, faPaw, faChevronRight, faHome, faSignOutAlt, faUtensils, faChartBar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faUserCircle, faLock, faAddressBook, faHeart, faTrophy, faCheckDouble, faEnvelope, faPaw, faChevronRight, faHome, faSignOutAlt )
+library.add(faUserCircle, faLock, faAddressBook, faHeart, faTrophy, faCheckDouble, faEnvelope, faPaw, faChevronRight, faHome, faSignOutAlt, faUtensils, faChartBar )
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 
 Vue.config.productionTip = false
 

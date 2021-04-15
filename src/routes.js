@@ -12,6 +12,7 @@ import SuccessfulMeal from './components/SuccessfulMeal.vue'
 import FeastPayment from './components/FeastPayment.vue'
 import SuccessfulFeast from './components/SuccessfulFeast.vue'
 
+import HomeDashboard from './components/HomeDashboard.vue'
 import Dashboard from "./components/Dashboard.vue"
 
 export default [
@@ -29,6 +30,7 @@ export default [
     { path: '/feastpayment', name:'feastpayment', component: FeastPayment, props:true},
     { path: '/successfulfeast', name:'successfulfeast', component: SuccessfulFeast, props:true},
     { path: '/dashboard', component: Dashboard},
+    { path: '/homedashboard', component:  HomeDashboard},
 ]
 
 
