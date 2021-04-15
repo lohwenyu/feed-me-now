@@ -1,13 +1,11 @@
 <template>
     <div id=mainboard>
-        <p><strong>Top {{this.length}} Contributors</strong></p>
-        <ul v-for="object in this.sortedNmaes.sort(this.compare_points).slice(0,3)" v-bind:key="object.ID">
-            <div class="column"><span>
-            <font-awesome-icon icon="paw" size="sm"/>
-                {{object.name}} ({{object.points}})
-                </span>
-                </div>
-        </ul>
+        <span id="topText">Top {{this.length}} Contributors</span>
+        <!-- <ul v-for="object in this.sortedNmaes.sort(this.compare_points).slice(0,3)" v-bind:key="object.ID"> -->
+        <div class="column" v-for="object in this.sortedNmaes.sort(this.compare_points).slice(0,3)" v-bind:key="object.ID">
+            <span><font-awesome-icon id="icon" icon="paw" size="sm"/>{{object.name}} ({{object.points}})</span>
+        </div>
+        <!-- </ul> -->
 
     </div>
 </template>
@@ -63,7 +61,6 @@ export default {
                 }
             })
         }
-        //this.names.sort(this.compare_points)
         if (this.rankedContributors.length < 3) {
             this.length = this.rankedContributors.length
         }
@@ -74,19 +71,28 @@ export default {
 
 <style scoped>
 #mainboard{
+    display: flex;
+    flex-direction: column;
     background-color: #F5F8E3;
     width: 30%;
-    float: left;
-    margin-left: 40px;
-    padding: 20px;
     text-align: center;
-    border-radius: 25px;
-    padding-right: 3.5%;
+    border-radius: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
-#column{
-    text-align: center;
+#topText {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
-p{
-    padding-left: 10%;
+.column{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#icon {
+    margin-right: 5px
 }
 </style>

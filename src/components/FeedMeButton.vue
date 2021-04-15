@@ -1,5 +1,5 @@
 <template>
-    <button v-on:click="feedAgain()" type="button">Feed Me!</button>
+    <button v-on:click="feedMe()" type="button">Feed Me!</button>
 </template>
 <script>
 export default {
@@ -13,7 +13,7 @@ export default {
         }
     },
     methods: {
-        feedAgain: function() {
+        feedMe: function() {
             console.log(this.animal)
             this.$router.push({
                 path: '/feedme',
@@ -28,8 +28,8 @@ export default {
 <style scoped>
 button {
     background-color: rgba(64, 168, 213, 0.24);
-    width: 140px;
-    height: 70px;
+    width: 100px;
+    height: 50px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
