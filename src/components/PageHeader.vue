@@ -39,13 +39,11 @@ export default {
     margin-bottom: 20px;
 }
 #description {
-    /* padding-inline: 5%; */
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 #subDescription {
-    /* padding-inline: 5%; */
     font-size: 18px;
 }
 </style>

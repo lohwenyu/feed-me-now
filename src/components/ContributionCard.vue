@@ -63,14 +63,14 @@ export default {
 </script>
 <style scoped>
 #mainContainer {
-    width: 370px;
-    height: 510px;
+    width: 450px;
+    height: 580px;
     background-color: #FFFFFF;
     word-wrap: break-word;
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 30px;
+    margin-right: 30px;
     box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
 }
 img {

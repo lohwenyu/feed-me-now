@@ -28,7 +28,7 @@
 </template>
 <script>
 import PageHeader from "./PageHeader.vue";
-import database, { firestore , auth} from "../firebase";
+import database, { firestore, auth } from "../firebase";
 import NavigationBar from './NavigationBar.vue';
 
 export default {
@@ -39,12 +39,12 @@ export default {
     },
     data() {
         return {
-            currUser: auth.currentUser.uid, 
+            currUser: auth.currentUser.uid,
             feedback: "",
             transactionId: "",
             transactionIssue: "",
             description: "Got a question or enquiry?",
-            subDescription: "You can leave a message using the contact form below or email to customerservice@fmn.sg."
+            subDescription: "You can leave a message using the contact form below or email to customer_service@feedmenow.com."
         }
     },
     methods: {
@@ -71,7 +71,8 @@ export default {
                 enquiryRef.set({
                     entry: this.transactionIssue,
                     userId: this.currUser,
-                    transactionId: this.transactionId
+                    transactionId: this.transactionId, 
+                    timestamp: new Date()
                 }).then(() => {
                     window.alert("Transaction enquiry succesfully submitted. Please give us up to 2 working days to contact you. Thank you for your patience!");
                     location.reload();

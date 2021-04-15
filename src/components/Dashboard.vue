@@ -132,7 +132,7 @@ export default {
     },
     computed: {
         timeLeft: function() {
-            return Math.round(this.countryCount/this.total * 30)
+            return Math.round(this.countryCount/this.total * 20)
         }
     },
     methods: {

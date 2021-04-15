@@ -12,15 +12,14 @@
         <p>THANK YOU FOR YOUR DONATION</p>
         <p id="email">A verification email has been sent!</p>
         <p id="order">Your order is #{{this.orderNumber}}</p>
-          <button @click="homepage()">Help more animals</button>
+          <button @click="homepage()">Help More Animals</button>
 
     </div>
 </template>
 
 <script>
 import NavigationBar from "./NavigationBar.vue";
-import database, {auth} from '../firebase.js'
-import firebase from 'firebase'
+import database, { firestore, auth } from '../firebase.js'
 
 export default {
     name: "SuccessfulTreat",
@@ -29,107 +28,103 @@ export default {
     },
     data() {
         return {
-            orderNumber: 0,
+            orderNumber: null,
             currUser: auth.currentUser.uid,   
         }
     },
     props: ['selectedanimal'],
     methods: {
         homepage: function() {
-            this.$router.push('/home').then(() => location.reload())
+            this.$router.push('/home')
         }
     },
     created: function() {
-            var currUser = this.currUser
-            var animalId = this.selectedanimal[0]
-            database.collection('users').doc(this.currUser).get().then((querySnapShot) => {
-                this.name = querySnapShot.data().contributions
-            }).then(() => {
-                if (typeof this.name === 'undefined') {
+        var animalId = this.selectedanimal[0]
+        database.collection('users').doc(this.currUser).get().then((querySnapShot) => {
+            this.name = querySnapShot.data().contributions
+        }).then(() => {
+            if (typeof this.name === 'undefined') {
+                database.collection('users').doc(this.currUser).update({
+                    contributions: {[animalId]:[0,1,2]}
+                })
+            } else {
+                for (var y in this.name) {
+                    if (y==animalId) {
+                        var repeated = true
+                        break
+                    } else {
+                        continue;
+                    }
+                }
+                if (typeof repeated === 'undefined') {
                     database.collection('users').doc(this.currUser).update({
-                        contributions: {[animalId]:[0,1,2]}
+                        ['contributions.'+animalId]: [0,1,2]
                     })
-                } else {
-                    for (var y in this.name) {
-                        if (y==animalId) {
-                            var repeated = true
-                            break
-                        } else {
-                            continue;
-                        }
+                }       
+            }
+        })
+
+
+        database.collection('animals').doc(animalId).get().then((querySnapShot) => {
+            this.contributor = querySnapShot.data().contributors
+        }).then(() => {
+            if (typeof this.contributor === 'undefined') {
+                database.collection('animals').doc(animalId).update({
+                    contributors: {[this.currUser]:[0,1,2]}
+                })
+            } else {
+                for (var y in this.contributor) {
+                    if (y==this.currUser) {
+                        var repeatedUser = true
+                        break
+                    } else {
+                        continue
                     }
-                    if (typeof repeated === 'undefined') {
-                        database.collection('users').doc(this.currUser).update({
-                            ['contributions.'+animalId]: [0,1,2]
-                        })
-                    }       
                 }
-            })
-
-
-            database.collection('animals').doc(animalId).get().then((querySnapShot) => {
-                this.contributor = querySnapShot.data().contributors
-            }).then(() => {
-                if (typeof this.contributor === 'undefined') {
+                if (typeof repeatedUser === 'undefined') {
                     database.collection('animals').doc(animalId).update({
-                        contributors: {[currUser]:[0,1,2]}
+                        ['contributors.'+this.currUser]:[0,1,2]
                     })
-                } else {
-                    for (var y in this.contributor) {
-                        if (y==currUser) {
-                            var repeatedUser = true
-                            break
-                        } else {
-                            continue
-                        }
-                    }
-                    if (typeof repeatedUser === 'undefined') {
-                        database.collection('animals').doc(animalId).update({
-                            ['contributors.'+currUser]:[0,1,2]
-                        })
-                    } 
-                }
-            }) 
+                } 
+            }
+        }) 
+    
+        var transactionDocRef = database.collection('transactions').doc()
+        this.orderNumber = transactionDocRef.id
+        transactionDocRef.set({
+            amount: 20,
+            animalId: animalId,
+            foodType: 'feast',
+            time: new Date(),  
+            userId: this.currUser            
+        })
         
+        database.collection('users').doc(this.currUser).update({
+            transactions: firestore.FieldValue.arrayUnion(this.orderNumber)
+        })
 
-            database.collection('transactions').add({
-                amount: 20,
-                animalId: this.selectedanimal[0],
-                foodType: 'feast',
-                time: new Date(),  
-                userId: currUser           
-            }).then(function(docRef) {
-                database.collection('users').doc(currUser).update({
-                    transactions: firebase.firestore.FieldValue.arrayUnion(docRef.id)
-            });
-            })
+        database.collection("users").doc(this.currUser).get().then((querySnapShot) => {
+            this.contributions = querySnapShot.data().contributions
+        }).then(() => {
+            for (const x in this.contributions) {
+                if (x == animalId) {
+                    var mealCount = this.contributions[x][0]
+                    var feastCount = this.contributions[x][1]
+                    var points = this.contributions[x][2]
 
-            database.collection("users").doc(currUser).get().then((querySnapShot) => {
-                this.contributions = querySnapShot.data().contributions
-            }).then(() => {
-                for (const x in this.contributions) {
-                    if (x == animalId) {
-                        var mealCount = this.contributions[x][0]
-                        var feastCount = this.contributions[x][1]
-                        var points = this.contributions[x][2]
-
-                        database.collection('users').doc(currUser).update({
-                             ['contributions.'+animalId]: [],
-                             ['contributions.'+animalId]: [mealCount, feastCount+1, points+2]
-                        })                       
-                        database.collection('animals').doc(animalId).update({
-                            ['contributors.'+ currUser]: [],
-                            ['contributors.'+ currUser]: [mealCount, feastCount+1, points+2],                            
-                        })                            
-                       
-                    }
+                    database.collection('users').doc(this.currUser).update({
+                            ['contributions.'+animalId]: [],
+                            ['contributions.'+animalId]: [mealCount, feastCount+1, points+2]
+                    })                       
+                    database.collection('animals').doc(animalId).update({
+                        ['contributors.'+ this.currUser]: [],
+                        ['contributors.'+ this.currUser]: [mealCount, feastCount+1, points+2],                            
+                    })                            
+                    
                 }
-            })
-
-
-        this.orderNumber = Math.round(Math.random() * 100000000)
+            }
+        })
     }
-
 }
 
 </script>

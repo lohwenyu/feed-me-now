@@ -1,23 +1,25 @@
 <template>
     <div id="mainContainer">
-        <span id="name">{{ animal.name }}</span>
-        <div id="speciesContainer">
-            <span>{{ information[0].commonName }}</span>
+        <div>
+            <span id="name">{{ animal.name }}</span>
+            <div id="speciesContainer">
+                <span>{{ information[0].commonName }}</span>
+            </div>
         </div>
-        <div id="AnimalContainer">
+        <div id="animalContainer">
             <img v-bind:src="animal.picture">
             <div class="row">
                 <FeedCounter v-bind:mealQuantity="array[0]" v-bind:feastQuantity="array[1]"/>
                 <FeedAgainButton class="column" v-bind:animalId="animalId" v-bind:animal="animal"/>
             </div>
+            <div id="ranking">
+                <span><strong>You are the </strong></span><br>
+                <span style="font-size:40px"><strong>#{{this.finalRanking}} </strong></span><br>
+                <span><strong> contributor </strong></span>
+                <p>with {{array[2]}} contributions</p>
+            </div>
+            <ContributorBoard v-bind:rankedContributors="rankedContributors" v-bind:animalId="animalId"/>
         </div>
-        <div id="ranking">
-             <span><strong>You are the </strong></span><br>
-             <span style="font-size:40px"><strong>#{{this.finalRanking}} </strong></span><br>
-             <span><strong> contributor </strong></span>
-             <p>with {{array[2]}} contributions</p>
-        </div>
-        <ContributorBoard v-bind:rankedContributors="rankedContributors" v-bind:animalId="animalId"/>
     </div>
 </template>
 
@@ -97,7 +99,7 @@ export default {
 </script>
 <style scoped>
 #mainContainer {
-    width: 1300px;
+    width: 90%;
     height: 380px;
     background-color: #FFFFFF;
     word-wrap: break-word;
@@ -105,17 +107,13 @@ export default {
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
-    padding: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 50px;
+    padding-left: 50px;
     box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
-}
-img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-    float: left;
-}
-#AnimalContainer {
-    margin: 3%;
+    display: flex;
+    flex-direction: column;
 }
 #name {
     font-size: 30px;
@@ -135,22 +133,32 @@ img {
     font-size: 15px;
     text-transform: uppercase;
 }
+#animalContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+img {
+    width: 25%;
+    height: 200px;
+    object-fit: cover;
+}
+
 #ranking{
-     width: 15%;
-     float: left;
-     text-align: center;
-     margin-top: 20px;
-     margin-left: 50px;
+    width: 20%;
+    text-align: center;
  }
  #ranking span{
-     font-size: 30px;
+    font-size: 30px;
  }
 .row {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
     align-items: center;
-    flex-wrap: wrap;
-    justify-content:space-evenly;
-    margin-left: 50px;
-    float:left;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    /* justify-content:space-evenly; */
 }
 .row:after {
     display: table;

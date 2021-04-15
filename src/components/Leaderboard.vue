@@ -4,13 +4,13 @@
         <div>
             <PageHeader v-bind:header="'Leaderboard'" v-bind:icon="'trophy'" v-bind:description="description" v-bind:subDescription="subDescription"/>
             <div class="row">
-            <div class="column" v-for="([animalId, array], index) in Object.entries(userContribution)" :key="index">
-                <LeaderBoardCard v-bind:animalId="animalId" v-bind:array="array"/>
-            </div>
+                <div class="column" v-for="([animalId, array], index) in Object.entries(userContribution)" :key="index">
+                    <LeaderBoardCard v-bind:animalId="animalId" v-bind:array="array"/>
+                </div>
             </div>
             <div id="counterDetails">
-                <span><img class="icon" src="../assets/meal.jpg"/> represents number of meals         </span>
-                <span><img class="icon" src="../assets/feast.jpg"/> represents number of feasts </span>
+                <div class="legendContainer"><img class="icon" src="../assets/meal.jpg"/>represents number of meals</div>
+                <div class="legendContainer"><img class="icon" src="../assets/feast.jpg"/>represents number of feasts</div> 
             </div>
         </div>
     </div>
@@ -51,18 +51,23 @@ export default {
 }
 </script>
 <style scoped>
-p{
-    margin-left: 50px;
-}
 .row{
     padding: 10px;
 }
 img{
-    width:30px;
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
-
 #counterDetails{
-    margin-left:135px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-left: 5%;
+}
+.legendContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 </style>

@@ -2,7 +2,7 @@
     <div id="mainContainer">
         <div id="innerContainer">
             <div id="paymentDetailsContainer">
-                <span>You are buying a<div id="mealContainer">Feast for {{temp[1].name}}</div></span>
+                <span>You are buying a<div id="feastContainer">Feast for {{temp[1].name}}</div></span>
                 <span>Payment Amount: <b>20.00 SGD</b></span>
             </div>
             
@@ -41,7 +41,7 @@
 import database, { auth } from "../firebase.js"
 
 export default {
-    name: "MealPayment",
+    name: "FeastPayment",
     data() {
         return {
             currUser: auth.currentUser.uid,
@@ -102,8 +102,8 @@ export default {
                     }
                 } 
                 this.$router.push({
-                    path: '/successfulmeal',
-                    name: 'successfulmeal',
+                    path: '/successfulfeast',
+                    name: 'successfulfeast',
                     params: {selectedanimal: this.temp},
                     props: true 
                 }) 
@@ -151,7 +151,7 @@ export default {
     text-align: center;
     margin: 20px
 }
-#mealContainer {
+#feastContainer {
     background-color: #E5E5BA;
     width: fit-content;
     padding-inline: 10px;
