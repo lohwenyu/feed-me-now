@@ -2,7 +2,7 @@
     <div>
         <NavigationBar/>
         <div class="homepage">
-            <PageHeader v-bind:header="'Feed An Animal Today!'" v-bind:icon="'heart'" v-bind:description="description" v-bind:subDescription="subDescription"/>
+            <PageHeader v-bind:header="'Feed An Animal Today!'" v-bind:icon="'home'" v-bind:description="description" v-bind:subDescription="subDescription"/>
             <div id="container">
                 <div v-for="(animal, index) in animals" :key="index" id="animal">
                     <img id="animalPic" v-bind:src="animal.details.picture">
