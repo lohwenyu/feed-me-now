@@ -44,7 +44,7 @@ export default {
             transactionId: "",
             transactionIssue: "",
             description: "Got a question or enquiry?",
-            subDescription: "You can leave a message using the contact form below or email to customerservice@fmn.sg."
+            subDescription: "You can leave a message using the contact form below or email to customer_service@feedmenow.com."
         }
     },
     methods: {
