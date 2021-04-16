@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         contribute: function() {
-            this.$router.push({ path: '/login' })
+            this.$router.push({ path: '/login' }).then(() => location.reload())
         },
         dashboard: function() {
             this.$router.push({ path: '/dashboard' }).then(() => location.reload())

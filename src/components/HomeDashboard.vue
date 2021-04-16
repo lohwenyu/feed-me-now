@@ -131,7 +131,7 @@ export default {
     },
     computed: {
         timeLeft: function() {
-            return Math.round(this.countryCount/this.total * 30)
+            return Math.round(this.countryCount/this.total * 20)
         }
     },
     methods: {
@@ -230,6 +230,7 @@ export default {
     background-image: url("https://i.pinimg.com/originals/2c/59/55/2c5955633852d7f0ce71e42d8e4d5684.jpg");
     background-size: cover;
     background-attachment: fixed;
+    overflow: hidden;
 }
 #dashboardContainer {
     background-image: url("https://i.pinimg.com/originals/2c/59/55/2c5955633852d7f0ce71e42d8e4d5684.jpg");
