@@ -12,7 +12,7 @@
         <p>THANK YOU FOR YOUR DONATION</p>
         <p id="email">A verification email has been sent!</p>
         <p id="order">Your order is #{{this.orderNumber}}</p>
-          <button @click="homepage()">Help More Animals</button>
+        <p><button @click="homepage()">Help More Animals</button></p>
 
     </div>
 </template>
