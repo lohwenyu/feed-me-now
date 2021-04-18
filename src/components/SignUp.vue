@@ -55,25 +55,28 @@ export default {
                 window.alert("Passwords do not match!") 
             } else {
                 return auth.createUserWithEmailAndPassword(this.email, this.password)
-                    .then((userCredential) => {
-                        var userId = userCredential.user.uid;
-                        console.log(userId);
+                .then((userCredential) => {
+                    var userId = userCredential.user.uid;
+                    console.log(userId);
 
-                        database.collection("users").doc(userId).set({
-                            name: this.username,
-                            status: "Animal Protector"
-                        })
+                    database.collection("users").doc(userId).set({
+                        name: this.username,
+                        status: "Animal Protector"
+                    })
 
+                    auth.signInWithEmailAndPassword(this.email, this.password)
+                    .then(() => {
                         auth.onAuthStateChanged((user) => {
                             if (user) {
                                 this.$router.push({ path: '/home' }).then(() => location.reload())
                             }
                         })
                     })
-                    .catch((error) => {
-                        var errorMessage = error.message;
-                        window.alert(errorMessage);
-                    });
+                })
+                .catch((error) => {
+                    var errorMessage = error.message;
+                    window.alert(errorMessage);
+                });
             }
         },
         login: function() {

@@ -1,12 +1,9 @@
 <template>
     <div id=mainboard>
         <span id="topText">Top {{this.length}} Contributors</span>
-        <!-- <ul v-for="object in this.sortedNmaes.sort(this.compare_points).slice(0,3)" v-bind:key="object.ID"> -->
         <div class="column" v-for="object in this.names.slice().sort(this.compare_points).slice(0,3)" v-bind:key="object.ID">
             <span><font-awesome-icon id="icon" icon="paw" size="sm"/>{{object.name}} ({{object.points}})</span>
         </div>
-        <!-- </ul> -->
-
     </div>
 </template>
 
