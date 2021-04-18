@@ -6,6 +6,7 @@ import Landing from './components/Landing.vue'
 import Leaderboard from './components/Leaderboard.vue'
 import Login from './components/Login.vue'
 import SignUp from "./components/SignUp.vue"
+import Transactions from "./components/Transactions.vue"
 
 import MealPayment from './components/MealPayment.vue'
 import SuccessfulMeal from './components/SuccessfulMeal.vue'
@@ -31,6 +32,7 @@ export default [
     { path: '/successfulfeast', name:'successfulfeast', component: SuccessfulFeast, props:true},
     { path: '/dashboard', component: Dashboard},
     { path: '/homedashboard', component:  HomeDashboard},
+    { path: '/transactions', component: Transactions}
 ]
 
 
