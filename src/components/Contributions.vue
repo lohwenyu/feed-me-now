@@ -21,6 +21,7 @@
             <div id="nullDescriptionContainer">
                 <span id="nullDescription">{{ nullDescription }}</span>
                 <span id="nullSubDescription">{{ nullSubDescription }}</span>
+                <button id="homeButton" type="button" v-on:click="redirectHome()">Start Feeding!</button>
             </div>
         </div>
     </div>
@@ -44,8 +45,8 @@ export default {
             contributionList: [],
             description: "Thank you for your contributions thus far!",
             subDescription: "Check out the Leader Board tab to see how you fare against the other contributors!",
-            nullDescription: "You do not have any contributions yet!",
-            nullSubDescription: "Check out the Home tab to start contributing!"
+            nullDescription: "You do not have any contributions yet.",
+            nullSubDescription: "Check out the Home tab to start feeding!"
         }
     },
     methods: {
@@ -61,7 +62,11 @@ export default {
         transactions: function() {
             this.$router.push({
                 path: '/transactions',
-                // name: 'transactions'
+            }) 
+        },
+        redirectHome() {
+            this.$router.push({
+                path: '/home',
             }) 
         }
     },
@@ -137,6 +142,26 @@ img{
 }
 #nullSubDescription {
     font-size: 18px;
+}
+#homeButton {
+    background-color: rgba(64, 168, 213, 0.24);
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    display: flex;
+    margin-top: 10px;
+    box-shadow: 1px 1px rgba(64, 168, 213, 0.5);
+    padding:10px
+}
+#homeButton:hover {
+    background-color: rgba(64, 168, 213, 0.5);
+    transition: ease-in-out 0.2s;
 }
 </style>
 
