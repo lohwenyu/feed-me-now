@@ -4,8 +4,8 @@
             <div class="column">
                 <div>
                     <span id="titleText">Help Them Today</span>
-                    <p id="subtitleText">The Singapore Zoo is losing funds due to the pandemic and many animals are starving. 
-                        Help them now by clicking on the button below and make a change now!</p>
+                    <p id="subtitleText">The Singapore Zoo is losing funds due to the pandemic and many animals are in need of your help. 
+                        Make a change now by clicking on the buttons below!</p>
                     <div id="buttonContainer">
                         <button v-on:click="contribute()" type="button">Contribute Now</button>
                         <button v-on:click="dashboard()" type="button">View Dashboard</button>
