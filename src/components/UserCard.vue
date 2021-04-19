@@ -44,9 +44,11 @@ export default {
     background-color: #CCD2A8;
     margin-left: auto;
     margin-right: 0;
-    flex-wrap: wrap;
-    padding: auto;
-    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-inline-start: 10px;
 }
 #name {
     font-size: 18px;

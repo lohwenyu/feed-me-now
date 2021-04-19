@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="navContainer">
         <img id="logo" src='../assets/logo.png'/>
         <router-link to="/home" exact><font-awesome-icon icon="home" size="sm"/><span class="pageTitle">Home</span></router-link>
         <router-link to="/contributions" exact><font-awesome-icon icon="heart" size="sm"/><span class="pageTitle">Your Contributions</span></router-link>
@@ -45,7 +45,7 @@ export default {
     height: 65px;
     margin-right:15px;
 }
-div {
+#navContainer {
     background:rgb(150, 176, 138);
     height: 80px;
     display: flex;
