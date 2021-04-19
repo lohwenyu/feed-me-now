@@ -14,7 +14,7 @@
                 <div id="breakLine"></div>
                 <div class="column" id="transactionEnquiry">
                     <p class="header">Transaction Enquiry</p>
-                    <p>Transaction Number:</p>
+                    <p>Transaction ID: <br><span id="idInstructions">Please identify the Transaction ID from your past transactions in the Contributions tab.</span></p>
                     <textarea rows="1" v-model="transactionId"/>
                     <p>Tell us what was wrong with your transaction.</p>
                     <textarea rows="10" v-model="transactionIssue"/>
@@ -115,6 +115,10 @@ export default {
     width: 49%;
     padding-left: 40px;
     padding-right: 40px;
+}
+#idInstructions {
+    font-size: 14px;
+    color: rgb(0, 0, 0, 0.6);
 }
 .header {
     font-size: 25px;

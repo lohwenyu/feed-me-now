@@ -4,7 +4,7 @@
         <div v-show="transactionList.length!=0">
             <PageHeader v-bind:header="'Transactions'" v-bind:icon="'receipt'" v-bind:description="description" v-bind:subDescription="subDescription"/>
             <div class="row">
-                <div class="column" v-for="(transactionId, index) in Object.entries(transactionList)" :key="index">
+                <div class="column" v-for="(transactionId, index) in transactionList" :key="index">
                     <TransactionCard v-bind:transactionId="transactionId[1]"/>
                 </div>
             </div>
@@ -29,15 +29,21 @@ export default {
         return {
             currUser: auth.currentUser.uid,
             transactionList: [],
-            description: "Thank you for your contributions thus far!",
-            subDescription: "Check out the Leader Board tab to see how you fare against the other contributors!",
+            description: "Here are the details of your past transations.",
+            subDescription: "If there are any issues, do copy the Transaction ID and let us know via the Contact Us tab.",
         }
     },
     methods: {
         fetchTransactions: function() {
             database.collection("users").doc(this.currUser).get().then(doc => {
                 if (doc.data().transactions !== undefined) {
-                    this.transactionList = doc.data().transactions
+                    var temp = Object.entries(doc.data().transactions)
+                    for (var i=temp.length-1; i>=0; i--) {
+
+                        this.transactionList.push(temp[i])
+
+                    }
+                    // this.transactionList = doc.data().transactions
                 }
             })
         }
