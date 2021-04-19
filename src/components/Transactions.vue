@@ -43,7 +43,6 @@ export default {
                         this.transactionList.push(temp[i])
 
                     }
-                    // this.transactionList = doc.data().transactions
                 }
             })
         }
