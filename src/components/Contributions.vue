@@ -2,7 +2,10 @@
     <div>
         <NavigationBar/>
         <div v-show="contributionList.length!=0">
-            <PageHeader v-bind:header="'Your Contributions'" v-bind:icon="'heart'" v-bind:description="description" v-bind:subDescription="subDescription"/>
+            <div id="topContainer">
+                <PageHeader v-bind:header="'Your Contributions'" v-bind:icon="'heart'" v-bind:description="description" v-bind:subDescription="subDescription"/>
+                <button id="transactionsButton" type="button" v-on:click="transactions()"><font-awesome-icon id="icon" icon="receipt" size="sm"/>View Past Transactions</button>
+            </div>
             <div class="row">
                 <div class="column" v-for="([animalId, array], index) in Object.entries(contributionList)" :key="index">
                     <ContributionCard v-bind:animalId="animalId" v-bind:array="array"/>
@@ -18,6 +21,7 @@
             <div id="nullDescriptionContainer">
                 <span id="nullDescription">{{ nullDescription }}</span>
                 <span id="nullSubDescription">{{ nullSubDescription }}</span>
+                <button id="homeButton" type="button" v-on:click="redirectHome()">Start Feeding!</button>
             </div>
         </div>
     </div>
@@ -41,8 +45,8 @@ export default {
             contributionList: [],
             description: "Thank you for your contributions thus far!",
             subDescription: "Check out the Leader Board tab to see how you fare against the other contributors!",
-            nullDescription: "You do not have any contributions yet!",
-            nullSubDescription: "Check out the Home tab to start contributing!"
+            nullDescription: "You do not have any contributions yet.",
+            nullSubDescription: "Check out the Home tab to start feeding!"
         }
     },
     methods: {
@@ -55,6 +59,16 @@ export default {
                 console.log(this.contributionList)
             })
         },
+        transactions: function() {
+            this.$router.push({
+                path: '/transactions',
+            }) 
+        },
+        redirectHome() {
+            this.$router.push({
+                path: '/home',
+            }) 
+        }
     },
     created() {
         this.fetchContributions();
@@ -62,6 +76,35 @@ export default {
 }
 </script>
 <style scoped>
+#topContainer {
+    display: flex;
+    align-items: center;
+}
+#transactionsButton {
+    background-color: rgba(64, 168, 213, 0.24);
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    display: flex;
+    margin-left: auto;
+    margin-right: 5%;
+    margin-top: 10px;
+    box-shadow: 1px 1px rgba(64, 168, 213, 0.5);
+    padding:10px
+}
+#transactionsButton:hover {
+    background-color: rgba(64, 168, 213, 0.5);
+    transition: ease-in-out 0.2s;
+}
+#icon {
+    margin-right: 5px;
+}
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -99,6 +142,26 @@ img{
 }
 #nullSubDescription {
     font-size: 18px;
+}
+#homeButton {
+    background-color: rgba(64, 168, 213, 0.24);
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    display: flex;
+    margin-top: 10px;
+    box-shadow: 1px 1px rgba(64, 168, 213, 0.5);
+    padding:10px
+}
+#homeButton:hover {
+    background-color: rgba(64, 168, 213, 0.5);
+    transition: ease-in-out 0.2s;
 }
 </style>
 

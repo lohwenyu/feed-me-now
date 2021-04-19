@@ -14,7 +14,6 @@
                             <div class="iconContainer"><font-awesome-icon icon="lock" size="lg"/></div>
                             <input id="password" v-model="password" type="password" placeholder="Password">
                         </div>
-                        <!-- <p><button type="button" id="forgetButton">Forgot Password?</button></p> -->
                         <button type="button" id="loginButton" v-on:click="login()">Sign In</button>
                         <p id="signUp">Don't have an account? <button type="button" id="signUpButton" v-on:click="signUp()">Sign up here.</button></p>
                     </form>
@@ -97,11 +96,6 @@ export default {
 #logoButton:hover {
     cursor: pointer;
 }
-/* img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-} */
 .inputContainer {
     width: 300px;
     height: 50px;
@@ -132,18 +126,6 @@ input {
     font-size: 15px;
     cursor: pointer;
 }
-/* #forgetButton {
-    background: none;
-    border: none;
-    outline: none;
-    font-size: 13px;
-    padding: 0px;
-    color: white;
-}
-#forgetButton:hover {
-    transition: ease-in-out 0.2s;
-    color: black;
-} */
 #loginButton {
     margin-top: 10px;
     width: 300px;

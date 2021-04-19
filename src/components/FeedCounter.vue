@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- can consider changing this alignment -->
         <div id="mealCounter">
             <img class="icon" src="../assets/meal.jpg"/>
             <span class="quantity">X {{ mealQuantity }}</span>
