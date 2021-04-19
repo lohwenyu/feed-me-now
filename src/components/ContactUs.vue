@@ -149,10 +149,12 @@ textarea {
     background-color: rgba(64, 168, 213, 0.5);
     transition: ease-in-out 0.2s;
 }
-
 #subtitle{
     margin-left: 50px;
     margin-top: 20px;
     font-size: 18px;
+}
+textarea {
+    outline-color: #E5E5BA;
 }
 </style>
