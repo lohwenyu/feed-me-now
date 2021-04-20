@@ -130,7 +130,6 @@ a:hover {
         padding-inline-start: 10px;
         background-color: rgb(150, 176, 138);
         width: 100%;
-        /* height: 100%; */
     }
     #drawer {
         display: none;
@@ -143,6 +142,7 @@ a:hover {
         top: 80px;
         background-color: rgb(150, 176, 138);
         z-index: 1;
+        height: calc(100vh - 80px);
     }
 }
 </style>
