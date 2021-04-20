@@ -63,7 +63,7 @@ export default {
 </script>
 <style scoped>
 #mainContainer {
-    width: 450px;
+    width: 400px;
     height: 580px;
     background-color: #FFFFFF;
     word-wrap: break-word;
