@@ -87,7 +87,7 @@ export default {
 
 #animal {
     position: relative; 
-    width: 450px;
+    width: 400px;
     height: 580px;
     background-color: #FFF;
     margin-top: 20px;

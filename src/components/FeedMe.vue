@@ -148,6 +148,7 @@ h1 {
 }
 #buttonContainer {
     display: flex;
+    justify-content: center;
 }
 button {
     background-color: rgba(64, 168, 213, 0.24);
