@@ -12,11 +12,11 @@
         <div id="right">
             <div id="informationContainer">
                 <div class="nameContainer">
-                    <span>COMMON NAME</span>
+                    <span class="nameTitle">COMMON NAME</span>
                     <span class="nameText">{{animalInformation[0].commonName}}</span>
                 </div>
                 <div class="nameContainer">
-                    <span>SCIENTIFIC NAME</span>
+                    <span class="nameTitle">SCIENTIFIC NAME</span>
                     <span id="scientific" class="nameText">{{animalInformation[0].scientificName}}</span>
                 </div>
                 <p v-for="(information, index) in animalInformation[0].information" :key="index">
@@ -106,6 +106,7 @@ h1 {
     padding-top: 3%;
     padding-bottom: 3%;
     box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
+    margin-bottom: 20px;
 }
 #left {
     padding-inline: 3%;
@@ -127,6 +128,12 @@ h1 {
 }
 .nameContainer {
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.nameTitle {
+    margin-right: 10px;
 }
 .nameText {
     background-color: #E5E5BA;
@@ -135,7 +142,6 @@ h1 {
     padding-top: 3px;
     padding-bottom: 3px;
     border-radius: 5px;
-    margin-inline-start: 10px;
 }
 #scientific {
     font-style: italic;
@@ -145,8 +151,9 @@ h1 {
 }
 button {
     background-color: rgba(64, 168, 213, 0.24);
-    width: 140px;
-    height: 70px;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -167,6 +174,7 @@ button:hover {
     font-size: 18px;
 }
 .amountText {
+    padding-top: 5px;
     font-size: 15px;
 }
 </style>

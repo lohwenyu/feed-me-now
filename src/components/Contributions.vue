@@ -84,6 +84,7 @@ export default {
     background-color: rgba(64, 168, 213, 0.24);
     width: fit-content;
     height: fit-content;
+    padding: 10px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -96,7 +97,6 @@ export default {
     margin-right: 5%;
     margin-top: 10px;
     box-shadow: 1px 1px rgba(64, 168, 213, 0.5);
-    padding:10px
 }
 #transactionsButton:hover {
     background-color: rgba(64, 168, 213, 0.5);

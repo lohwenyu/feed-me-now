@@ -134,8 +134,12 @@ textarea {
 }
 .submitButton {
     background-color: rgba(64, 168, 213, 0.24);
-    width: 200px;
-    height: 30px;
+    width: fit-content;
+    height: fit-content;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
