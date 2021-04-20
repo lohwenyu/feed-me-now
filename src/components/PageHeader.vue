@@ -28,7 +28,9 @@ export default {
 #headerContainer {
     margin-top: 40px;
     margin-bottom: 20px;
-    padding-inline: 5%;
+    width: fit-content;
+    padding-left: 5%;
+    padding-right: 5%;
     display: flex;
     flex-direction: column;
 }
