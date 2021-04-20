@@ -9,7 +9,9 @@
             <img class="icon" src="../assets/feast.jpg" v-if="transactionDetails.amount==20"/>
             <span class="amount">${{ transactionDetails.amount }}</span>
         </div>
-        <span id="dateContainer">Donated on {{ new Date(this.transactionDetails.time.seconds * 1000).toLocaleDateString("en-US") }}</span>
+        <div id="dateContainer">
+            <span>Donated on {{ new Date(this.transactionDetails.time.seconds * 1000).toLocaleDateString("en-US") }}</span>
+        </div>
         <div id="idContainer">
             <span>Transaction ID</span>
             <span id="transactionId">{{ transactionId }}</span>
@@ -71,20 +73,21 @@ export default {
     margin-left: auto;
     margin-right: auto;
     box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
     padding-top: 20px;
     padding-bottom: 20px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 #nameContainer {
     width: 30%;
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
-    margin-right: 10px;
+    /* margin-left: 10px;
+    margin-right: 10px; */
 }
 #name {
     font-weight: bold;
@@ -101,10 +104,7 @@ export default {
 #amountContainer {
     display: flex;
     align-items: center;
-    width: 5%;
     justify-content: center;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 .icon {
     color: #96B08A;
@@ -120,16 +120,17 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30%; 
-    flex-wrap: wrap;
+    width: 25%; 
+    text-align: center;
 }
 #idContainer {
-    width: 30%;
+    width: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
+    text-align: center;
 }
 #transactionId {
     background-color: rgba(64, 168, 213, 0.24);
@@ -139,5 +140,6 @@ export default {
     padding-bottom: 3px;
     border-radius: 5px;
     font-weight: bold;
+    word-break: break-all;
 }
 </style>

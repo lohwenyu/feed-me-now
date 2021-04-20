@@ -19,9 +19,6 @@
 <script>
 export default {
     name: "Landing",
-    data() {
-        
-    },
     methods: {
         contribute: function() {
             this.$router.push({ path: '/login' }).then(() => location.reload())

@@ -8,15 +8,15 @@
         </div>
         <div id="animalContainer">
             <img v-bind:src="animal.picture">
-            <div class="row">
-                <FeedCounter v-bind:mealQuantity="array[0]" v-bind:feastQuantity="array[1]"/>
-                <FeedAgainButton class="column" v-bind:animalId="animalId" v-bind:animal="animal"/>
+            <div class="counterContainer">
+                <FeedCounter v-bind:mealQuantity="array[0]" v-bind:feastQuantity="array[1]" v-bind:page="'leaderboard'"/>
+                <FeedAgainButton v-bind:animalId="animalId" v-bind:animal="animal"/>
             </div>
             <div id="ranking">
                 <span><strong>You are the </strong></span><br>
                 <span style="font-size:40px"><strong>#{{this.finalRanking}} </strong></span><br>
                 <span><strong> contributor </strong></span>
-                <p>with {{array[2]}} contributions</p>
+                <p>with {{array[2]}} contribution(s).</p>
             </div>
             <ContributorBoard v-bind:rankedContributors="rankedContributors" v-bind:animalId="animalId"/>
         </div>
@@ -100,7 +100,7 @@ export default {
 <style scoped>
 #mainContainer {
     width: 90%;
-    height: 380px;
+    flex-wrap: wrap;
     background-color: #FFFFFF;
     word-wrap: break-word;
     margin-top: 20px;
@@ -109,8 +109,8 @@ export default {
     margin-right: auto;
     padding-top: 30px;
     padding-bottom: 30px;
-    padding-right: 50px;
-    padding-left: 50px;
+    padding-right: 3%;
+    padding-left: 3%;
     box-shadow: 1px 1px rgb(136, 136, 136, 0.5);
     display: flex;
     flex-direction: column;
@@ -147,24 +147,15 @@ img {
 #ranking{
     width: 20%;
     text-align: center;
- }
- #ranking span{
+}
+#ranking span{
     font-size: 30px;
- }
-.row {
+}
+#counterContainer {
     display: flex;
     flex-direction: column;
     width: 15%;
     align-items: center;
     justify-content: center;
-    /* flex-wrap: wrap; */
-    /* justify-content:space-evenly; */
-}
-.row:after {
-    display: table;
-    clear: both;
-}
-.column {
-    float:left;
 }
 </style>

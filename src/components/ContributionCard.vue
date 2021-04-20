@@ -9,10 +9,8 @@
                 </div>
                 <span id="feedStatus">{{ animal.name + " " + animal.feedStatus + "!" }}</span>
             </div>
-            <div class="row">
-                <FeedCounter class="column" v-bind:mealQuantity="array[0]" v-bind:feastQuantity="array[1]"/>
-                <FeedAgainButton class="column" v-bind:animalId="animalId" v-bind:animal="animal"/>
-            </div>
+            <FeedCounter v-bind:mealQuantity="array[0]" v-bind:feastQuantity="array[1]" v-bind:page="'contributions'"/>
+            <FeedAgainButton id="feedAgainButton" v-bind:animalId="animalId" v-bind:animal="animal"/>
         </div>
     </div>
 </template>
@@ -63,8 +61,9 @@ export default {
 </script>
 <style scoped>
 #mainContainer {
-    width: 400px;
-    height: 580px;
+    position: relative;
+    width: 450px;
+    height: 500px;
     background-color: #FFFFFF;
     word-wrap: break-word;
     margin-top: 20px;
@@ -106,17 +105,9 @@ img {
 #feedStatus {
     font-size: 15px;
 }
-.row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content:space-evenly;
-}
-.row:after {
-    display: table;
-    clear: both;
-}
-.column {
-    float:left
+#feedAgainButton {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
 }
 </style>

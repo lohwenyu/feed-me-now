@@ -1,12 +1,24 @@
 <template>
     <div>
-        <div id="mealCounter">
-            <img class="icon" src="../assets/meal.jpg"/>
-            <span class="quantity">X {{ mealQuantity }}</span>
+        <div id="contributionsCounter" v-if="page==='contributions'">
+            <div id="mealCounter">
+                <img class="icon" src="../assets/meal.jpg"/>
+                <span class="quantity">X {{ mealQuantity }}</span>
+            </div>
+            <div id="feastCounter">
+                <img class="icon" src="../assets/feast.jpg"/>
+                <span class="quantity">X {{ feastQuantity }}</span>
+            </div>
         </div>
-        <div id="feastCounter">
-            <img class="icon" src="../assets/feast.jpg"/>
-            <span class="quantity">X {{ feastQuantity }}</span>
+        <div id="leaderboardCounter" v-if="page==='leaderboard'">
+            <div id="mealCounter">
+                <img class="icon" src="../assets/meal.jpg"/>
+                <span class="quantity">X {{ mealQuantity }}</span>
+            </div>
+            <div id="feastCounter">
+                <img class="icon" src="../assets/feast.jpg"/>
+                <span class="quantity">X {{ feastQuantity }}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -19,6 +31,9 @@ export default {
         },
         feastQuantity: {
             type: Number
+        },
+        page: {
+            type: String
         }
     },
     components: {
@@ -30,34 +45,36 @@ export default {
 }
 </script>
 <style scoped>
+#contributionsCounter {
+    display: flex;
+}
+#leaderboardCounter {
+    display: flex;
+    flex-direction: column;
+}
 #mealCounter {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-}
-#mealCounter:after {
-    display: table;
-    clear: both;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
 }
 #feastCounter {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-}
-#feastCounter:after {
-    display: table;
-    clear: both;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
 }
 .icon {
-    color: #96B08A;
-    float: left;
-    margin: 10px;
+    margin-right: 5px;
     width: 50px;
     height: 50px;
 }
 .quantity {
     font-size: 15px;
     font-weight: bold;
-    float: left;
 }
 </style>

@@ -209,8 +209,9 @@ input {
 }
 button {
     background-color: rgba(64, 168, 213, 0.24);
-    width: 150px;
-    height: 50px;
+    width: 100px;
+    height: fit-content;
+    padding: 10px;
     font-size: 17px;
     border-radius: 10px;
     display: flex;

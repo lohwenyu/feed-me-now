@@ -1,7 +1,7 @@
 <template>
     <div>
         <NavigationBar/>
-        <div class="homepage">
+        <div>
             <PageHeader v-bind:header="'Feed An Animal Today!'" v-bind:icon="'home'" v-bind:description="description" v-bind:subDescription="subDescription"/>
             <div id="container">
                 <div v-for="(animal, index) in animals" :key="index" id="animal">
