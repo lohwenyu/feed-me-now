@@ -62,7 +62,7 @@ export default {
 <style scoped>
 #mainContainer {
     position: relative;
-    width: 450px;
+    width: 400px;
     height: 500px;
     background-color: #FFFFFF;
     word-wrap: break-word;
